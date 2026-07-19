@@ -20,10 +20,10 @@ export const profile = {
 
   // Home status strip — every number is a resume bullet
   stats: [
-    { num: '89%', cap: 'Troubleshooting time cut' },
-    { num: '50%', cap: 'Manual audit reduced' },
-    { num: '82%', cap: 'Semantic accuracy (LLM PoC)' },
-    { num: '60', cap: 'FPS · millions of particles' },
+    { num: '89%', cap: 'Faster log triage — AI agent @ Volvo' },
+    { num: '50%', cap: 'Less manual review — multi-agent audit system' },
+    { num: '82%', cap: 'Intent accuracy — LLM voice-control PoC' },
+    { num: '60', cap: 'FPS — million-particle CUDA sim' },
   ],
 
   work: [
