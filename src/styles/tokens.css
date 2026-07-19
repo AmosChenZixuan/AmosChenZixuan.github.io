@@ -1,0 +1,183 @@
+/* ============================================================
+   NEW ERIDU — Design Tokens
+   A ZZZ (Zenless Zone Zero) inspired system for a personal site.
+   Brand DNA: hi-vis caution yellow + ink black, angular comic
+   energy, retro-CRT HUD chrome, urban-pop sticker accents.
+   ============================================================ */
+
+:root {
+  /* ---- Core palette ---------------------------------------- */
+  --ink:        #0C0C0E;   /* near-black, comic ink                 */
+  --ink-2:      #17171B;   /* raised surfaces on dark               */
+  --ink-3:      #232329;   /* hairline / borders on dark            */
+  --paper:      #EFEBDE;   /* bone / CRT off-white                  */
+  --paper-2:    #E3DECB;   /* slightly deeper paper                 */
+  --paper-edge: #CFC9B2;   /* paper hairline                        */
+
+  /* Signature hi-vis "caution tape" yellow — the brand anchor */
+  --hi:         #FFE400;
+  --hi-deep:    #E4C400;   /* pressed / shadow state of yellow      */
+
+  /* Electric secondary accents (CRT / glitch) */
+  --magenta:    #FF2E6D;
+  --cyan:       #2BE5E5;
+  --violet:     #8A6CFF;
+
+  /* Functional text */
+  --on-ink:     #F4F1E6;   /* text on dark                          */
+  --on-ink-dim: #9C9AA0;   /* muted text on dark                    */
+  --on-paper:   #161510;   /* text on paper                         */
+  --on-paper-dim:#5A564A;  /* muted text on paper                   */
+
+  /* Default themeable accent (Tweaks can swap this) */
+  --accent:     var(--hi);
+  --accent-deep:var(--hi-deep);
+  --on-accent:  var(--ink);
+
+  /* ---- Typography ------------------------------------------ */
+  --font-display: "Anton", "Archivo", system-ui, sans-serif;        /* giant caps banners */
+  --font-ui:      "Archivo", system-ui, sans-serif;                 /* headings, body, reading */
+  --font-mono:    "Space Mono", ui-monospace, "SFMono-Regular", monospace; /* HUD labels, data, code */
+
+  /* Fluid type scale (clamp: min, fluid, max) */
+  --t-mega:  clamp(3.5rem, 11vw, 9rem);     /* hero name            */
+  --t-xxl:   clamp(2.4rem, 6vw, 4.5rem);    /* section display      */
+  --t-xl:    clamp(1.8rem, 3.4vw, 2.6rem);  /* card titles          */
+  --t-lg:    clamp(1.25rem, 2vw, 1.6rem);   /* sub-heads            */
+  --t-md:    1.0625rem;                      /* body                 */
+  --t-sm:    0.9375rem;                      /* small body           */
+  --t-xs:    0.75rem;                        /* HUD label / kicker   */
+
+  --leading-tight: 1.02;
+  --leading-body:  1.62;
+  --track-hud:     0.22em;   /* letter-spacing for mono HUD labels  */
+  --track-display: -0.01em;
+
+  /* ---- Spacing (4px base grid) ----------------------------- */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 24px;  --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+  --s-9: 96px;  --s-10: 128px;
+
+  --maxw: 1180px;            /* content container                   */
+  --gutter: clamp(16px, 4vw, 48px);
+
+  /* ---- Radius — ZZZ is angular: sharp by default ----------- */
+  --r-chip: 2px;            /* the only place softness is allowed  */
+  --notch:  14px;           /* clip-path chamfer size for cards    */
+
+  /* ---- Elevation — HARD comic offset shadows, not blurs ----- */
+  --shadow-hard:  6px 6px 0 var(--ink);
+  --shadow-hard-sm: 4px 4px 0 var(--ink);
+  --shadow-accent: 6px 6px 0 var(--accent);
+  --shadow-soft:  0 8px 30px rgba(0,0,0,.28);   /* used sparingly  */
+
+  /* ---- Motion — snappy, mechanical ------------------------- */
+  --ease-pop: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-mech: cubic-bezier(0.7, 0, 0.3, 1);
+  --dur-fast: 140ms;
+  --dur:      220ms;
+  --dur-slow: 420ms;
+
+  /* ---- Signature textures (reusable backgrounds) ----------- */
+  --caution-stripes: repeating-linear-gradient(
+      -45deg, var(--accent) 0 18px, var(--ink) 18px 36px);
+  --scanlines: repeating-linear-gradient(
+      to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.06) 2px 3px);
+  --halftone: radial-gradient(var(--ink) 1.1px, transparent 1.4px);
+  --halftone-size: 8px 8px;
+}
+
+/* ============================================================
+   Base / reset
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--t-md);
+  line-height: var(--leading-body);
+  color: var(--on-paper);
+  background: var(--paper);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+p { text-wrap: pretty; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   Reusable primitives
+   ============================================================ */
+
+/* Mono HUD label — // 01 — ABOUT */
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: var(--track-hud);
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--on-paper-dim);
+}
+.hud-label .tick { color: var(--accent); }
+
+/* Notched card — chamfered top-right + bottom-left corners */
+.notch-card {
+  --c: var(--notch);
+  clip-path: polygon(
+    0 0, calc(100% - var(--c)) 0, 100% var(--c),
+    100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+}
+
+/* Corner-bracket HUD frame */
+.hud-frame { position: relative; }
+.hud-frame::before, .hud-frame::after {
+  content: ""; position: absolute; width: 18px; height: 18px;
+  border: 2px solid var(--accent); pointer-events: none;
+}
+.hud-frame::before { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.hud-frame::after  { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+
+/* Caution-tape slash divider */
+.caution-bar {
+  height: 14px;
+  background: var(--caution-stripes);
+}
+
+/* Buttons — hard offset shadow, mechanical press */
+.btn {
+  --bg: var(--accent); --fg: var(--on-accent);
+  font-family: var(--font-ui); font-weight: 800;
+  font-size: var(--t-sm); letter-spacing: .02em;
+  text-transform: uppercase;
+  padding: 14px 26px;
+  background: var(--bg); color: var(--fg);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-hard-sm);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-mech),
+              box-shadow var(--dur-fast) var(--ease-mech);
+}
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+.btn:active { transform: translate(2px,2px); box-shadow: 0 0 0 var(--ink); }
+.btn--ghost { --bg: transparent; --fg: var(--on-paper); }
+
+/* Sticker chip — small rotated tag */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: var(--t-xs);
+  letter-spacing: .08em; text-transform: uppercase; font-weight: 700;
+  padding: 5px 10px; background: var(--ink); color: var(--on-ink);
+  border-radius: var(--r-chip);
+}
+.chip--hi { background: var(--accent); color: var(--on-accent); }
+
+/* ============================================================
+   Accessibility / motion preferences
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
+}
