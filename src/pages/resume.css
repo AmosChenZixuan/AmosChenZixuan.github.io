@@ -1,0 +1,75 @@
+/* Ported from zzz-design-system/resume.html — includes the full print stylesheet */
+.resume-page { background: #d9d4c4; min-height: 100vh; }
+.resume-page .container { max-width: 1040px; margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ---- The sheet ---- */
+.sheet { background: var(--paper); margin: var(--s-6) auto var(--s-8); max-width: 920px;
+  border: 2px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); }
+.sheet-inner { padding: clamp(28px, 5vw, 56px); }
+
+/* header */
+.r-head { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--s-6); align-items: end; }
+.r-head .name { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5.5rem); text-transform: uppercase;
+  line-height: .86; margin: 0; }
+.r-head .role { font-weight: 900; font-style: italic; font-size: var(--t-lg); margin: var(--s-3) 0 0; }
+.r-head .summary { color: var(--on-paper-dim); margin: var(--s-3) 0 0; max-width: 48ch; font-size: var(--t-sm); }
+.r-contact { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .04em; display: grid; gap: 7px; }
+.r-contact .line { display: grid; grid-template-columns: 72px 1fr; gap: 8px; }
+.r-contact .k { color: var(--accent-deep); text-transform: uppercase; }
+.r-contact a { border-bottom: 1px solid var(--paper-edge); }
+.print-btn { margin-top: var(--s-4); margin-right: var(--s-2); display: inline-block; font-family: var(--font-ui); font-weight: 800; font-size: var(--t-xs);
+  text-transform: uppercase; letter-spacing: .04em; padding: 10px 16px; background: var(--accent); color: var(--ink);
+  border: 2px solid var(--ink); box-shadow: var(--shadow-hard-sm); cursor: pointer; transition: transform var(--dur-fast); }
+.print-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+@media (max-width: 640px){ .r-head { grid-template-columns: 1fr; } }
+
+.rule { height: 12px; background: var(--caution-stripes); margin: var(--s-6) 0; }
+
+/* body two-col */
+.r-cols { display: grid; grid-template-columns: 1.7fr 1fr; gap: var(--s-7); }
+@media (max-width: 760px){ .r-cols { grid-template-columns: 1fr; } }
+
+.r-sec { margin-bottom: var(--s-6); break-inside: avoid; }
+.r-sec > h2 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase;
+  color: var(--on-paper); margin: 0 0 var(--s-4); padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+.r-sec > h2 .tick { color: var(--accent-deep); }
+
+/* experience entry */
+.job { margin-bottom: var(--s-5); break-inside: avoid; }
+.job:last-child { margin-bottom: 0; }
+.job .top { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4); }
+.job .title { font-family: var(--font-ui); font-weight: 900; font-size: 1.15rem; line-height: 1.15; }
+.job .title .co { color: var(--accent-deep); }
+.job .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .06em; color: var(--on-paper-dim); white-space: nowrap; }
+.job ul { margin: var(--s-3) 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.job li { position: relative; padding-left: 18px; font-size: var(--t-sm); line-height: 1.55; }
+.job li::before { content: "▪"; position: absolute; left: 0; color: var(--accent-deep); }
+
+/* aside blocks */
+.skill-group { margin-bottom: var(--s-4); }
+.skill-group .lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--on-paper-dim); margin-bottom: 6px; }
+.skill-group .row { display: flex; flex-wrap: wrap; gap: 6px; }
+.r-sec.edu .item { margin-bottom: var(--s-4); }
+.r-sec.edu .deg { font-weight: 800; font-size: var(--t-sm); }
+.r-sec.edu .sch, .r-sec.edu .yr { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--on-paper-dim); }
+.r-links { display: grid; gap: 6px; font-family: var(--font-mono); font-size: var(--t-xs); }
+.r-links a { display: flex; justify-content: space-between; border-bottom: 1px solid var(--paper-edge); padding-bottom: 5px; }
+.r-links a .ar { color: var(--accent-deep); }
+
+/* ============================================================
+   PRINT — clean black-on-white, no chrome, fits A4/Letter
+   ============================================================ */
+@media print {
+  @page { margin: 14mm; }
+  body, .resume-page { background: #fff; }
+  .hud-top, .print-btn, .fx-noise, .fx-scanlines, .scroll-prog { display: none !important; }
+  .sheet { box-shadow: none; border: 0; margin: 0; max-width: none; }
+  .sheet-inner { padding: 0; }
+  .rule { background: none; height: 0; border-top: 3px solid #000; margin: 16px 0; }
+  .r-head .name { color: #000; }
+  .r-contact .k, .r-sec > h2 .tick, .job .title .co,
+  .job li::before, .r-links a .ar { color: #000 !important; }
+  .chip { background: #eee !important; color: #000 !important; border: 1px solid #000; }
+  a { color: #000; text-decoration: none; }
+  .r-sec, .job { break-inside: avoid; }
+}

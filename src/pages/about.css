@@ -1,0 +1,65 @@
+/* Ported from zzz-design-system/about.html ("Now" strip repurposed as Titles list) */
+.about .container { max-width: 1080px; }
+.about .read { max-width: 70ch; }
+
+/* ---- Hero: text + portrait ---- */
+.about-hero { padding: var(--s-8) 0 var(--s-7); display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--s-8); align-items: end; }
+.about-hero .slash { width: 64px; height: 6px; background: var(--accent); margin-bottom: var(--s-5); }
+.about-hero h1 { font-family: var(--font-ui); font-weight: 900; font-size: clamp(2.6rem, 6.5vw, 5rem); line-height: .98;
+  letter-spacing: -0.02em; margin: 0; }
+.about-hero h1 em { font-style: italic; color: var(--on-paper-dim); }
+.about-hero .lead { font-size: var(--t-lg); color: var(--on-paper-dim); max-width: 40ch; margin-top: var(--s-5); }
+.portrait { aspect-ratio: 4/5; border: 2px solid var(--ink); box-shadow: var(--shadow-hard);
+  background: var(--ink); position: relative; overflow: visible; }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait .tape { position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+  background: var(--accent); color: var(--ink); font-family: var(--font-mono); font-weight: 700; font-size: var(--t-xs);
+  letter-spacing: .1em; padding: 5px 14px; border: 2px solid var(--ink); z-index: 1; }
+@media (max-width: 760px){ .about-hero { grid-template-columns: 1fr; } .portrait { max-width: 280px; } }
+
+/* ---- Bio prose ---- */
+.bio { padding: var(--s-8) 0; border-top: 1px solid var(--paper-edge); }
+.bio .kicker { margin-bottom: var(--s-4); }
+.bio p { font-size: 1.125rem; line-height: 1.75; color: #2a281f; margin: 0 0 var(--s-5); }
+.bio p:last-child { margin-bottom: 0; }
+.bio strong { font-weight: 800; }
+
+/* ---- Titles strip (Azurtelier "Titles", in the template's Now layout) ---- */
+.titles { background: var(--ink); color: var(--on-ink); }
+.titles .inner { padding: var(--s-7) 0; display: grid; grid-template-columns: 200px 1fr; gap: var(--s-6); }
+.titles h2 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); text-transform: uppercase; margin: 0; line-height: .9; }
+.titles h2 small { display: block; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; color: var(--accent); margin-bottom: 8px; }
+.titles ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); }
+.titles li { display: grid; grid-template-columns: 130px 1fr; gap: var(--s-4); align-items: baseline; padding-bottom: var(--s-4); border-bottom: 1px solid var(--ink-3); }
+.titles li:last-child { border-bottom: 0; padding-bottom: 0; }
+.titles .k { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.titles .v { color: var(--on-ink); }
+@media (max-width: 680px){ .titles .inner { grid-template-columns: 1fr; } .titles li { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ---- Timeline + Loadout ---- */
+.track { padding: var(--s-9) 0; }
+.track .section-head { margin-bottom: var(--s-6); }
+.track .section-head h2 { font-family: var(--font-display); font-size: clamp(2.2rem,5vw,3.5rem); text-transform: uppercase; margin: 0; line-height: .95; }
+.cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--s-8); align-items: start; }
+@media (max-width: 820px){ .cols { grid-template-columns: 1fr; } }
+.about .timeline { position: relative; padding-left: var(--s-6); }
+.about .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--ink); }
+.about .tl-item { position: relative; padding-bottom: var(--s-6); }
+.about .tl-item:last-child { padding-bottom: 0; }
+.about .tl-item::before { content: ""; position: absolute; left: -27px; top: 6px; width: 14px; height: 14px; background: var(--accent); border: 2px solid var(--ink); }
+.about .tl-item .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .1em; color: var(--on-paper-dim); }
+.about .tl-item h3 { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-lg); margin: 2px 0; }
+.about .tl-item p { font-size: var(--t-sm); color: var(--on-paper-dim); margin: 0; max-width: 56ch; }
+.about .skills-card { background: var(--ink); color: var(--on-ink); padding: var(--s-6); border: 2px solid var(--ink); box-shadow: var(--shadow-accent); }
+.about .skills-card h4 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-4); }
+.about .skills-card h4:not(:first-child) { margin-top: var(--s-5); }
+.about .skills-card .row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ---- Contact footer ---- */
+.contact { background: var(--ink); color: var(--on-ink); padding: var(--s-9) 0 var(--s-7); }
+.contact .kicker { color: var(--accent); margin-bottom: var(--s-4); }
+.contact .big { font-family: var(--font-display); font-size: clamp(2.4rem,6vw,4.5rem); text-transform: uppercase; line-height: .95; }
+.contact .big a { color: var(--accent); }
+.contact .meta { display: flex; justify-content: space-between; gap: var(--s-4); flex-wrap: wrap; margin-top: var(--s-6);
+  font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .1em; color: var(--on-ink-dim); }
+.contact .meta a:hover { color: var(--accent); }

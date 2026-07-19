@@ -38,6 +38,10 @@ body.intensity-max .fx-noise { opacity: .05; }
 .hud-top nav a.here { color: var(--accent); }
 .hud-status { margin-left: auto; display: flex; align-items: center; gap: var(--s-4);
   font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .12em; color: var(--on-ink-dim); }
+.rec { display: inline-flex; align-items: center; gap: 6px; color: var(--magenta); }
+.rec .blip { width: 8px; height: 8px; border-radius: 50%; background: var(--magenta);
+  box-shadow: 0 0 0 0 var(--magenta); animation: blip 1.6s infinite; }
+@keyframes blip { 0%{box-shadow:0 0 0 0 rgba(255,46,109,.6)} 70%{box-shadow:0 0 0 7px rgba(255,46,109,0)} 100%{box-shadow:0 0 0 0 rgba(255,46,109,0)} }
 @media (max-width: 720px){ .hud-top nav { display: none; } }
 
 /* ---- Scroll progress bar (HUD readout) ---- */

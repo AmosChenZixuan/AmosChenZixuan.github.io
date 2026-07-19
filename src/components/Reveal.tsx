@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode, type CSSProperties, type ElementType } from 'react'
+import { useEffect, useRef, type CSSProperties, type ElementType, type ComponentPropsWithoutRef } from 'react'
 
 let io: IntersectionObserver | null = null
 function observer() {
@@ -9,13 +9,16 @@ function observer() {
   return io
 }
 
-export default function Reveal({ children, type = 'up', delay = 0, as: Tag = 'div', className }: {
-  children?: ReactNode
+type RevealProps<T extends ElementType> = {
   type?: 'up' | 'left' | 'wipe'
   delay?: number
-  as?: ElementType
-  className?: string
-}) {
+  as?: T
+} & Omit<ComponentPropsWithoutRef<T>, 'as'>
+
+export default function Reveal<T extends ElementType = 'div'>(
+  { type = 'up', delay = 0, as, ...rest }: RevealProps<T>,
+) {
+  const Tag = (as ?? 'div') as ElementType
   const ref = useRef<HTMLElement>(null)
   useEffect(() => {
     const el = ref.current
@@ -25,9 +28,8 @@ export default function Reveal({ children, type = 'up', delay = 0, as: Tag = 'di
     return () => io?.unobserve(el)
   }, [])
   return (
-    <Tag ref={ref} data-reveal={type} className={className}
-      style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}>
-      {children}
-    </Tag>
+    <Tag ref={ref} data-reveal={type}
+      style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}
+      {...rest} />
   )
 }

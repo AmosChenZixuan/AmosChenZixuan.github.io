@@ -8,6 +8,11 @@ export const profile = {
   role: 'Digital Alchemist',
   identities: ['Software Engineer', 'Machine Learning Engineer', 'PC Gamer', 'Anime Enthusiast', 'Cat-person'],
   blurb: 'Driven by a relentless curiosity. Generative AI & agentic architecture design, full-stack development & performance tuning.',
+  aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast, cat-person.',
+  aboutBio: [
+    'Driven by a relentless curiosity. I work on generative AI and agentic architecture design, full-stack development and performance tuning — most recently as a Global Graduate on the Software Engineering track at Volvo Cars in Gothenburg, Sweden.',
+    'Before that: an M.S. in Electrical & Computer Engineering at Carnegie Mellon, a B.S. in Computer Science at UC Irvine (summa cum laude), a research stint at CMU CyLab, and a physics-engine job at Glinsun AI simulating millions of particles in real time.',
+  ],
   email: 'zixuanchen1999@gmail.com',
   github: 'https://github.com/AmosChenZixuan',
   linkedin: 'https://www.linkedin.com/in/amoschenzixuan/',

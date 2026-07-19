@@ -1,0 +1,44 @@
+/* Ported from zzz-design-system/showroom.html */
+.show-head { padding: var(--s-8) 0 var(--s-6); }
+.show-head .kicker { margin-bottom: var(--s-3); }
+.show-head h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 8vw, 6rem); text-transform: uppercase;
+  line-height: .9; margin: 0; }
+.show-head .lead { max-width: 52ch; color: var(--on-paper-dim); margin-top: var(--s-4); }
+
+.show-caution { margin-bottom: var(--s-7); }
+
+/* ---- Comic-grid showroom ---- */
+.show-grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-flow: row dense; gap: 16px;
+  background-image: var(--halftone); background-size: 7px 7px; padding-bottom: var(--s-9); }
+.card { position: relative; display: flex; flex-direction: column; min-height: 260px;
+  border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); padding: var(--s-5);
+  background: var(--paper); color: var(--on-paper); overflow: hidden;
+  transition: transform var(--dur) var(--ease-pop), box-shadow var(--dur) var(--ease-pop); }
+.card:hover { transform: translate(-4px,-4px); box-shadow: 12px 12px 0 var(--accent); }
+.card .idx { font-family: var(--font-display); font-size: 2.4rem; line-height: 1; }
+.card .cat { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .12em;
+  text-transform: uppercase; margin-top: 2px; opacity: .75; }
+.card h3 { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-xl); margin: var(--s-4) 0 var(--s-2); line-height: 1; }
+.card p { font-size: var(--t-sm); line-height: 1.5; margin: 0 0 var(--s-4); }
+.card .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.card .go { display: flex; justify-content: space-between; align-items: center; margin-top: var(--s-4);
+  font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+.card .star { position: absolute; top: -12px; right: -8px; font-size: 60px; line-height: 1; transform: rotate(12deg); opacity: .9; }
+
+/* color variants */
+.card.dark   { background: var(--ink);    color: var(--on-ink); }
+.card.dark .chip { background: var(--accent); color: var(--ink); }
+.card.yellow { background: var(--accent);  color: var(--ink); }
+.card.magenta{ background: var(--magenta); color: #fff; }
+.card.magenta .chip { background: #fff; color: var(--ink); }
+.card.cyan   { background: var(--cyan);    color: var(--ink); }
+
+/* spans */
+.s2 { grid-column: span 2; } .s3 { grid-column: span 3; }
+.s4 { grid-column: span 4; } .s6 { grid-column: span 6; }
+.feat h3 { font-size: clamp(2rem, 4vw, 3rem); }
+.feat p { font-size: var(--t-md); max-width: 52ch; }
+@media (max-width: 900px){ .show-grid { grid-template-columns: 1fr 1fr; }
+  .s2,.s3,.s4,.s6 { grid-column: span 2; } }
+@media (max-width: 560px){ .show-grid { grid-template-columns: 1fr; }
+  .s2,.s3,.s4,.s6 { grid-column: span 1; } }
