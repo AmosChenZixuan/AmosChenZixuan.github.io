@@ -66,7 +66,7 @@ export default function Home() {
 
       <section className="hero">
         <div className="container">
-          <Reveal as="p" className="hud-label kicker" delay={0}><span className="tick">{'//'}</span> 00 — NEW ERIDU {'//'} PERSONAL TERMINAL</Reveal>
+          <Reveal as="p" className="hud-label kicker" delay={0}><span className="tick">{'//'}</span> 00 — PERSONAL TERMINAL</Reveal>
           <Reveal as="h1" delay={90}>{l1}<br /><span className="hl">{l2}</span><br /><span className="stroke">{l3}</span></Reveal>
           <Reveal as="p" className="role" delay={180}>{profile.role}.</Reveal>
           <Reveal as="p" className="blurb" delay={270}>{profile.blurb}</Reveal>
