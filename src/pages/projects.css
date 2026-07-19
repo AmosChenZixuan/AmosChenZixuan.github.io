@@ -1,4 +1,4 @@
-/* Ported from zzz-design-system/showroom.html */
+/* Projects showroom */
 .show-head { padding: var(--s-8) 0 var(--s-6); }
 .show-head .kicker { margin-bottom: var(--s-3); }
 .show-head h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 8vw, 6rem); text-transform: uppercase;

@@ -1,12 +1,12 @@
 @import "./tokens.css";
 
 /* ============================================================
-   Shared site chrome — ported from the New Eridu templates
+   Shared site chrome
    ============================================================ */
 body { overflow-x: hidden; }
 .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
 
-/* ---- CRT scanline + halftone overlays (mockup.html) ---- */
+/* ---- CRT scanline + halftone overlays ---- */
 .fx-scanlines, .fx-noise { position: fixed; inset: 0; pointer-events: none; z-index: 9; }
 .fx-scanlines { background: var(--scanlines); opacity: 0; transition: opacity var(--dur); mix-blend-mode: multiply; }
 .fx-noise { opacity: 0; background-image: var(--halftone); background-size: var(--halftone-size); transition: opacity var(--dur); }

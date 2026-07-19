@@ -1,4 +1,4 @@
-/* Ported from zzz-design-system/resume.html — includes the full print stylesheet */
+/* Resume page — includes the full print stylesheet */
 .resume-page { background: #d9d4c4; min-height: 100vh; }
 .resume-page .container { max-width: 1040px; margin-inline: auto; padding-inline: var(--gutter); }
 

@@ -1,6 +1,5 @@
 /* ============================================================
-   NEW ERIDU — Design Tokens
-   A ZZZ (Zenless Zone Zero) inspired system for a personal site.
+   Design Tokens
    Brand DNA: hi-vis caution yellow + ink black, angular comic
    energy, retro-CRT HUD chrome, urban-pop sticker accents.
    ============================================================ */
@@ -61,7 +60,7 @@
   --maxw: 1180px;            /* content container                   */
   --gutter: clamp(16px, 4vw, 48px);
 
-  /* ---- Radius — ZZZ is angular: sharp by default ----------- */
+  /* ---- Radius — angular: sharp by default ----------- */
   --r-chip: 2px;            /* the only place softness is allowed  */
   --notch:  14px;           /* clip-path chamfer size for cards    */
 
