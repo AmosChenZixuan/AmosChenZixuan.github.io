@@ -98,7 +98,10 @@ export default function Home() {
             {projects.slice(0, 3).map((p, i) => (
               <Reveal key={p.slug} as="article" delay={(i % 4) * 80}>
                 <Link className="proj" to={`/projects/${p.slug}`}>
-                  <div className="thumb"><span className="idx">{p.idx}</span></div>
+                  <div className="thumb">
+                    {p.thumb && <img src={p.thumb} alt={`${p.title} screenshot`} loading="lazy" />}
+                    <span className="idx">{p.idx}</span>
+                  </div>
                   <div className="body">
                     <h3>{p.title}</h3>
                     <p>{p.card}</p>

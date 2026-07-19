@@ -30,6 +30,12 @@ export default function ProjectStory() {
           <div className="m"><span className="k">Language</span><span className="v">{p.language}</span></div>
           <div className="m"><span className="k">Links</span><span className="v"><a href={p.github} target="_blank" rel="noopener">GitHub ↗</a></span></div>
         </div>
+        {p.hero && (
+          <figure className="shot">
+            <img src={p.hero.src} alt={p.hero.cap} />
+            <figcaption>{p.hero.cap}</figcaption>
+          </figure>
+        )}
       </div>
 
       {p.stats && (
@@ -52,6 +58,12 @@ export default function ProjectStory() {
                 <p className="hud-label kicker"><span className="tick">{'//'}</span> {s.kicker}</p>
                 <h2>{s.title}</h2>
                 {s.paras.map(t => <p key={t.slice(0, 24)}>{t}</p>)}
+                {s.shot && (
+                  <figure className="shot shot--inline">
+                    <img src={s.shot.src} alt={s.shot.cap} loading="lazy" />
+                    <figcaption>{s.shot.cap}</figcaption>
+                  </figure>
+                )}
               </section>
               {si === 0 && p.pull && <div className="pull">{p.pull}</div>}
             </Fragment>

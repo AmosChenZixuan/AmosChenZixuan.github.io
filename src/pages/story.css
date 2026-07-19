@@ -20,6 +20,14 @@
 .meta-row .v { font-weight: 800; }
 .meta-row .v a { border-bottom: 2px solid var(--accent); }
 
+/* ---- Screenshots ---- */
+.shot { margin: var(--s-7) 0 0; border: 2px solid var(--ink); box-shadow: var(--shadow-hard);
+  background: var(--ink); }
+.shot img { display: block; width: 100%; }
+.shot figcaption { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .1em;
+  text-transform: uppercase; color: var(--on-ink-dim); padding: 8px 12px; border-top: 2px solid var(--accent); }
+.shot--inline { margin-top: var(--s-5); }
+
 /* ---- Stat strip (real, cited numbers) ---- */
 .stats { background: var(--ink); color: var(--on-ink); }
 .stats .grid { display: grid; grid-template-columns: repeat(4, 1fr); }
