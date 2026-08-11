@@ -43,8 +43,11 @@ body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
   animation: sticker-in 520ms var(--ease-pop) backwards; animation-delay: var(--d, 0ms);
   transition: rotate var(--dur) var(--ease-pop), scale var(--dur) var(--ease-pop),
               box-shadow var(--dur) var(--ease-pop); }
-/* Hover straightens the badge, like picking one off the board. */
-.sticker:hover { rotate: 0deg; scale: 1.07; z-index: 3; box-shadow: var(--shadow-hard); }
+/* Hover straightens the badge, like picking one off the board — the payoff for pushing
+   through the capture ring. Real pointers only: on touch, :hover sticks after a tap. */
+@media (hover: hover) {
+  .sticker:hover { rotate: 0deg; scale: 1.07; z-index: 3; box-shadow: var(--shadow-hard); }
+}
 @keyframes sticker-in {
   0%   { opacity: 0; scale: 1.7; }
   62%  { opacity: 1; scale: .93; }
@@ -71,6 +74,9 @@ body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
   .sticker { position: static; rotate: 0deg; will-change: auto;
     background: transparent; color: var(--on-paper); box-shadow: none;
     border: 1px solid var(--paper-edge); padding: 6px 10px; }
+  /* Nothing to catch in the flow row, so no hover state either — on a narrow desktop window
+     it would put back the shadow and lift the fix above was made to remove. */
+  .sticker:hover { scale: 1; box-shadow: none; }
 }
 
 /* Big watermark numeral behind hero */
