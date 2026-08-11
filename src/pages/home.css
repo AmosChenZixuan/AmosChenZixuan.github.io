@@ -21,20 +21,27 @@ body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
   93% { text-shadow: -3px 0 var(--magenta), 3px 0 var(--cyan), 4px 4px 0 var(--ink); transform: translate(2px,-1px); }
   95% { text-shadow: 3px 0 var(--magenta), -3px 0 var(--cyan), 4px 4px 0 var(--ink); transform: translate(-2px,1px); }
 }
+/* No max-width: the role line is a single long phrase, so the container bounds it.
+   An 18ch cap was tuned for the old two-word role and wrapped this one onto four lines. */
 .hero .role { font-family: var(--font-ui); font-weight: 900; font-style: italic;
-  font-size: var(--t-lg); margin: var(--s-5) 0 var(--s-2); max-width: 18ch; }
+  font-size: var(--t-lg); margin: var(--s-5) 0 var(--s-2); }
 .hero .blurb { max-width: 46ch; color: var(--on-paper-dim); font-size: var(--t-md); }
 .hero .cta { display: flex; gap: var(--s-3); margin-top: var(--s-6); flex-wrap: wrap; }
 
 /* Decorative sticker badges in hero */
 .sticker { position: absolute; font-family: var(--font-mono); font-weight: 700;
-  text-transform: uppercase; letter-spacing: .1em; font-size: var(--t-xs);
-  padding: 8px 12px; border: 2px solid var(--ink); background: var(--paper);
+  text-transform: uppercase; letter-spacing: .1em; font-size: var(--t-xs); white-space: nowrap;
+  padding: 8px 12px; border: 2px solid var(--ink); background: var(--paper); color: var(--ink);
   box-shadow: var(--shadow-hard-sm); }
-.sticker--1 { top: 70px; right: 4%; background: var(--accent); transform: rotate(6deg); }
-.sticker--2 { bottom: 90px; right: 16%; background: var(--cyan); transform: rotate(-5deg); }
-.sticker--3 { top: 220px; right: 30%; transform: rotate(-9deg); }
-@media (max-width: 720px){ .sticker { display: none; } }
+.sticker--1 { top: 70px;     right: 4%;  background: var(--accent); transform: rotate(6deg); }
+.sticker--2 { top: 200px;    right: 26%; transform: rotate(-9deg); }
+.sticker--3 { top: 330px;    right: 6%;  background: var(--cyan);   transform: rotate(-4deg); }
+.sticker--4 { top: 460px;    right: 23%; transform: rotate(5deg); }
+.sticker--5 { bottom: 130px; right: 8%;  transform: rotate(-7deg); }
+.sticker--6 { bottom: 48px;  right: 29%; transform: rotate(4deg); }
+/* Badges need clear space to the right of the copy; below this the single-column hero text
+   runs the full container and they land on the blurb and the CTA buttons. */
+@media (max-width: 1080px){ .sticker { display: none; } }
 
 /* Big watermark numeral behind hero */
 .hero .watermark { position: absolute; right: -2%; top: 30%; font-family: var(--font-display);

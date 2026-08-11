@@ -76,9 +76,9 @@ export default function Home() {
           </Reveal>
         </div>
         <span className="watermark">A</span>
-        <span className="sticker sticker--1">★ CMU ALUM</span>
-        <span className="sticker sticker--2">⚡ GEN-AI</span>
-        <span className="sticker sticker--3">🐱 CAT-PERSON</span>
+        {profile.stickers.map((s, i) => (
+          <span key={s} className={`sticker sticker--${i + 1}`}>{s}</span>
+        ))}
       </section>
 
       <Reveal type="wipe" className="caution-bar" />

@@ -5,14 +5,19 @@ export const profile = {
   name: 'Zixuan Chen',
   alias: 'Amos',
   heroLines: ['ZIXUAN', 'AMOS', 'CHEN'] as const, // middle line gets the .hl glitch treatment
-  role: 'Digital Alchemist',
-  identities: ['Software Engineer', 'Machine Learning Engineer', 'PC Gamer', 'Anime Enthusiast', 'Cat-person'],
-  blurb: 'Driven by a relentless curiosity. Generative AI & agentic systems, full-stack development & performance tuning.',
-  aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast, cat-person.',
+  role: 'Software Engineer — Generative AI & Agentic Systems',
+  identities: ['Software Engineer', 'Machine Learning Engineer', 'PC Gamer', 'Anime Enthusiast'],
+  // Sits directly under `role` on the home hero — it must add to that line, not restate it.
+  blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
+  aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
   // Status strip under the About hero. Work authorization is deliberately NOT a field here —
   // an application form already asks it. It lands as narrative in the `now` timeline entry instead.
   location: 'Irvine, California',
+  timeZone: 'America/Los_Angeles',
   openTo: 'AI/ML · Full-Stack · Forward-Deployed Engineer',
+  // Hero sticker badges. Placement (which corner, what rotation) stays in home.css, keyed by
+  // index — a seventh entry needs a matching .sticker--7 rule there or it renders unpositioned.
+  stickers: ['★ CMU ALUM', '🚗 EX-VOLVO', '⚡ LLM IN PROD', '◆ CLAUDE CODE', '🐍 PYTHON', '📍 IRVINE, CA'] as const,
   aboutBio: [
     'Driven by a relentless curiosity. I build LLM systems that do real work inside real products — multi-agent pipelines, retrieval over messy data, evaluation — along with the full-stack and performance work it takes to ship them. Most recently as a software developer at Volvo Cars in Gothenburg, Sweden, where I started on the Global Graduate programme and stayed on.',
     'Before that: a B.S. in Computer Science at UC Irvine (summa cum laude) and an M.S. in Electrical & Computer Engineering at Carnegie Mellon, with machine-learning work either side of it — vulnerability detection at CMU CyLab, real-time simulation and computer vision at Glinsun AI.',
