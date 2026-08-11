@@ -6,7 +6,6 @@ export const profile = {
   alias: 'Amos',
   heroLines: ['ZIXUAN', 'AMOS', 'CHEN'] as const, // middle line gets the .hl glitch treatment
   role: 'Software Engineer — Generative AI & Agentic Systems',
-  identities: ['Software Engineer', 'Machine Learning Engineer', 'PC Gamer', 'Anime Enthusiast'],
   // Sits directly under `role` on the home hero — it must add to that line, not restate it.
   blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
   aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
