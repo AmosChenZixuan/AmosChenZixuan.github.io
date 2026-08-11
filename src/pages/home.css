@@ -56,10 +56,22 @@ body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
 .sticker--4 { --rot:  5deg; top: 460px;    right: 23%; --d: 300ms; }
 .sticker--5 { --rot: -7deg; bottom: 130px; right: 8%;  --d: 380ms; }
 .sticker--6 { --rot:  4deg; bottom: 48px;  right: 29%; --d: 460ms; }
-/* Badges need clear space to the right of the copy; below this the single-column hero text
-   runs the full container and they land on the blurb and the CTA buttons. The JS reads this
-   state off the layout rather than repeating the number — see `live` in Home.tsx. */
-@media (max-width: 1080px){ .sticker { display: none; } }
+/* Scattering needs clear space to the right of the copy; below this the single-column hero
+   text runs the full container and the badges would land on the blurb and the CTA buttons.
+   So they leave the scatter and become a plain wrapped row under the buttons — same words,
+   no overlap risk, and they stay visible on phones where most recruiters open the link.
+   Dropping `position: absolute` is also what tells the magnetic effect to stand down; it
+   probes for it rather than repeating this breakpoint — see `live` in Home.tsx. */
+@media (max-width: 1080px){
+  .sticker-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--s-6); }
+  /* Flat tags, not controls. In the scatter the tilt and the distance from the buttons carry
+     that distinction, but in a row directly under the CTAs the shared 2px ink border, hard
+     shadow and accent fill made these read as tappable. Dropping all three is the signal;
+     the hairline border keeps them grouped without promising an action. */
+  .sticker { position: static; rotate: 0deg; will-change: auto;
+    background: transparent; color: var(--on-paper); box-shadow: none;
+    border: 1px solid var(--paper-edge); padding: 6px 10px; }
+}
 
 /* Big watermark numeral behind hero */
 .hero .watermark { position: absolute; right: -2%; top: 30%; font-family: var(--font-display);

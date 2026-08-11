@@ -27,10 +27,11 @@ function useMagneticStickers(heroRef: React.RefObject<HTMLElement>) {
     let raf = 0
 
     // Centres relative to the hero, taken with any displacement zeroed. `live` is read off
-    // the layout rather than duplicating home.css's breakpoint — below it the badges are
-    // display:none, measure to all-zero rects, and would otherwise be simulated unseen.
+    // the layout rather than duplicating home.css's breakpoint: below it the badges drop out
+    // of absolute positioning into a plain flow row, where displacing them makes no sense.
+    // `position` is the probe because it is exactly what distinguishes the two modes.
     const measure = () => {
-      live = getComputedStyle(els[0]).display !== 'none'
+      live = getComputedStyle(els[0]).position === 'absolute'
       if (!live) return
       els.forEach(el => { el.style.setProperty('--tx', '0px'); el.style.setProperty('--ty', '0px') })
       const h = hero.getBoundingClientRect()
@@ -166,11 +167,16 @@ export default function Home() {
             <Link className="btn" to="/projects">View Projects</Link>
             <Link className="btn btn--ghost" to="/resume">Read Resume ↗</Link>
           </Reveal>
+          {/* Inside .container so that when the badges drop into flow below 1080px they pick
+              up its gutters. .container is unpositioned, so while they are absolute they
+              still resolve against .hero and the wrapper collapses to zero height. */}
+          <div className="sticker-row">
+            {profile.stickers.map((s, i) => (
+              <span key={s} className={`sticker sticker--${i + 1}`}>{s}</span>
+            ))}
+          </div>
         </div>
         <span className="watermark">A</span>
-        {profile.stickers.map((s, i) => (
-          <span key={s} className={`sticker sticker--${i + 1}`}>{s}</span>
-        ))}
       </section>
 
       <Reveal type="wipe" className="caution-bar" />
