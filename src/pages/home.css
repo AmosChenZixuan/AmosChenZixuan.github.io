@@ -28,19 +28,37 @@ body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
 .hero .blurb { max-width: 46ch; color: var(--on-paper-dim); font-size: var(--t-md); }
 .hero .cta { display: flex; gap: var(--s-3); margin-top: var(--s-6); flex-wrap: wrap; }
 
-/* Decorative sticker badges in hero */
-.sticker { position: absolute; font-family: var(--font-mono); font-weight: 700;
+/* Decorative sticker badges in hero.
+   CONTRACT: --tx/--ty are written every frame by useMagneticStickers in Home.tsx. Renaming
+   them here silently breaks that. Nothing may transition `translate` — rAF owns it. Keeping
+   translate/rotate/scale as separate CSS properties is what lets the cursor displacement and
+   the hover state animate independently instead of overwriting one shared `transform`. */
+.sticker {
+  position: absolute; font-family: var(--font-mono); font-weight: 700;
   text-transform: uppercase; letter-spacing: .1em; font-size: var(--t-xs); white-space: nowrap;
   padding: 8px 12px; border: 2px solid var(--ink); background: var(--paper); color: var(--ink);
-  box-shadow: var(--shadow-hard-sm); }
-.sticker--1 { top: 70px;     right: 4%;  background: var(--accent); transform: rotate(6deg); }
-.sticker--2 { top: 200px;    right: 26%; transform: rotate(-9deg); }
-.sticker--3 { top: 330px;    right: 6%;  background: var(--cyan);   transform: rotate(-4deg); }
-.sticker--4 { top: 460px;    right: 23%; transform: rotate(5deg); }
-.sticker--5 { bottom: 130px; right: 8%;  transform: rotate(-7deg); }
-.sticker--6 { bottom: 48px;  right: 29%; transform: rotate(4deg); }
+  box-shadow: var(--shadow-hard-sm);
+  translate: var(--tx, 0px) var(--ty, 0px); rotate: var(--rot, 0deg);
+  will-change: translate, scale;   /* compositor-only, else each frame repaints the hero */
+  animation: sticker-in 520ms var(--ease-pop) backwards; animation-delay: var(--d, 0ms);
+  transition: rotate var(--dur) var(--ease-pop), scale var(--dur) var(--ease-pop),
+              box-shadow var(--dur) var(--ease-pop); }
+/* Hover straightens the badge, like picking one off the board. */
+.sticker:hover { rotate: 0deg; scale: 1.07; z-index: 3; box-shadow: var(--shadow-hard); }
+@keyframes sticker-in {
+  0%   { opacity: 0; scale: 1.7; }
+  62%  { opacity: 1; scale: .93; }
+  100% { opacity: 1; scale: 1; }
+}
+.sticker--1 { --rot:  6deg; top: 70px;     right: 4%;  background: var(--accent); --d:  60ms; }
+.sticker--2 { --rot: -9deg; top: 200px;    right: 26%; --d: 140ms; }
+.sticker--3 { --rot: -4deg; top: 330px;    right: 6%;  background: var(--cyan);   --d: 220ms; }
+.sticker--4 { --rot:  5deg; top: 460px;    right: 23%; --d: 300ms; }
+.sticker--5 { --rot: -7deg; bottom: 130px; right: 8%;  --d: 380ms; }
+.sticker--6 { --rot:  4deg; bottom: 48px;  right: 29%; --d: 460ms; }
 /* Badges need clear space to the right of the copy; below this the single-column hero text
-   runs the full container and they land on the blurb and the CTA buttons. */
+   runs the full container and they land on the blurb and the CTA buttons. The JS reads this
+   state off the layout rather than repeating the number — see `live` in Home.tsx. */
 @media (max-width: 1080px){ .sticker { display: none; } }
 
 /* Big watermark numeral behind hero */
