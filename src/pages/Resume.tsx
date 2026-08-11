@@ -18,7 +18,7 @@ export default function Resume() {
               <div>
                 <h1 className="name">{name2}<br />{name1}</h1>
                 <p className="role">Software Engineer — Generative AI &amp; Agentic Systems</p>
-                <p className="summary">Generative AI &amp; agentic architecture design, full-stack development &amp; performance tuning, agile development and leadership.</p>
+                <p className="summary">Generative AI &amp; agentic systems, full-stack development &amp; performance tuning, agile development and leadership.</p>
               </div>
               <div>
                 <div className="r-contact">
