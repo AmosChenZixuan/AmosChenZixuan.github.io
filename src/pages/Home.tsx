@@ -6,10 +6,13 @@ import { profile } from '../content/profile'
 import { projects } from '../content/projects'
 import './home.css'
 
+/* Amos's local time, not the visitor's — it only says something if it's pinned to where he is. */
 function Clock() {
   const [t, setT] = useState('--:--:--')
   useEffect(() => {
-    const id = setInterval(() => setT(new Date().toLocaleTimeString('en-GB')), 1000)
+    const tick = () => setT(new Date().toLocaleTimeString('en-GB', { timeZone: profile.timeZone }))
+    tick()
+    const id = setInterval(tick, 1000)
     return () => clearInterval(id)
   }, [])
   return <span>{t}</span>
@@ -60,9 +63,10 @@ function StatusStrip() {
 
 export default function Home() {
   const [l1, l2, l3] = profile.heroLines
+  const city = profile.location.split(',')[0].toUpperCase()
   return (
     <>
-      <HudTop status={<><span className="rec"><span className="blip" />ONLINE</span><Clock /></>} />
+      <HudTop status={<><span className="rec"><span className="blip" />ONLINE</span><span>{city} <Clock /></span></>} />
 
       <section className="hero">
         <div className="container">
