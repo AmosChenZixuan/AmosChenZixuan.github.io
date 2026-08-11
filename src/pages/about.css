@@ -9,6 +9,15 @@
   letter-spacing: -0.02em; margin: 0; }
 .about-hero h1 em { font-style: italic; color: var(--on-paper-dim); }
 .about-hero .lead { font-size: var(--t-lg); color: var(--on-paper-dim); max-width: 40ch; margin-top: var(--s-5); }
+/* Status strip: location + work authorization + CV — the facts a resume can't pre-answer */
+.about-status { display: grid; justify-items: start; gap: 10px; margin-top: var(--s-6); padding-left: var(--s-4);
+  border-left: 3px solid var(--accent);
+  font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .06em; color: var(--ink); }
+.about-status i { font-style: normal; letter-spacing: .2em; color: var(--on-paper-dim); margin-right: 10px; }
+.about-status .cv { font-weight: 700; letter-spacing: .14em; color: var(--ink); border: 2px solid var(--ink);
+  padding: 5px 10px; margin-top: 2px; }
+.about-status .cv:hover { background: var(--accent); }
+
 .portrait { aspect-ratio: 4/5; border: 2px solid var(--ink); box-shadow: var(--shadow-hard);
   background: var(--ink); position: relative; overflow: visible; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; }
@@ -49,11 +58,21 @@
 .about .tl-item::before { content: ""; position: absolute; left: -27px; top: 6px; width: 14px; height: 14px; background: var(--accent); border: 2px solid var(--ink); }
 .about .tl-item .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .1em; color: var(--on-paper-dim); }
 .about .tl-item h3 { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-lg); margin: 2px 0; }
-.about .tl-item p { font-size: var(--t-sm); color: var(--on-paper-dim); margin: 0; max-width: 56ch; }
+.about .tl-item ul { list-style: none; margin: var(--s-3) 0 0; padding: 0; display: grid; gap: 6px; max-width: 60ch; }
+.about .tl-item li { position: relative; padding-left: 16px; font-size: var(--t-sm); line-height: 1.55; color: var(--on-paper-dim); }
+.about .tl-item li::before { content: "▸"; position: absolute; left: 0; color: var(--ink); }
+/* Current chapter: hollow marker — reads as interim by design, not a job being inflated */
+.about .tl-item--now::before { background: var(--paper); }
+.about .tl-item--now h3::after { content: "NOW"; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .16em;
+  background: var(--accent); color: var(--ink); padding: 3px 7px; margin-left: 10px; vertical-align: middle; }
 .about .skills-card { background: var(--ink); color: var(--on-ink); padding: var(--s-6); border: 2px solid var(--ink); box-shadow: var(--shadow-accent); }
 .about .skills-card h4 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-4); }
 .about .skills-card h4:not(:first-child) { margin-top: var(--s-5); }
 .about .skills-card .row { display: flex; flex-wrap: wrap; gap: 6px; }
+.about .skills-card .edu { display: grid; gap: var(--s-4); padding-bottom: var(--s-5); border-bottom: 1px solid var(--ink-3); }
+.about .skills-card .edu b { display: block; font-family: var(--font-ui); font-weight: 800; font-size: var(--t-sm); }
+.about .skills-card .edu span { display: block; font-size: var(--t-xs); color: var(--on-ink-dim); }
+.about .skills-card .edu .yr { font-family: var(--font-mono); letter-spacing: .08em; color: var(--accent); margin-top: 3px; }
 
 /* ---- Contact footer ---- */
 .contact { background: var(--ink); color: var(--on-ink); padding: var(--s-9) 0 var(--s-7); }
