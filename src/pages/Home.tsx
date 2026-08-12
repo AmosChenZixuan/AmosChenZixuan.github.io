@@ -235,7 +235,7 @@ export default function Home() {
           <p className="hud-label" style={{ color: 'var(--accent)', marginBottom: 'var(--s-4)' }}>
             <span className="tick">{'//'}</span> 03 — UPLINK
           </p>
-          <Reveal className="big">{profile.cta.home.lead[0]}<br />{profile.cta.home.lead[1]}{' '}<a href={`mailto:${profile.email}`}>{profile.cta.home.link}</a></Reveal>
+          <Reveal className="big">{profile.cta.lead}<br /><a href={`mailto:${profile.email}`}>{profile.cta.link}</a></Reveal>
           <div className="meta">
             <span>© 2026 AMOS.IO — {profile.name} ({profile.alias})</span>
             <span>
