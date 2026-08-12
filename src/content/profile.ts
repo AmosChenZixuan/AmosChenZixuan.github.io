@@ -33,12 +33,20 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/amoschenzixuan/',
   resumePdf: '/resume.pdf',
 
-  // Home status strip — every number is a resume bullet
+  // Home status strip. Measured from Amos's own agent telemetry over 2026-03-30 → 05-31
+  // (nine weeks), except `where` on the first cell, which is GitHub's contribution API for
+  // the same window. Deliberately NOT resume numbers — those appear again in the timeline
+  // further down the same page, so repeating them here spends the best slot on a duplicate.
+  // Each cell reads number → claim → evidence:
+  //   `num` + `verb`  the claim line; the verb rides the figure so it stands alone
+  //   `what`          the readable label, one line at every width
+  //   `where`         dim mono evidence, written to run exactly two lines at the tightest
+  //                   column — a few characters more tips one cell onto a third line.
   stats: [
-    { num: '89%', cap: 'Faster log triage — AI agent @ Volvo' },
-    { num: '50%', cap: 'Less manual review — multi-agent audit system' },
-    { num: '82%', cap: 'Intent accuracy — LLM voice-control PoC' },
-    { num: '60', cap: 'FPS — million-particle CUDA sim' },
+    { num: '1.0B', verb: 'TOKENS', what: 'Weekly consumption', where: '→ 49 commits · 14 PRs a week' },
+    { num: '$1.1K', verb: 'SAVED/MO', what: 'Against list API rates', where: '$1,169 of usage for $45' },
+    { num: '7', verb: 'LLMS', what: 'Across 3 vendors', where: 'Plan · design · proto · exec · review' },
+    { num: '192K', verb: 'CONTEXT', what: 'Average session', where: '17 fresh sessions a day, handed off clean' },
   ],
 
   // Current chapter — About timeline only, deliberately kept out of `work` so the CV

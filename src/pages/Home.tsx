@@ -105,41 +105,20 @@ function Clock() {
   return <span>{t}</span>
 }
 
-/* Count-up on the status numbers when the strip scrolls in (mockup.html port) */
+/* The count-up that used to run here is gone with the resume numbers it was written for.
+   It rewrote `.num`'s textContent, which would now wipe the <em> unit out of the claim
+   line, and it only animates a leading integer — of the four figures, two (`$1.1K`, `1.0B`)
+   would have counted to 1 and sat there looking broken next to the two that worked. */
 function StatusStrip() {
-  const ref = useRef<HTMLElement>(null)
-  useEffect(() => {
-    const strip = ref.current
-    if (!strip || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return
-        strip.querySelectorAll('.status-cell .num').forEach(el => {
-          const m = el.textContent!.trim().match(/^(\d+)(.*)$/)
-          if (!m) return
-          const target = +m[1], suffix = m[2], t0 = performance.now(), dur = 900
-          el.textContent = '0' + suffix
-          const step = (t: number) => {
-            const p = Math.min((t - t0) / dur, 1)
-            el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix
-            if (p < 1) requestAnimationFrame(step)
-          }
-          requestAnimationFrame(step)
-        })
-        io.disconnect()
-      })
-    }, { threshold: 0.4 })
-    io.observe(strip)
-    return () => io.disconnect()
-  }, [])
   return (
-    <section className="status-strip" ref={ref}>
+    <section className="status-strip">
       <div className="container">
         <div className="status-grid">
           {profile.stats.map((s, i) => (
-            <Reveal key={s.cap} className="status-cell" delay={(i % 4) * 80}>
-              <div className="num">{s.num}</div>
-              <div className="cap">{s.cap}</div>
+            <Reveal key={s.what} className="status-cell" delay={(i % 4) * 80}>
+              <div className="num">{s.num} <em>{s.verb}</em></div>
+              <div className="head">{s.what}</div>
+              <div className="cap">{s.where}</div>
             </Reveal>
           ))}
         </div>
