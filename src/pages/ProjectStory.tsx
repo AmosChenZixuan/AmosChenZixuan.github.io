@@ -26,7 +26,7 @@ export default function ProjectStory() {
         <h1>{p.title}</h1>
         <p className="tag">{p.tagline}</p>
         <div className="meta-row">
-          <div className="m"><span className="k">Category</span><span className="v">{p.cat}</span></div>
+          {/* No Category column — the kicker above the title already is `cat`. */}
           <div className="m"><span className="k">Language</span><span className="v">{p.language}</span></div>
           <div className="m"><span className="k">Links</span><span className="v"><a href={p.github} target="_blank" rel="noopener">GitHub ↗</a></span></div>
         </div>
