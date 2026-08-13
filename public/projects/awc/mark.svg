@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- The slash command, held inside brackets: every skill runs to the same contract. -->
+  <g fill="none" stroke="#F4F1E6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 10 L10 10 L10 54 L22 54"/>
+    <path d="M42 10 L54 10 L54 54 L42 54"/>
+    <path d="M39 16 L25 48"/>
+  </g>
+</svg>
