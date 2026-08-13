@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
-import { projects, storyCta } from '../content/projects'
+import { featured, storyCta } from '../content/projects'
 import './home.css'
 
 /* Magnetic sticker field — the cursor shoves badges aside and they spring back. The
@@ -172,16 +172,16 @@ export default function Home() {
             <Link className="more" to="/projects">All Projects →</Link>
           </Reveal>
           <div className="proj-grid">
-            {projects.slice(0, 3).map((p, i) => (
+            {featured.map((p, i) => (
               <Reveal key={p.slug} as="article" delay={(i % 4) * 80}>
                 <Link className="proj" to={`/projects/${p.slug}`}>
-                  <div className="thumb">
-                    {p.thumb && <img src={p.thumb} alt={`${p.title} screenshot`} loading="lazy" />}
-                    <span className="idx">{p.idx}</span>
+                  {/* --mark feeds the oversized ghost of the same logo behind the lockup. */}
+                  <div className="thumb" style={{ '--mark': `url(${p.mark})` } as CSSProperties}>
+                    <img className="mark" src={p.mark} alt="" loading="lazy" />
+                    <h3>{p.short ?? p.title}</h3>
                   </div>
                   <div className="body">
                     <div className="cat">{p.cat}</div>
-                    <h3>{p.title}</h3>
                     <p>{p.card}</p>
                     <div className="stack">
                       {p.chips.slice(0, 3).map((c, j) => (

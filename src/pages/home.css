@@ -132,21 +132,35 @@ section.block { padding: var(--s-9) 0; }
   transition: transform var(--dur) var(--ease-pop), box-shadow var(--dur) var(--ease-pop);
 }
 .proj:hover { transform: translate(-4px,-4px); box-shadow: 10px 10px 0 var(--accent); }
+/* The cover is a brand lockup: the project's own mark beside its name, in the display face.
+   Not a screenshot — a card-sized screenshot is unreadable, and its type never matched. */
 .proj .thumb { aspect-ratio: 16/10; background:
     linear-gradient(135deg, var(--ink-2), var(--ink));
-  display: grid; place-items: center; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; gap: var(--s-4);
+  padding: var(--s-5); position: relative; overflow: hidden;
   border-bottom: 2px solid var(--accent); }
-.proj .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.proj .thumb .idx { position: absolute; top: 8px; left: 10px; font-family: var(--font-display);
-  font-size: 2rem; color: var(--accent); line-height: 1; text-shadow: 2px 2px 0 var(--ink); }
+.proj .thumb .mark { width: clamp(44px, 17%, 72px); height: auto; flex: none; position: relative; }
+/* The card's heading lives in the lockup, so the mark and the name are one object and the
+   name is never printed twice on the same card. */
+.proj .thumb h3 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+  letter-spacing: .02em; line-height: .95; margin: 0; color: var(--on-ink);
+  text-transform: uppercase; position: relative; }
+/* Halftone over the band, in light ink rather than the paper-facing --halftone. */
+.proj .thumb::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(244,241,230,.10) 1.1px, transparent 1.4px);
+  background-size: var(--halftone-size); }
+/* Same move as .hero .watermark, but the project's own mark blown up behind its lockup.
+   Masked rather than drawn, so the accent comes from the palette and one SVG serves both
+   the small mark and this ghost. --mark is set per card in Home.tsx. */
+.proj .thumb::after { content: ''; position: absolute; right: -5%; bottom: -26%;
+  width: 58%; aspect-ratio: 1; background: var(--accent); opacity: .14; pointer-events: none;
+  -webkit-mask: var(--mark) center/contain no-repeat; mask: var(--mark) center/contain no-repeat; }
 .proj .body { padding: var(--s-5); flex: 1; display: flex; flex-direction: column; }
 .proj .body .stack { margin-top: auto; }
 .proj .body p { flex: 0 1 auto; }
 /* Same category line as the /projects card (.card .cat), on the dark card's dim ink. */
 .proj .cat { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .12em;
   text-transform: uppercase; color: var(--on-ink-dim); margin: 0 0 var(--s-2); }
-.proj h3 { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-xl);
-  margin: 0 0 var(--s-2); line-height: 1.05; }
 .proj p { font-size: var(--t-sm); color: var(--on-ink-dim); margin: 0 0 var(--s-4); }
 .proj .stack { display: flex; flex-wrap: wrap; gap: 6px; }
 /* Same CTA as the /projects card (.card .go) — one dark treatment, so no variant rules. */
