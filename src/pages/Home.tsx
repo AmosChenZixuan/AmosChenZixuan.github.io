@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
-import { projects } from '../content/projects'
+import { projects, storyCta } from '../content/projects'
 import './home.css'
 
 /* Magnetic sticker field — the cursor shoves badges aside and they spring back. The
@@ -187,6 +187,7 @@ export default function Home() {
                         <span key={c} className={j === 0 ? 'chip chip--hi' : 'chip'}>{c}</span>
                       ))}
                     </div>
+                    <div className="go"><span>{storyCta} →</span></div>
                   </div>
                 </Link>
               </Reveal>
