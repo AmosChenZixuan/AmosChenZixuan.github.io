@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
+import ContactFooter from '../components/ContactFooter'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
@@ -233,24 +234,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="home-footer" id="contact">
-        <div className="container">
-          <p className="hud-label" style={{ color: 'var(--accent)', marginBottom: 'var(--s-4)' }}>
-            <span className="tick">{'//'}</span> 03 — UPLINK
-          </p>
-          <Reveal className="big">{profile.cta.lead}<br /><a href={`mailto:${profile.email}`}>{profile.cta.link}</a></Reveal>
-          <div className="meta">
-            <span>© 2026 AMOS.IO — {profile.name} ({profile.alias})</span>
-            <span>
-              <a href={profile.github} target="_blank" rel="noopener">GITHUB</a>
-              {' · '}
-              <a href={profile.linkedin} target="_blank" rel="noopener">LINKEDIN</a>
-              {' · '}
-              <a href={`mailto:${profile.email}`}>EMAIL</a>
-            </span>
-          </div>
-        </div>
-      </footer>
+      <ContactFooter />
     </>
   )
 }

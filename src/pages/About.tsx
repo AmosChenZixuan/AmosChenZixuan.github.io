@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import ContactFooter from '../components/ContactFooter'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
@@ -95,22 +96,7 @@ export default function About() {
         </div>
       </section>
 
-      <footer className="contact">
-        <div className="container">
-          <p className="hud-label kicker"><span className="tick">{'//'}</span> 03 — UPLINK</p>
-          <div className="big">{profile.cta.lead}<br /><a href={`mailto:${profile.email}`}>{profile.cta.link}</a></div>
-          <div className="meta">
-            <span>© 2026 AMOS.IO — ABOUT</span>
-            <span>
-              <a href={profile.github} target="_blank" rel="noopener">GITHUB</a>
-              {' · '}
-              <a href={profile.linkedin} target="_blank" rel="noopener">LINKEDIN</a>
-              {' · '}
-              <a href={`mailto:${profile.email}`}>EMAIL</a>
-            </span>
-          </div>
-        </div>
-      </footer>
+      <ContactFooter />
     </div>
   )
 }
