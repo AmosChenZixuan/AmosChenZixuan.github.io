@@ -2,6 +2,11 @@
 // and story-assets walkthrough), and demo-scene notes. Stats appear only
 // where the repo states them.
 
+// One label for "this opens into the project's story" — the home card, the /projects card
+// and the story-page footer all read it, so the wording only changes here. Bare words: the
+// arrow and the casing belong to whichever component renders it.
+export const storyCta = 'How it works'
+
 export type Shot = { src: string; cap: string }
 
 export type Project = {

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
 import SiteFooter from '../components/SiteFooter'
 import Reveal from '../components/Reveal'
-import { projects } from '../content/projects'
+import { projects, storyCta } from '../content/projects'
 import './projects.css'
 
 export default function Projects() {
@@ -13,7 +13,7 @@ export default function Projects() {
       <div className="container show-head">
         <p className="hud-label kicker"><span className="tick">{'//'}</span> 01 — SHOWROOM</p>
         <h1>Selected Work</h1>
-        <p className="lead">Things I&rsquo;ve designed, built and shipped. Each opens into a full case study — the problem, the approach, and what shipped.</p>
+        <p className="lead">Things I&rsquo;ve designed, built and shipped. Each opens into how it works — the system, the hard parts, and what they cost.</p>
       </div>
 
       <div className="caution-bar show-caution" />
@@ -41,7 +41,7 @@ export default function Projects() {
               <div className="stack">
                 {p.chips.slice(0, 4).map(c => <span key={c} className="chip">{c}</span>)}
               </div>
-              <div className="go"><span>Read case study →</span></div>
+              <div className="go"><span>{storyCta} →</span></div>
             </Reveal>
           ))}
         </div>
