@@ -96,7 +96,7 @@ body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
   color: var(--on-ink); vertical-align: .34em; }
 .status-cell .head { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-md);
   line-height: 1.1; margin-top: var(--s-2); color: var(--on-ink); }
-/* Every caption is written to run exactly two lines at the tightest column, so the floor
+/* Every caption is written to run at most two lines at the tightest column, so the floor
    here is a guard rather than padding — letter-spaced mono is wide enough that a few extra
    characters tip one caption onto a third line and drop that cell's baseline alone. */
 .status-cell .cap { font-family: var(--font-mono); font-size: var(--t-xs);
