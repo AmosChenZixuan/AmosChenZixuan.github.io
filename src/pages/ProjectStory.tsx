@@ -22,7 +22,7 @@ export default function ProjectStory() {
 
       <div className="container story-hero">
         <div className="slash" />
-        <p className="hud-label kicker"><span className="tick">{'//'}</span> {p.idx} — {p.cat}</p>
+        <p className="hud-label kicker"><span className="tick">{'//'}</span> {p.cat}</p>
         <h1>{p.title}</h1>
         <p className="tag">{p.tagline}</p>
         <div className="meta-row">

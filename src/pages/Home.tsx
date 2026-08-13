@@ -139,7 +139,7 @@ export default function Home() {
 
       <section className="hero" ref={heroRef}>
         <div className="container">
-          <Reveal as="p" className="hud-label kicker" delay={0}><span className="tick">{'//'}</span> 00 — PERSONAL TERMINAL</Reveal>
+          <Reveal as="p" className="hud-label kicker" delay={0}><span className="tick">{'//'}</span> PERSONAL TERMINAL</Reveal>
           <Reveal as="h1" delay={90}>{l1}<br /><span className="hl">{l2}</span><br /><span className="stroke">{l3}</span></Reveal>
           <Reveal as="p" className="role" delay={180}>{profile.role}.</Reveal>
           <Reveal as="p" className="blurb" delay={270}>{profile.blurb}</Reveal>
@@ -167,7 +167,7 @@ export default function Home() {
         <div className="container">
           <Reveal className="section-head">
             <div>
-              <p className="hud-label"><span className="tick">{'//'}</span> 01 — SHOWROOM</p>
+              <p className="hud-label"><span className="tick">{'//'}</span> SHOWROOM</p>
               <h2>Selected Work</h2>
             </div>
             <Link className="more" to="/projects">All Projects →</Link>
@@ -204,7 +204,7 @@ export default function Home() {
         <div className="container">
           <Reveal className="section-head">
             <div>
-              <p className="hud-label"><span className="tick">{'//'}</span> 02 — DOSSIER</p>
+              <p className="hud-label"><span className="tick">{'//'}</span> DOSSIER</p>
               <h2>Resume</h2>
             </div>
             <a className="more" href={profile.resumePdf} download>Download PDF ↓</a>

@@ -31,7 +31,7 @@ export default function About() {
 
       <section className="bio">
         <div className="container read">
-          <p className="hud-label kicker"><span className="tick">{'//'}</span> 01 — THE SHORT VERSION</p>
+          <p className="hud-label kicker"><span className="tick">{'//'}</span> THE SHORT VERSION</p>
           {profile.aboutBio.map(t => <p key={t.slice(0, 24)}>{t}</p>)}
         </div>
       </section>
@@ -39,7 +39,7 @@ export default function About() {
       <section className="track">
         <div className="container">
           <div className="section-head">
-            <p className="hud-label kicker"><span className="tick">{'//'}</span> 02 — THE LONG VERSION</p>
+            <p className="hud-label kicker"><span className="tick">{'//'}</span> THE LONG VERSION</p>
             <h2>Track Record</h2>
           </div>
           <div className="cols">

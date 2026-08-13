@@ -11,7 +11,7 @@ export default function Projects() {
       <HudTop status={`// 0${projects.length} ITEMS`} />
 
       <div className="container show-head">
-        <p className="hud-label kicker"><span className="tick">{'//'}</span> 01 — SHOWROOM</p>
+        <p className="hud-label kicker"><span className="tick">{'//'}</span> SHOWROOM</p>
         <h1>Selected Work</h1>
         <p className="lead">Things I&rsquo;ve designed, built and shipped. Each opens into how it works — the system, the hard parts, and what they cost.</p>
       </div>
