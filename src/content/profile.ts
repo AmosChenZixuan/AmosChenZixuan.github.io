@@ -60,14 +60,15 @@ export const profile = {
     ],
   },
 
+  // Bullet order is priority order, like `skills`. The home timeline shows only `bullets[0]`.
   work: [
     {
       when: 'AUG 2023 — DEC 2025',
       title: 'Software Developer · Volvo Cars',
       loc: 'Gothenburg, Sweden',
       bullets: [
-        '50% less manual intervention in requirement-document audits, via an LLM multi-agent system that scores and suggests fixes.',
         '89% faster troubleshooting — an AI agent for test workflows using structured chunking + Map-Reduce over DLT logs; ~5 hours to 40 minutes.',
+        '50% less manual intervention in requirement-document audits, via an LLM multi-agent system that scores and suggests fixes.',
         'Rebuilt the US-region brand site: dynamic route loading (−35% FCP) and a CDN (−20% LCP), for a 12% lower bounce rate.',
         'PM on an LLM + legacy voice-control PoC across Shanghai teams; hybrid intent recognition reached 82% semantic accuracy.',
       ],
