@@ -22,11 +22,9 @@ export const profile = {
     'Before that: a B.S. in Computer Science at UC Irvine (summa cum laude) and an M.S. in Electrical & Computer Engineering at Carnegie Mellon, with machine-learning work either side of it — vulnerability detection at CMU CyLab, real-time simulation and computer vision at Glinsun AI.',
     'In January 2026 I moved from Sweden back to Irvine, California, and spent the next eight months waiting on a work permit. I built through it: a deep dive into agentic coding, and the IRS Enrolled Agent exams.',
   ],
-  // Footer CTA per page. The words live here; where the line breaks stays in the component.
-  cta: {
-    home: { lead: ['LET’S BUILD', 'SOMETHING'], link: 'LOUD →' },
-    about: { lead: ['OPEN TO WORK.'], link: 'LET’S TALK →' },
-  },
+  // Footer CTA, shared by both pages — one ask, worded the same wherever a reader reaches the
+  // bottom. The words live here; where the line breaks stays in the component.
+  cta: { lead: 'OPEN TO WORK.', link: 'LET’S TALK →' },
 
   email: 'zixuanchen1999@gmail.com',
   github: 'https://github.com/AmosChenZixuan',

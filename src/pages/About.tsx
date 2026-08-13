@@ -98,7 +98,7 @@ export default function About() {
       <footer className="contact">
         <div className="container">
           <p className="hud-label kicker"><span className="tick">{'//'}</span> 03 — UPLINK</p>
-          <div className="big">{profile.cta.about.lead[0]}<br /><a href={`mailto:${profile.email}`}>{profile.cta.about.link}</a></div>
+          <div className="big">{profile.cta.lead}<br /><a href={`mailto:${profile.email}`}>{profile.cta.link}</a></div>
           <div className="meta">
             <span>© 2026 AMOS.IO — ABOUT</span>
             <span>
