@@ -180,6 +180,7 @@ export default function Home() {
                     <span className="idx">{p.idx}</span>
                   </div>
                   <div className="body">
+                    <div className="cat">{p.cat}</div>
                     <h3>{p.title}</h3>
                     <p>{p.card}</p>
                     <div className="stack">
