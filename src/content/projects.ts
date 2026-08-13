@@ -21,7 +21,8 @@ export type Project = {
   language: string
   cardVariant: 'dark' | 'yellow' | 'magenta' | 'cyan' | 'paper'
   span: 's2' | 's3' | 's4' | 's6'
-  thumb?: string         // home-card cover image
+  mark?: string          // brand mark for the home-card lockup
+  short?: string         // lockup name when the full title is too long for the card
   hero?: Shot            // story-page hero shot
   stats?: { num: string; cap: string }[]
   sections: { kicker: string; title: string; paras: string[]; shot?: Shot }[]
@@ -41,7 +42,7 @@ export const projects: Project[] = [
     language: 'Python + TypeScript',
     cardVariant: 'dark',
     span: 's4',
-    thumb: '/projects/bibilab/chat.png',
+    mark: '/projects/bibilab/mark.svg',
     hero: { src: '/projects/bibilab/chat.png', cap: 'Ask your video sources — streamed answers with transcript citations' },
     sections: [
       {
@@ -85,6 +86,8 @@ export const projects: Project[] = [
     language: 'Markdown / agent skills',
     cardVariant: 'yellow',
     span: 's2',
+    mark: '/projects/awc/mark.svg',
+    short: 'AWC',
     sections: [
       {
         kicker: '01 — THE PROBLEM',
@@ -116,7 +119,6 @@ export const projects: Project[] = [
     language: 'TypeScript',
     cardVariant: 'magenta',
     span: 's2',
-    thumb: '/projects/redline/flow.gif',
     hero: { src: '/projects/redline/flow.gif', cap: 'Load → /review → apply → publish, end to end' },
     sections: [
       {
@@ -159,6 +161,7 @@ export const projects: Project[] = [
     language: 'Python',
     cardVariant: 'cyan',
     span: 's2',
+    mark: '/projects/logsum/mark.svg',
     stats: [
       { num: '~3,400×', cap: 'Compression (Drain mining)' },
       { num: '167k', cap: 'Records/sec streamed' },
@@ -205,7 +208,6 @@ export const projects: Project[] = [
     language: 'Python',
     cardVariant: 'paper',
     span: 's6',
-    thumb: '/projects/pyflexim/dam_break.gif',
     hero: { src: '/projects/pyflexim/dam_break.gif', cap: 'dam_break — PBF fluid, wave-maker paddle, and a light box that floats' },
     sections: [
       {
@@ -234,3 +236,8 @@ export const projects: Project[] = [
     ],
   },
 ]
+
+// The three the landing showroom puts up front, in order. /projects lists all five,
+// newest first — this is a curation, not the top of that list.
+export const featured = ['bibilab', 'awc', 'logsum']
+  .map(slug => projects.find(p => p.slug === slug)!)

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Log lines nobody wants to read by hand, poured into the funnel that reduces them. -->
+  <g fill="none" stroke="#F4F1E6" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke-width="4">
+      <path d="M6 8 L58 8"/>
+      <path d="M6 17 L46 17"/>
+      <path d="M6 26 L54 26"/>
+    </g>
+    <path d="M8 37 L56 37 L38 53 L38 60 L26 60 L26 53 Z" stroke-width="5"/>
+  </g>
+</svg>
