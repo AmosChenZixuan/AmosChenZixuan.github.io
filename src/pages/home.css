@@ -191,12 +191,3 @@ section.block { padding: var(--s-9) 0; }
 .skills-card h4 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em;
   text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-4); }
 .skills-card .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-4); }
-
-/* ---------- Footer ---------- */
-.home-footer { background: var(--ink); color: var(--on-ink); padding: var(--s-8) 0 var(--s-6); }
-.home-footer .big { font-family: var(--font-display); font-size: var(--t-xxl); text-transform: uppercase; line-height: .95; }
-.home-footer .big a { color: var(--accent); }
-.home-footer .meta { display: flex; justify-content: space-between; gap: var(--s-4); flex-wrap: wrap;
-  margin-top: var(--s-6); font-family: var(--font-mono); font-size: var(--t-xs);
-  letter-spacing: .1em; color: var(--on-ink-dim); }
-.home-footer .meta a:hover { color: var(--accent); }
