@@ -1,4 +1,6 @@
-docs/superpowers/
+# Local-only workspace: issue tracker, spikes, superpowers artifacts.
+# Nothing in docs/ ships. Force-add if you ever want a tracked doc here.
+docs/
 node_modules/
 dist/
 .shots/
