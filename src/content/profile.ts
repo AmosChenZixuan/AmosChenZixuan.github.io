@@ -97,11 +97,13 @@ export const profile = {
     { deg: 'B.S. Computer Science', sch: 'University of California, Irvine', yr: 'DEC 2020 · GPA 3.96/4.0 · Summa Cum Laude' },
   ],
 
+  // Key order is priority order: the home page shows only the first two groups, so whatever
+  // leads here is what a screener reads under the role line.
   skills: {
-    Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Kotlin'],
+    Practice: ['Agentic Systems', 'Performance Tuning', 'Agile Leadership'],
     'Frameworks & AI': ['FastAPI', 'React', 'Next.js', 'PyTorch', 'Spring', 'Django'],
     'Cloud & Ops': ['AWS', 'Azure', 'GCP', 'Docker', 'CI/CD'],
-    Practice: ['Agentic Systems', 'Performance Tuning', 'Agile Leadership'],
+    Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Kotlin'],
   } as Record<string, readonly string[]>,
 
   funTitles: [
