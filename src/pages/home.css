@@ -146,6 +146,13 @@ section.block { padding: var(--s-9) 0; }
   margin: 0 0 var(--s-2); line-height: 1.05; }
 .proj p { font-size: var(--t-sm); color: var(--on-ink-dim); margin: 0 0 var(--s-4); }
 .proj .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+/* Same CTA as the /projects card (.card .go) — one dark treatment, so no variant rules. */
+.proj .go { margin-top: var(--s-4); font-family: var(--font-mono); font-size: var(--t-xs);
+  letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: var(--on-ink-dim);
+  transition: color var(--dur) var(--ease-pop); }
+.proj .go span { display: inline-block; transition: transform var(--dur) var(--ease-pop); }
+.proj:hover .go, .proj:focus-visible .go { color: var(--accent); }
+.proj:hover .go span, .proj:focus-visible .go span { transform: translateX(4px); }
 
 /* ---------- Resume timeline ---------- */
 .timeline { position: relative; padding-left: var(--s-6); }

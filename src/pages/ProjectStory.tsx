@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import HudTop from '../components/HudTop'
 import SiteFooter from '../components/SiteFooter'
-import { projects } from '../content/projects'
+import { projects, storyCta } from '../content/projects'
 import './story.css'
 
 export default function ProjectStory() {
@@ -14,7 +14,7 @@ export default function ProjectStory() {
 
   return (
     <div className="story">
-      <HudTop status={`// CASE ${p.idx} / 0${projects.length}`} />
+      <HudTop status={`// ${p.idx} / 0${projects.length}`} />
 
       <div className="container">
         <p className="crumb"><Link to="/projects">Showroom</Link> &nbsp;/&nbsp; {p.title}</p>
@@ -22,7 +22,7 @@ export default function ProjectStory() {
 
       <div className="container story-hero">
         <div className="slash" />
-        <p className="hud-label kicker"><span className="tick">{'//'}</span> CASE STUDY {p.idx} — {p.cat}</p>
+        <p className="hud-label kicker"><span className="tick">{'//'}</span> {p.idx} — {p.cat}</p>
         <h1>{p.title}</h1>
         <p className="tag">{p.tagline}</p>
         <div className="meta-row">
@@ -91,7 +91,7 @@ export default function ProjectStory() {
         </div>
       </div>
 
-      <SiteFooter note={`CASE STUDY · ${p.title.toUpperCase()}`} />
+      <SiteFooter note={`${storyCta.toUpperCase()} · ${p.title.toUpperCase()}`} />
     </div>
   )
 }
