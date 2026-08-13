@@ -38,10 +38,10 @@ export const profile = {
   // Each cell reads number → claim → evidence:
   //   `num` + `verb`  the claim line; the verb rides the figure so it stands alone
   //   `what`          the readable label, one line at every width
-  //   `where`         dim mono evidence, written to run exactly two lines at the tightest
+  //   `where`         dim mono evidence, written to run at most two lines at the tightest
   //                   column — a few characters more tips one cell onto a third line.
   stats: [
-    { num: '1.0B', verb: 'TOKENS', what: 'Weekly consumption', where: '→ 49 commits · 14 PRs a week' },
+    { num: '1.0B', verb: 'TOKENS', what: 'Weekly consumption', where: '→ 49 commits · 14 PRs' },
     { num: '$1.1K', verb: 'SAVED/MO', what: 'Against list API rates', where: '$1,169 of usage for $45' },
     { num: '7', verb: 'LLMS', what: 'Across 3 vendors', where: 'Plan · design · proto · exec · review' },
     { num: '192K', verb: 'CONTEXT', what: 'Average session', where: '17 fresh sessions a day, handed off clean' },

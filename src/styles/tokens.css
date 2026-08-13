@@ -109,7 +109,7 @@ a { color: inherit; text-decoration: none; }
    Reusable primitives
    ============================================================ */
 
-/* Mono HUD label — // 01 — ABOUT */
+/* Mono HUD label — // ABOUT */
 .hud-label {
   font-family: var(--font-mono);
   font-size: var(--t-xs);

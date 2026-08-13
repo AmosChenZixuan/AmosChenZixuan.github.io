@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
+import ContactFooter from '../components/ContactFooter'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
@@ -138,7 +139,7 @@ export default function Home() {
 
       <section className="hero" ref={heroRef}>
         <div className="container">
-          <Reveal as="p" className="hud-label kicker" delay={0}><span className="tick">{'//'}</span> 00 — PERSONAL TERMINAL</Reveal>
+          <Reveal as="p" className="hud-label kicker" delay={0}><span className="tick">{'//'}</span> PERSONAL TERMINAL</Reveal>
           <Reveal as="h1" delay={90}>{l1}<br /><span className="hl">{l2}</span><br /><span className="stroke">{l3}</span></Reveal>
           <Reveal as="p" className="role" delay={180}>{profile.role}.</Reveal>
           <Reveal as="p" className="blurb" delay={270}>{profile.blurb}</Reveal>
@@ -166,7 +167,7 @@ export default function Home() {
         <div className="container">
           <Reveal className="section-head">
             <div>
-              <p className="hud-label"><span className="tick">{'//'}</span> 01 — SHOWROOM</p>
+              <p className="hud-label"><span className="tick">{'//'}</span> SHOWROOM</p>
               <h2>Selected Work</h2>
             </div>
             <Link className="more" to="/projects">All Projects →</Link>
@@ -203,7 +204,7 @@ export default function Home() {
         <div className="container">
           <Reveal className="section-head">
             <div>
-              <p className="hud-label"><span className="tick">{'//'}</span> 02 — DOSSIER</p>
+              <p className="hud-label"><span className="tick">{'//'}</span> DOSSIER</p>
               <h2>Resume</h2>
             </div>
             <a className="more" href={profile.resumePdf} download>Download PDF ↓</a>
@@ -233,24 +234,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="home-footer" id="contact">
-        <div className="container">
-          <p className="hud-label" style={{ color: 'var(--accent)', marginBottom: 'var(--s-4)' }}>
-            <span className="tick">{'//'}</span> 03 — UPLINK
-          </p>
-          <Reveal className="big">{profile.cta.lead}<br /><a href={`mailto:${profile.email}`}>{profile.cta.link}</a></Reveal>
-          <div className="meta">
-            <span>© 2026 AMOS.IO — {profile.name} ({profile.alias})</span>
-            <span>
-              <a href={profile.github} target="_blank" rel="noopener">GITHUB</a>
-              {' · '}
-              <a href={profile.linkedin} target="_blank" rel="noopener">LINKEDIN</a>
-              {' · '}
-              <a href={`mailto:${profile.email}`}>EMAIL</a>
-            </span>
-          </div>
-        </div>
-      </footer>
+      <ContactFooter />
     </>
   )
 }

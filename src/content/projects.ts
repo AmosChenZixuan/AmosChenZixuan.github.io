@@ -46,7 +46,7 @@ export const projects: Project[] = [
     hero: { src: '/projects/bibilab/chat.png', cap: 'Ask your video sources — streamed answers with transcript citations' },
     sections: [
       {
-        kicker: '01 — THE PROBLEM',
+        kicker: 'THE PROBLEM',
         title: 'Your watch-later list is a graveyard',
         paras: [
           'Hours of lectures, podcasts and tutorials sit locked inside video — unsearchable, unquotable, impossible to skim. The tools that fix this for documents are cloud products: they want an account, they only speak YouTube, and your sources live on someone else’s machine.',
@@ -54,7 +54,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        kicker: '02 — THE SOLUTION',
+        kicker: 'THE SOLUTION',
         title: 'A notebook that answers with receipts',
         paras: [
           'Drop in a playlist and a FastAPI pipeline takes over: download → transcribe → punctuate → chunk → digest and embed in parallel. Every video becomes a speaker-attributed transcript, and every chat answer is grounded — the model cites sections as [N], and clicking a citation seeks the source video to that exact moment.',
@@ -63,7 +63,7 @@ export const projects: Project[] = [
         shot: { src: '/projects/bibilab/mindmap.png', cap: 'Mind maps generated from the sources — click a node to interrogate it' },
       },
       {
-        kicker: '03 — THE HARD PARTS',
+        kicker: 'THE HARD PARTS',
         title: 'Grounding is an engineering problem',
         paras: [
           'Honest citations need structure the model can actually read: transcripts are cut into token-quantized sections (~12k tokens, bounded range) with per-section digests, then into retrieval chunks sized per language for hybrid vector + BM25 search. Mid-stream, the LLM chooses between two tools — a recall-biased passage finder and a bounded verbatim section read — so answers stay pinned to transcript text instead of vibes.',
@@ -90,7 +90,7 @@ export const projects: Project[] = [
     short: 'AWC',
     sections: [
       {
-        kicker: '01 — THE PROBLEM',
+        kicker: 'THE PROBLEM',
         title: 'Every session starts from zero',
         paras: [
           'A coding agent is only as good as the working agreement you re-explain to it — how to challenge a design, when to write issues, how hard to review its own code. That agreement evaporates with every new session, and it doesn’t travel between tools.',
@@ -98,7 +98,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        kicker: '02 — THE CHAIN',
+        kicker: 'THE CHAIN',
         title: 'grill-me → to-issues → shipit',
         paras: [
           'The core loop is a pipeline: /grill-me stress-tests an idea with design-decision questions, /to-issues converts the surviving spec into agent-ready GitHub issues, and /shipit takes one issue all the way to a review-ready PR — the agent plans, codes and commits on a branch, then reviews itself in two phases: first correctness against acceptance criteria, then leanness. It never merges; the human stays the reviewer.',
@@ -122,7 +122,7 @@ export const projects: Project[] = [
     hero: { src: '/projects/redline/flow.gif', cap: 'Load → /review → apply → publish, end to end' },
     sections: [
       {
-        kicker: '01 — THE PROBLEM',
+        kicker: 'THE PROBLEM',
         title: 'Peer review that scales with headcount',
         paras: [
           'Every ADAS functional requirement gets hand-checked by a peer: writing conventions, conflicts and duplicates against the requirement base, SMART quality, ambiguity. It’s slow, it’s inconsistent between reviewers, and the only way to do more of it is to hire more reviewers.',
@@ -130,7 +130,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        kicker: '02 — THE SOLUTION',
+        kicker: 'THE SOLUTION',
         title: 'Findings you can click, fixes you can trust',
         paras: [
           'Load a requirement by tracking ID and run /review. One forced tool-call returns categorized findings — conventions, conflicts, duplicates, ambiguity, verifiability — each anchored to a span of the requirement text and highlighted in the viewer. Tick the findings you accept and apply them mechanically, or ask the agent to /rewrite the draft. Publishing mints a tracked revision: new ID, version+1, predecessor link, source superseded.',
@@ -138,7 +138,7 @@ export const projects: Project[] = [
         shot: { src: '/projects/redline/review-findings.png', cap: '/review — categorized findings, each highlighting the span it concerns' },
       },
       {
-        kicker: '03 — THE HARD PARTS',
+        kicker: 'THE HARD PARTS',
         title: 'Never trust a model with character offsets',
         paras: [
           'The load-bearing decision: findings quote an exact substring of the requirement, not offsets — LLMs fabricate offsets too often to build a UI on. Quotes are validated server-side with indexOf; a match becomes a highlight, a miss keeps the finding without one. The same trick makes "Apply selected" a deterministic string replace — no second model call, no drift.',
@@ -170,14 +170,14 @@ export const projects: Project[] = [
     ],
     sections: [
       {
-        kicker: '01 — THE PROBLEM',
+        kicker: 'THE PROBLEM',
         title: 'Nobody reads a 500 MB log',
         paras: [
           'When a test vehicle misbehaves, someone gets a multi-gigabyte DLT capture and a question: what happened? No context window holds 130 million tokens, shipping raw logs to a cloud model is slow, expensive, and leaks things that shouldn’t leave the machine — and the capture is probably corrupted anyway, because that’s what a yanked USB stick does.',
         ],
       },
       {
-        kicker: '02 — THE SOLUTION',
+        kicker: 'THE SOLUTION',
         title: 'A deterministic funnel with an LLM on top',
         paras: [
           'Every stage except the last is deterministic and streams in bounded memory. Drain template mining collapses millions of lines into dozens of templates (~3,400× compression); error clusters keep counts, time spans, and one verbatim sample each; a timeline records only error onsets and rate spikes. It all serializes into a ~4 KB evidence pack — and only then does a model turn it into a 5W1H narrative: what died, when, why, and what to do about it.',
@@ -185,7 +185,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        kicker: '03 — THE HARD PARTS',
+        kicker: 'THE HARD PARTS',
         title: 'Real captures fight back',
         paras: [
           'Corruption: a bare DLT parser dies at the first damaged header. LogSum resyncs — scan forward for the next magic bytes, sanity-check the candidate header, keep going — recovering 47,055 of 47,064 messages from a capture with its storage header deliberately destroyed.',
@@ -211,7 +211,7 @@ export const projects: Project[] = [
     hero: { src: '/projects/pyflexim/dam_break.gif', cap: 'dam_break — PBF fluid, wave-maker paddle, and a light box that floats' },
     sections: [
       {
-        kicker: '01 — THE IDEA',
+        kicker: 'THE IDEA',
         title: 'Stop writing one solver per material',
         paras: [
           'Physics engines traditionally silo materials: a cloth solver, a rigid-body solver, a fluid solver — and coupling them is where projects go to die. PyFlexim takes the NVIDIA Flex bet: every body is the same primitive, particles plus constraints. Cloth is distance + bending; rigids are shape matching; fluid is a density constraint; gas adds buoyancy and vorticity; a balloon is a closed-mesh volume constraint.',
@@ -219,7 +219,7 @@ export const projects: Project[] = [
         ],
       },
       {
-        kicker: '02 — WHAT EMERGES',
+        kicker: 'WHAT EMERGES',
         title: 'Buoyancy nobody programmed',
         paras: [
           'The demo scenes are chosen to show behavior that falls out of the model instead of being scripted. In dam_break, a box with density 0.4 floats — displaced fluid pushes back on the lighter body, emergent Archimedes. In the smoke scenes, temperature buoyancy plus vorticity confinement rolls rising gas into vortex rings. The soft-body bunny uses overlapping shape-matching clusters, so its ears bend and haunches squash locally, then it recovers its shape.',
@@ -227,7 +227,7 @@ export const projects: Project[] = [
         shot: { src: '/projects/pyflexim/soft_bunny.gif', cap: 'soft_bunny — overlapping shape-match clusters: local squash, full recovery' },
       },
       {
-        kicker: '03 — THE HARD PARTS',
+        kicker: 'THE HARD PARTS',
         title: 'Making it fast, stable, and visible',
         paras: [
           'The solver runs as Taichi kernels on CUDA or Vulkan with a CPU fallback that runs anywhere. Rendering is its own problem: water is ray-marched with Beer-Lambert absorption and Fresnel so thin water shows the floor and thick water deepens to teal; smoke is a ray-marched volume driven by passive markers advected through the velocity field. Scenes are plain YAML — global parameters plus a list of objects — and headless export writes gifs and mp4s without a display, which is exactly how every clip on this page was made.',
