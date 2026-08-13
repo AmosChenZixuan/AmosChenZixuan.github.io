@@ -217,6 +217,7 @@ export default function Home() {
                   <p>{w.bullets[0]}</p>
                 </Reveal>
               ))}
+              <Link className="more" to="/resume">Full Resume →</Link>
             </div>
             <Reveal type="left" as="aside" className="skills-card hud-frame">
               {Object.entries(profile.skills).slice(0, 2).map(([group, items], gi) => (
