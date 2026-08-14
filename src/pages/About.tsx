@@ -37,6 +37,8 @@ export default function About() {
         </div>
       </section>
 
+      <Reveal type="wipe" className="caution-bar" />
+
       <section className="track">
         <div className="container">
           <div className="track-head">
