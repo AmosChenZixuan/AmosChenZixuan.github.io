@@ -62,7 +62,8 @@
 @media print {
   @page { margin: 14mm; }
   body, .resume-page { background: #fff; }
-  .hud-top, .print-btn, .fx-noise, .fx-scanlines, .scroll-prog { display: none !important; }
+  .hud-top, .print-btn, .contact-footer,
+  .fx-noise, .fx-scanlines, .scroll-prog { display: none !important; }
   .sheet { box-shadow: none; border: 0; margin: 0; max-width: none; }
   .sheet-inner { padding: 0; }
   .rule { background: none; height: 0; border-top: 3px solid #000; margin: 16px 0; }

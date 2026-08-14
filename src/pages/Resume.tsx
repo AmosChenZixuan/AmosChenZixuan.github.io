@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
+import ContactFooter from '../components/ContactFooter'
 import { profile } from '../content/profile'
 import { projects } from '../content/projects'
 import './resume.css'
@@ -107,6 +108,8 @@ export default function Resume() {
           </div>
         </div>
       </div>
+
+      <ContactFooter />
     </div>
   )
 }

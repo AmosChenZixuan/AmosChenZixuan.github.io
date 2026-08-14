@@ -68,11 +68,7 @@ body.intensity-max .fx-noise { opacity: .05; }
 .scroll-prog { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: var(--accent); z-index: 40; box-shadow: 0 0 8px var(--accent); }
 
-/* ---- Mono footer (showroom / story pages) ---- */
-.site-footer { background: var(--ink); color: var(--on-ink-dim); font-family: var(--font-mono);
-  font-size: var(--t-xs); letter-spacing: .1em; padding: var(--s-6) 0; }
-
-/* ---- Rich footer (landing + about), rendered by ContactFooter ---- */
+/* ---- Footer, rendered by ContactFooter on every page ---- */
 .contact-footer { background: var(--ink); color: var(--on-ink); padding: var(--s-8) 0 var(--s-6); }
 .contact-footer .kicker { color: var(--accent); margin-bottom: var(--s-4); }
 .contact-footer .big { font-family: var(--font-display); font-size: var(--t-xxl);

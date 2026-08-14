@@ -1,8 +1,8 @@
 import { Fragment } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import HudTop from '../components/HudTop'
-import SiteFooter from '../components/SiteFooter'
-import { projects, storyCta } from '../content/projects'
+import ContactFooter from '../components/ContactFooter'
+import { projects } from '../content/projects'
 import './story.css'
 
 export default function ProjectStory() {
@@ -91,7 +91,7 @@ export default function ProjectStory() {
         </div>
       </div>
 
-      <SiteFooter note={`${storyCta.toUpperCase()} · ${p.title.toUpperCase()}`} />
+      <ContactFooter />
     </div>
   )
 }
