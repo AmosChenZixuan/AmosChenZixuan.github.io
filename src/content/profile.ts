@@ -1,4 +1,5 @@
-// All facts sourced from the resume PDF (assets/) and Azurtelier.com author files.
+// This file is the source of truth for every fact on the site. `public/resume.pdf` is a
+// hand-maintained copy and has drifted out of step with it — do not check a fact against it.
 // Edit this file to update the site — components never contain copy.
 
 export const profile = {

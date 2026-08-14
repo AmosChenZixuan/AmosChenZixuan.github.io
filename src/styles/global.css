@@ -8,10 +8,8 @@ body { overflow-x: hidden; }
 
 /* ---- CRT scanline + halftone overlays ---- */
 .fx-scanlines, .fx-noise { position: fixed; inset: 0; pointer-events: none; z-index: 9; }
-.fx-scanlines { background: var(--scanlines); opacity: 0; transition: opacity var(--dur); mix-blend-mode: multiply; }
-.fx-noise { opacity: 0; background-image: var(--halftone); background-size: var(--halftone-size); transition: opacity var(--dur); }
-body.intensity-max .fx-scanlines { opacity: 1; }
-body.intensity-max .fx-noise { opacity: .05; }
+.fx-scanlines { background: var(--scanlines); opacity: 1; mix-blend-mode: multiply; }
+.fx-noise { opacity: .05; background-image: var(--halftone); background-size: var(--halftone-size); }
 
 /* ---- Top HUD bar (shared chrome) ---- */
 .hud-top {
