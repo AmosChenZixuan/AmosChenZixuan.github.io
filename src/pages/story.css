@@ -1,4 +1,4 @@
-/* Project story page (.shot screenshot frame omitted — no real screenshots) */
+/* Project story page */
 .story .container { max-width: 1080px; }
 .story .read { max-width: 70ch; margin-inline: auto; }
 
@@ -9,7 +9,6 @@
 
 /* ---- Hollow hero ---- */
 .story-hero { padding: var(--s-6) 0 var(--s-7); }
-.story-hero .slash { width: 64px; height: 6px; background: var(--accent); margin-bottom: var(--s-5); }
 .story-hero h1 { font-family: var(--font-ui); font-weight: 900; font-size: clamp(3rem, 9vw, 6.5rem); line-height: .94;
   letter-spacing: -0.02em; margin: 0; }
 .story-hero .tag { font-size: var(--t-lg); color: var(--on-paper-dim); max-width: 46ch; margin: var(--s-4) 0 var(--s-6); }

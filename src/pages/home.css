@@ -1,5 +1,4 @@
-/* Home page (blog, tweaks panel and
-   intensity-subtle overrides dropped — site ships intensity-max only). */
+/* Home page */
 
 /* ---------- Hero ---------- */
 .hero { position: relative; padding: var(--s-9) 0 var(--s-8); overflow: hidden; }
@@ -14,8 +13,7 @@
   color: transparent; -webkit-text-stroke: 2px var(--on-paper);
 }
 .hero h1 .hl { color: var(--accent); -webkit-text-stroke: 2px var(--ink);
-  text-shadow: 4px 4px 0 var(--ink); }
-body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
+  text-shadow: 4px 4px 0 var(--ink); animation: glitch 3.2s infinite steps(1); }
 @keyframes glitch {
   0%,92%,100% { text-shadow: 4px 4px 0 var(--ink); transform: translate(0); }
   93% { text-shadow: -3px 0 var(--magenta), 3px 0 var(--cyan), 4px 4px 0 var(--ink); transform: translate(2px,-1px); }
@@ -172,22 +170,13 @@ section.block { padding: var(--s-9) 0; }
 .proj:hover .go, .proj:focus-visible .go { color: var(--accent); }
 .proj:hover .go span, .proj:focus-visible .go span { transform: translateX(4px); }
 
-/* ---------- Resume timeline ---------- */
-.timeline { position: relative; padding-left: var(--s-6); }
-.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
-  width: 2px; background: var(--ink); }
-.tl-item { position: relative; padding-bottom: var(--s-6); }
-.tl-item::before { content: ""; position: absolute; left: -27px; top: 6px; width: 14px; height: 14px;
-  background: var(--accent); border: 2px solid var(--ink); }
-.tl-item .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .1em;
-  color: var(--on-paper-dim); }
-.tl-item h3 { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-lg); margin: 2px 0; }
-.tl-item p { font-size: var(--t-sm); color: var(--on-paper-dim); margin: 0; max-width: 60ch; }
-/* Inside .timeline, so the rule runs down past the last dot to reach it. */
-.timeline .more { display: inline-block; }
+/* ---------- Resume section ----------
+   The timeline and the skills card are drawn by global.css, because the about page uses
+   the same two. Only this page's differences live here: entries are a single line of prose
+   instead of a bullet list, and the column ends in a link out to the full resume.
+   Everything is under .resume-wrap so none of it can reach the about page's copy. */
 .resume-wrap { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--s-8); align-items: start; }
 @media (max-width: 820px){ .resume-wrap { grid-template-columns: 1fr; } }
-.skills-card { background: var(--ink); color: var(--on-ink); padding: var(--s-6); border: 2px solid var(--ink); box-shadow: var(--shadow-accent); }
-.skills-card h4 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em;
-  text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-4); }
-.skills-card .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-4); }
+.resume-wrap .tl-item p { font-size: var(--t-sm); color: var(--on-paper-dim); margin: 0; max-width: 60ch; }
+/* Inside .timeline, so the rule runs down past the last dot to reach it. */
+.resume-wrap .timeline .more { display: inline-block; }

@@ -1,8 +1,9 @@
 import { Fragment } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import HudTop from '../components/HudTop'
-import SiteFooter from '../components/SiteFooter'
-import { projects, storyCta } from '../content/projects'
+import Kicker from '../components/Kicker'
+import ContactFooter from '../components/ContactFooter'
+import { projects } from '../content/projects'
 import './story.css'
 
 export default function ProjectStory() {
@@ -22,7 +23,7 @@ export default function ProjectStory() {
 
       <div className="container story-hero">
         <div className="slash" />
-        <p className="hud-label kicker"><span className="tick">{'//'}</span> {p.cat}</p>
+        <Kicker>{p.cat}</Kicker>
         <h1>{p.title}</h1>
         <p className="tag">{p.tagline}</p>
         <div className="meta-row">
@@ -55,7 +56,7 @@ export default function ProjectStory() {
           {p.sections.map((s, si) => (
             <Fragment key={s.kicker}>
               <section>
-                <p className="hud-label kicker"><span className="tick">{'//'}</span> {s.kicker}</p>
+                <Kicker>{s.kicker}</Kicker>
                 <h2>{s.title}</h2>
                 {s.paras.map(t => <p key={t.slice(0, 24)}>{t}</p>)}
                 {s.shot && (
@@ -91,7 +92,7 @@ export default function ProjectStory() {
         </div>
       </div>
 
-      <SiteFooter note={`${storyCta.toUpperCase()} · ${p.title.toUpperCase()}`} />
+      <ContactFooter />
     </div>
   )
 }

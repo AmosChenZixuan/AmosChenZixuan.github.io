@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import ContactFooter from '../components/ContactFooter'
 import HudTop from '../components/HudTop'
+import Kicker from '../components/Kicker'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
 import { featured, storyCta } from '../content/projects'
@@ -106,10 +107,6 @@ function Clock() {
   return <span>{t}</span>
 }
 
-/* The count-up that used to run here is gone with the resume numbers it was written for.
-   It rewrote `.num`'s textContent, which would now wipe the <em> unit out of the claim
-   line, and it only animates a leading integer — of the four figures, two (`$1.1K`, `1.0B`)
-   would have counted to 1 and sat there looking broken next to the two that worked. */
 function StatusStrip() {
   return (
     <section className="status-strip">
@@ -139,7 +136,7 @@ export default function Home() {
 
       <section className="hero" ref={heroRef}>
         <div className="container">
-          <Reveal as="p" className="hud-label kicker" delay={0}><span className="tick">{'//'}</span> PERSONAL TERMINAL</Reveal>
+          <Reveal delay={0}><Kicker>PERSONAL TERMINAL</Kicker></Reveal>
           <Reveal as="h1" delay={90}>{l1}<br /><span className="hl">{l2}</span><br /><span className="stroke">{l3}</span></Reveal>
           <Reveal as="p" className="role" delay={180}>{profile.role}.</Reveal>
           <Reveal as="p" className="blurb" delay={270}>{profile.blurb}</Reveal>
@@ -167,7 +164,7 @@ export default function Home() {
         <div className="container">
           <Reveal className="section-head">
             <div>
-              <p className="hud-label"><span className="tick">{'//'}</span> SHOWROOM</p>
+              <Kicker>SHOWROOM</Kicker>
               <h2>Selected Work</h2>
             </div>
             <Link className="more" to="/projects">All Projects →</Link>
@@ -204,7 +201,7 @@ export default function Home() {
         <div className="container">
           <Reveal className="section-head">
             <div>
-              <p className="hud-label"><span className="tick">{'//'}</span> DOSSIER</p>
+              <Kicker>DOSSIER</Kicker>
               <h2>Resume</h2>
             </div>
             <a className="more" href={profile.resumePdf} download>Download PDF ↓</a>

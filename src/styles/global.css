@@ -8,10 +8,8 @@ body { overflow-x: hidden; }
 
 /* ---- CRT scanline + halftone overlays ---- */
 .fx-scanlines, .fx-noise { position: fixed; inset: 0; pointer-events: none; z-index: 9; }
-.fx-scanlines { background: var(--scanlines); opacity: 0; transition: opacity var(--dur); mix-blend-mode: multiply; }
-.fx-noise { opacity: 0; background-image: var(--halftone); background-size: var(--halftone-size); transition: opacity var(--dur); }
-body.intensity-max .fx-scanlines { opacity: 1; }
-body.intensity-max .fx-noise { opacity: .05; }
+.fx-scanlines { background: var(--scanlines); opacity: 1; mix-blend-mode: multiply; }
+.fx-noise { opacity: .05; background-image: var(--halftone); background-size: var(--halftone-size); }
 
 /* ---- Top HUD bar (shared chrome) ---- */
 .hud-top {
@@ -44,15 +42,52 @@ body.intensity-max .fx-noise { opacity: .05; }
 @keyframes blip { 0%{box-shadow:0 0 0 0 rgba(255,46,109,.6)} 70%{box-shadow:0 0 0 7px rgba(255,46,109,0)} 100%{box-shadow:0 0 0 0 rgba(255,46,109,0)} }
 @media (max-width: 720px){ .hud-top nav { display: none; } }
 
+/* ---- Bottom dock — carries the nav below 720px, where the top bar has no room ----
+   The accent top border mirrors the header's bottom border, so the page reads as
+   bracketed by HUD chrome rather than sitting in an app tab bar. */
+.nav-dock { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  background: var(--ink); border-top: 2px solid var(--accent);
+  padding-bottom: env(safe-area-inset-bottom); }
+.nav-dock a { flex: 1; display: grid; place-items: center; min-height: 52px;
+  font-family: var(--font-mono); font-size: var(--t-xs); font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--on-ink-dim);
+  border-left: 1px solid var(--ink-3); }
+.nav-dock a:first-child { border-left: 0; }
+.nav-dock a.here { color: var(--accent); background: var(--ink-2); }
+
+@media (max-width: 720px) {
+  .nav-dock { display: flex; }
+  /* Clear the dock, or it covers the last line of the footer. 52px cell + 2px border,
+     plus the home-indicator inset on a notched phone. */
+  body { padding-bottom: calc(54px + env(safe-area-inset-bottom)); }
+}
+
+/* ---- Dated timeline: a vertical rule with a square marker per entry ----
+   Used by the home page's resume section and the about page's track record. Both draw the
+   same column and differ only in what each entry contains, so the bodies stay in
+   home.css and about.css. */
+.timeline { position: relative; padding-left: var(--s-6); }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--ink); }
+.tl-item { position: relative; padding-bottom: var(--s-6); }
+.tl-item::before { content: ""; position: absolute; left: -27px; top: 6px; width: 14px; height: 14px;
+  background: var(--accent); border: 2px solid var(--ink); }
+.tl-item .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .1em;
+  color: var(--on-paper-dim); }
+.tl-item h3 { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-lg); margin: 2px 0; }
+
+/* ---- Ink card of skill groups, sitting beside the timeline on home and about ---- */
+.skills-card { background: var(--ink); color: var(--on-ink); padding: var(--s-6);
+  border: 2px solid var(--ink); box-shadow: var(--shadow-accent); }
+.skills-card h4 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-4); }
+.skills-card .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-4); }
+
 /* ---- Scroll progress bar (HUD readout) ---- */
 .scroll-prog { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: var(--accent); z-index: 40; box-shadow: 0 0 8px var(--accent); }
 
-/* ---- Mono footer (showroom / story pages) ---- */
-.site-footer { background: var(--ink); color: var(--on-ink-dim); font-family: var(--font-mono);
-  font-size: var(--t-xs); letter-spacing: .1em; padding: var(--s-6) 0; }
-
-/* ---- Rich footer (landing + about), rendered by ContactFooter ---- */
+/* ---- Footer, rendered by ContactFooter on every page ---- */
 .contact-footer { background: var(--ink); color: var(--on-ink); padding: var(--s-8) 0 var(--s-6); }
 .contact-footer .kicker { color: var(--accent); margin-bottom: var(--s-4); }
 .contact-footer .big { font-family: var(--font-display); font-size: var(--t-xxl);
@@ -76,8 +111,14 @@ body.intensity-max .fx-noise { opacity: .05; }
   }
   [data-reveal="left"] { transform: translateX(-34px); }
   [data-reveal].in { opacity: 1; transform: none; }
-  /* Caution bars wipe in from the left like a scanning bar */
-  .caution-bar[data-reveal] { opacity: 1; transform: none; clip-path: inset(0 100% 0 0);
-    transition: clip-path var(--dur-slow) var(--ease-mech) var(--reveal-delay,0ms); }
-  .caution-bar[data-reveal].in { clip-path: inset(0 0 0 0); }
+  /* Caution bars wipe in from the left like a scanning bar.
+     The stripes move to a child so the bar's own box stays unclipped: an element clipped to
+     zero width never intersects the viewport, so it would never be told to reveal itself. */
+  .caution-bar[data-reveal] { opacity: 1; transform: none; background: none; }
+  .caution-bar[data-reveal]::after {
+    content: ""; display: block; height: 100%; background: var(--caution-stripes);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path var(--dur-slow) var(--ease-mech) var(--reveal-delay,0ms);
+  }
+  .caution-bar[data-reveal].in::after { clip-path: inset(0 0 0 0); }
 }

@@ -1,5 +1,7 @@
-// All facts sourced from the resume PDF (assets/) and Azurtelier.com author files.
-// Edit this file to update the site — components never contain copy.
+// This file is the source of truth for every fact on the site. `public/resume.pdf` is a
+// hand-maintained copy and has drifted out of step with it — do not check a fact against it.
+// A string lives here if two components need it, or if it states a fact that changes — job
+// title, contact, dates. Nav labels, section heads and button text stay in the component.
 
 export const profile = {
   name: 'Zixuan Chen',
@@ -9,6 +11,9 @@ export const profile = {
   // Sits directly under `role` on the home hero — it must add to that line, not restate it.
   blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
   aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
+  // Sits directly under `role` on the résumé sheet — like `blurb`, it must add to that line
+  // rather than restate it.
+  resumeSummary: 'Full-stack development & performance tuning, agile development and leadership.',
   // Status strip under the About hero. Work authorization is deliberately NOT a field here —
   // an application form already asks it. It lands as narrative in the `now` timeline entry instead.
   location: 'Irvine, California',
@@ -30,6 +35,7 @@ export const profile = {
   github: 'https://github.com/AmosChenZixuan',
   linkedin: 'https://www.linkedin.com/in/amoschenzixuan/',
   resumePdf: '/resume.pdf',
+  siteUrl: 'https://amoschenzixuan.github.io',
 
   // Home status strip. Measured from Amos's own agent telemetry over 2026-03-30 → 05-31
   // (nine weeks), except `where` on the first cell, which is GitHub's contribution API for
@@ -106,10 +112,4 @@ export const profile = {
     'Cloud & Ops': ['AWS', 'Azure', 'GCP', 'Docker', 'CI/CD'],
     Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Kotlin'],
   } as Record<string, readonly string[]>,
-
-  funTitles: [
-    { k: 'Summoner', v: 'League of Legends — Diamond rank' },
-    { k: 'Sapphire Star', v: 'Monster Hunter: World — master of Charge Blade' },
-    { k: 'Traveler', v: 'Renowned traveler of the Teyvat continent — and, off-screen, of Asia, America and Europe' },
-    ],
 } as const

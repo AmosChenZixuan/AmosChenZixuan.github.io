@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import ContactFooter from '../components/ContactFooter'
+import Kicker from '../components/Kicker'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
@@ -14,7 +15,7 @@ export default function About() {
       <div className="container about-hero">
         <div>
           <div className="slash" />
-          <p className="hud-label kicker"><span className="tick">{'//'}</span> ABOUT — IDENTITY FILE</p>
+          <Kicker>ABOUT — IDENTITY FILE</Kicker>
           <h1>Digital <em>Alchemist.</em></h1>
           <p className="lead">{profile.aboutLead}</p>
           <div className="about-status">
@@ -31,15 +32,17 @@ export default function About() {
 
       <section className="bio">
         <div className="container read">
-          <p className="hud-label kicker"><span className="tick">{'//'}</span> THE SHORT VERSION</p>
+          <Kicker>THE SHORT VERSION</Kicker>
           {profile.aboutBio.map(t => <p key={t.slice(0, 24)}>{t}</p>)}
         </div>
       </section>
 
+      <Reveal type="wipe" className="caution-bar" />
+
       <section className="track">
         <div className="container">
-          <div className="section-head">
-            <p className="hud-label kicker"><span className="tick">{'//'}</span> THE LONG VERSION</p>
+          <div className="track-head">
+            <Kicker>THE LONG VERSION</Kicker>
             <h2>Track Record</h2>
           </div>
           <div className="cols">
@@ -82,17 +85,6 @@ export default function About() {
               ))}
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      <section className="titles">
-        <div className="container inner">
-          <h2><small>{'//'} STATUS</small>Titles &amp;<br />Honors</h2>
-          <ul>
-            {profile.funTitles.map(t => (
-              <li key={t.k}><span className="k">{t.k}</span><span className="v">{t.v}</span></li>
-            ))}
-          </ul>
         </div>
       </section>
 

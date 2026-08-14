@@ -1,16 +1,14 @@
 import Reveal from './Reveal'
+import Kicker from './Kicker'
 import { profile } from '../content/profile'
 
-/* The rich footer — CTA, copyright, social row — on the landing page and About.
-   SiteFooter is the slim one the showroom and story pages use; the two are unrelated.
-   No props: the pages differed only by a copyright note and a padding step, and both
-   were unified. #contact is an anchor for links shared before it existed; <Routes>
-   renders one page at a time, so it can never collide. */
+/* The site's only footer — CTA, copyright, social row. Every page ends on it.
+   The fixed #contact id can never collide: <Routes> renders one page at a time. */
 export default function ContactFooter() {
   return (
     <footer className="contact-footer" id="contact">
       <div className="container">
-        <p className="hud-label kicker"><span className="tick">{'//'}</span> UPLINK</p>
+        <Kicker>UPLINK</Kicker>
         <Reveal className="big">{profile.cta.lead}<br /><a href={`mailto:${profile.email}`}>{profile.cta.link}</a></Reveal>
         <div className="meta">
           <span>© 2026 AMOS.IO — {profile.name} ({profile.alias})</span>

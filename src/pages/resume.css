@@ -44,6 +44,14 @@
 .job ul { margin: var(--s-3) 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
 .job li { position: relative; padding-left: 18px; font-size: var(--t-sm); line-height: 1.55; }
 .job li::before { content: "▪"; position: absolute; left: 0; color: var(--accent-deep); }
+/* On one column the entry header has no room for a title and a long right-hand value side by
+   side — the Selected Projects row carries a full URL. Nowrap there sets a minimum width
+   wider than a phone, and the page silently overflows. Let the value drop to its own line
+   and break. Dates are far shorter and still fit on one, so they do not wrap. */
+@media (max-width: 760px) {
+  .job .top { flex-wrap: wrap; }
+  .job .when { white-space: normal; overflow-wrap: anywhere; }
+}
 
 /* aside blocks */
 .skill-group { margin-bottom: var(--s-4); }
@@ -62,7 +70,8 @@
 @media print {
   @page { margin: 14mm; }
   body, .resume-page { background: #fff; }
-  .hud-top, .print-btn, .fx-noise, .fx-scanlines, .scroll-prog { display: none !important; }
+  .hud-top, .print-btn, .contact-footer, .nav-dock,
+  .fx-noise, .fx-scanlines, .scroll-prog { display: none !important; }
   .sheet { box-shadow: none; border: 0; margin: 0; max-width: none; }
   .sheet-inner { padding: 0; }
   .rule { background: none; height: 0; border-top: 3px solid #000; margin: 16px 0; }
