@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
-import SiteFooter from '../components/SiteFooter'
+import ContactFooter from '../components/ContactFooter'
 import Reveal from '../components/Reveal'
 import { projects, storyCta } from '../content/projects'
 import './projects.css'
@@ -47,7 +47,7 @@ export default function Projects() {
         </div>
       </div>
 
-      <SiteFooter note="SHOWROOM" />
+      <ContactFooter />
     </>
   )
 }

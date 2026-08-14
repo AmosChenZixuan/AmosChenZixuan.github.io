@@ -1,11 +1,8 @@
 import Reveal from './Reveal'
 import { profile } from '../content/profile'
 
-/* The rich footer — CTA, copyright, social row — on the landing page and About.
-   SiteFooter is the slim one the showroom and story pages use; the two are unrelated.
-   No props: the pages differed only by a copyright note and a padding step, and both
-   were unified. #contact is an anchor for links shared before it existed; <Routes>
-   renders one page at a time, so it can never collide. */
+/* The site's only footer — CTA, copyright, social row. Every page ends on it.
+   The fixed #contact id can never collide: <Routes> renders one page at a time. */
 export default function ContactFooter() {
   return (
     <footer className="contact-footer" id="contact">
