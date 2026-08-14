@@ -44,6 +44,26 @@ body.intensity-max .fx-noise { opacity: .05; }
 @keyframes blip { 0%{box-shadow:0 0 0 0 rgba(255,46,109,.6)} 70%{box-shadow:0 0 0 7px rgba(255,46,109,0)} 100%{box-shadow:0 0 0 0 rgba(255,46,109,0)} }
 @media (max-width: 720px){ .hud-top nav { display: none; } }
 
+/* ---- Bottom dock — carries the nav below 720px, where the top bar has no room ----
+   The accent top border mirrors the header's bottom border, so the page reads as
+   bracketed by HUD chrome rather than sitting in an app tab bar. */
+.nav-dock { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+  background: var(--ink); border-top: 2px solid var(--accent);
+  padding-bottom: env(safe-area-inset-bottom); }
+.nav-dock a { flex: 1; display: grid; place-items: center; min-height: 52px;
+  font-family: var(--font-mono); font-size: var(--t-xs); font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--on-ink-dim);
+  border-left: 1px solid var(--ink-3); }
+.nav-dock a:first-child { border-left: 0; }
+.nav-dock a.here { color: var(--accent); background: var(--ink-2); }
+
+@media (max-width: 720px) {
+  .nav-dock { display: flex; }
+  /* Clear the dock, or it covers the last line of the footer. 52px cell + 2px border,
+     plus the home-indicator inset on a notched phone. */
+  body { padding-bottom: calc(54px + env(safe-area-inset-bottom)); }
+}
+
 /* ---- Scroll progress bar (HUD readout) ---- */
 .scroll-prog { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: var(--accent); z-index: 40; box-shadow: 0 0 8px var(--accent); }
