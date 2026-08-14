@@ -1,5 +1,5 @@
-// This file is the source of truth for every fact on the site. `public/resume.pdf` is built
-// from it — run `npm run resume:pdf` after an edit here, and commit the PDF it writes.
+// This file is the source of truth for every fact on the site. `public/resume.pdf` is a
+// hand-maintained copy and has drifted out of step with it — do not check a fact against it.
 // A string lives here if two components need it, or if it states a fact that changes — job
 // title, contact, dates. Nav labels, section heads and button text stay in the component.
 
