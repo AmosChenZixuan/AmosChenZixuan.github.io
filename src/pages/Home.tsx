@@ -107,10 +107,6 @@ function Clock() {
   return <span>{t}</span>
 }
 
-/* The count-up that used to run here is gone with the resume numbers it was written for.
-   It rewrote `.num`'s textContent, which would now wipe the <em> unit out of the claim
-   line, and it only animates a leading integer — of the four figures, two (`$1.1K`, `1.0B`)
-   would have counted to 1 and sat there looking broken next to the two that worked. */
 function StatusStrip() {
   return (
     <section className="status-strip">

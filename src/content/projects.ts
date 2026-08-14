@@ -1,10 +1,9 @@
-// Story content is drawn from each repo's README, docs (Redline's DESIGN.md
-// and story-assets walkthrough), and demo-scene notes. Stats appear only
-// where the repo states them.
+// A project's story may only state a number its own repo states. Nothing here is estimated.
 
-// One label for "this opens into the project's story" — both the home card and the
-// /projects card read it, so the wording only changes here. Bare words: the arrow and
-// the casing belong to whichever component renders it.
+import type { Bullet } from './lanes'
+
+// One label for "this opens into the project's story", read by both card surfaces. Bare words:
+// the arrow and the casing belong to whichever component renders it.
 export const storyCta = 'How it works'
 
 export type Shot = { src: string; cap: string }
@@ -15,12 +14,16 @@ export type Project = {
   title: string
   cat: string            // showroom card category line
   card: string           // showroom card blurb
+  cv?: Bullet[]          // CV bullets; only on projects the résumé lists. Written, not derived
+                         // from `card` — card copy sells, a CV bullet informs.
+  cvWhen?: string        // CV date range. Not derivable from `cat`, which carries a bare year
+                         // for the showroom card and cannot say whether the work is still live.
   tagline: string        // story-page hero tagline
   chips: string[]
-  github: string
+  github?: string       // absent where no public repo exists — the story page drops the Links row
   language: string
   cardVariant: 'dark' | 'yellow' | 'magenta' | 'cyan' | 'paper'
-  span: 's2' | 's3' | 's4' | 's6'
+  span: 's2' | 's4' | 's6'
   mark?: string          // brand mark for the home-card lockup
   short?: string         // lockup name when the full title is too long for the card
   hero?: Shot            // story-page hero shot
@@ -36,6 +39,14 @@ export const projects: Project[] = [
     title: 'BibiLab',
     cat: '2026 · AI · Local-first · Python',
     card: 'A local, private NotebookLM for video — turn videos & playlists into a searchable, citation-backed AI notebook. No cloud.',
+    cvWhen: 'FEB 2026 — PRESENT',
+    cv: [
+      {
+        text: 'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
+        swe: 'Built a self-hosted, model-agnostic RAG system over 100 hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
+      },
+      'Regression-tested answer quality with a standalone eval package — a hand-curated 35-case set, scored per answer by an LLM judge and compared across runs',
+    ],
     tagline: 'Turn a playlist into a private notebook, then ask questions across every transcript — answers cite their sources, and citations seek the video.',
     chips: ['Python', 'FastAPI', 'React', 'SQLite', 'ChromaDB', 'RAG'],
     github: 'https://github.com/AmosChenZixuan/BibiLab',
@@ -80,6 +91,13 @@ export const projects: Project[] = [
     title: 'Agentic Working Contract',
     cat: '2026 · AI Agents · Tooling',
     card: 'Personal skills collection for AI coding agents — /shipit, /razor, /grill-me and friends. Built for Claude Code, works cross-platform.',
+    cvWhen: 'MAR 2026 — PRESENT',
+    cv: [
+      {
+        text: 'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
+        swe: 'Replaced up-front planning docs with an issue-scoped agent workflow: median lead time 21 → 12 hours, in-branch fixes down two-thirds; self-measured across 223 merged PRs',
+      },
+    ],
     tagline: 'Stop re-teaching your agent your standards every session — install the contract once, get the same discipline everywhere.',
     chips: ['Claude Code', 'Agent Skills', 'Markdown', 'OpenCode', 'Codex'],
     github: 'https://github.com/AmosChenZixuan/Agentic-working-contract',
@@ -112,14 +130,13 @@ export const projects: Project[] = [
     idx: '03',
     title: 'Redline',
     cat: '2025 · Requirements · ADAS',
-    card: 'Agent-driven requirements quality portal — AI peer-review for ADAS functional requirements, with text-anchored findings and tracked revisions.',
-    tagline: 'AI peer-review for safety requirements: findings anchored to the exact words they concern, fixes applied deterministically, every revision tracked.',
-    chips: ['LLM Agents', 'Node', 'React', 'SQLite FTS5', 'ISO 26262'],
-    github: 'https://github.com/AmosChenZixuan/Redline',
+    card: 'Agent-driven requirements quality portal — AI peer-review for ADAS functional requirements, with tracked revisions.',
+    tagline: 'AI peer-review for safety requirements: the routine read handled by an agent, the judgement calls left to a human, every revision tracked.',
+    chips: ['LLM Agents', 'Node', 'React', 'ISO 26262'],
     language: 'TypeScript',
     cardVariant: 'magenta',
     span: 's2',
-    hero: { src: '/projects/redline/flow.gif', cap: 'Load → /review → apply → publish, end to end' },
+    hero: { src: '/projects/redline/flow.gif', cap: 'Load → review → apply → publish, end to end' },
     sections: [
       {
         kicker: 'THE PROBLEM',
@@ -130,67 +147,42 @@ export const projects: Project[] = [
         ],
       },
       {
-        kicker: 'THE SOLUTION',
-        title: 'Findings you can click, fixes you can trust',
+        kicker: 'THE SHAPE',
+        title: 'The agent proposes, the human decides',
         paras: [
-          'Load a requirement by tracking ID and run /review. One forced tool-call returns categorized findings — conventions, conflicts, duplicates, ambiguity, verifiability — each anchored to a span of the requirement text and highlighted in the viewer. Tick the findings you accept and apply them mechanically, or ask the agent to /rewrite the draft. Publishing mints a tracked revision: new ID, version+1, predecessor link, source superseded.',
+          'The design question worth arguing about is where the human sits. An agent that rewrites requirements on its own is unusable in a regulated process; one that only leaves comments gets ignored. Redline sits in between — it returns categorized findings, the reviewer accepts the ones they agree with, and publishing mints a tracked revision instead of overwriting the source.',
+          'Everything else follows from that choice. Findings have to be specific enough to accept one at a time, and the audit trail has to stay intact for the cases where the agent is simply wrong.',
         ],
-        shot: { src: '/projects/redline/review-findings.png', cap: '/review — categorized findings, each highlighting the span it concerns' },
-      },
-      {
-        kicker: 'THE HARD PARTS',
-        title: 'Never trust a model with character offsets',
-        paras: [
-          'The load-bearing decision: findings quote an exact substring of the requirement, not offsets — LLMs fabricate offsets too often to build a UI on. Quotes are validated server-side with indexOf; a match becomes a highlight, a miss keeps the finding without one. The same trick makes "Apply selected" a deterministic string replace — no second model call, no drift.',
-          'Retrieval stayed boring on purpose: an FTS5/BM25 prefilter over siblings and related requirements beats standing up a vector store for a corpus this size. And the agent is vendor-agnostic by construction — it needs exactly two capabilities (forced tool calling, structured results), so each provider is a ~40-line adapter and the model is configuration, not architecture.',
-        ],
-        shot: { src: '/projects/redline/published.png', cap: 'Publish — new tracking ID, version+1, predecessor link; source superseded' },
+        shot: { src: '/projects/redline/review-findings.png', cap: 'Categorized findings — accept the ones you agree with, leave the rest' },
       },
     ],
-    pull: '“Verbatim quotes are verifiable — and double as patch operations.”',
   },
   {
     slug: 'logsum',
     idx: '04',
     title: 'LogSum',
     cat: '2024 · Log Analysis · Pipelines',
-    card: 'Turns a multi-gigabyte vehicle log into a one-page 5W1H incident report. Deterministic core, bounded memory — the LLM is optional.',
-    tagline: 'A 500 MB log is ~130 million tokens. LogSum funnels it into a ~4 KB evidence pack, then writes the incident story any engineer can act on.',
-    chips: ['Python', 'DLT', 'Drain', 'FastAPI', 'LLM'],
-    github: 'https://github.com/AmosChenZixuan/LogSum',
+    card: 'Turns a multi-gigabyte vehicle log into a one-page incident report. Deterministic core, bounded memory — the LLM is optional.',
+    tagline: 'A capture far too large for any context window, funnelled into an evidence pack small enough to reason about — then written up as an incident story an engineer can act on.',
+    chips: ['Python', 'DLT', 'FastAPI', 'LLM'],
     language: 'Python',
     cardVariant: 'cyan',
     span: 's2',
     mark: '/projects/logsum/mark.svg',
-    stats: [
-      { num: '~3,400×', cap: 'Compression (Drain mining)' },
-      { num: '167k', cap: 'Records/sec streamed' },
-      { num: '36 MB', cap: 'RSS on 2M records' },
-      { num: '~40 s', cap: 'End-to-end incl. LLM' },
-    ],
     sections: [
       {
         kicker: 'THE PROBLEM',
-        title: 'Nobody reads a 500 MB log',
+        title: 'Nobody reads a multi-gigabyte log',
         paras: [
-          'When a test vehicle misbehaves, someone gets a multi-gigabyte DLT capture and a question: what happened? No context window holds 130 million tokens, shipping raw logs to a cloud model is slow, expensive, and leaks things that shouldn’t leave the machine — and the capture is probably corrupted anyway, because that’s what a yanked USB stick does.',
+          'When a test vehicle misbehaves, someone gets a capture measured in gigabytes and a question: what happened? No context window holds it, shipping raw logs to a cloud model is slow, expensive, and leaks things that shouldn’t leave the machine — and the capture is probably damaged anyway, because that’s what a yanked USB stick does.',
         ],
       },
       {
-        kicker: 'THE SOLUTION',
+        kicker: 'THE SHAPE',
         title: 'A deterministic funnel with an LLM on top',
         paras: [
-          'Every stage except the last is deterministic and streams in bounded memory. Drain template mining collapses millions of lines into dozens of templates (~3,400× compression); error clusters keep counts, time spans, and one verbatim sample each; a timeline records only error onsets and rate spikes. It all serializes into a ~4 KB evidence pack — and only then does a model turn it into a 5W1H narrative: what died, when, why, and what to do about it.',
-          'No model? The report still renders — the narrative degrades to a stub, never the pipeline. In CI, summarize-cli turns the verdict into an exit code, so a pipeline can gate directly on "a FATAL was found".',
-        ],
-      },
-      {
-        kicker: 'THE HARD PARTS',
-        title: 'Real captures fight back',
-        paras: [
-          'Corruption: a bare DLT parser dies at the first damaged header. LogSum resyncs — scan forward for the next magic bytes, sanity-check the candidate header, keep going — recovering 47,055 of 47,064 messages from a capture with its storage header deliberately destroyed.',
-          'Meaning: stack traces are stitched into single records before mining so a crash survives as one unit instead of exploding into per-frame templates. The evidence pack has a hard character cap with an error-preserving drop order — verbose noise is dropped first, E/F clusters never silently. And when the pack still doesn’t fit, fold-summarization threads a rolling "story so far" through sequential chunks, because causality is temporal and parallel map-reduce loses the thread that connects chunk 1’s binder death to chunk 3’s crash.',
-          'Unknown formats get an LLM-proposed regex — validated against a sample in a sandboxed subprocess with a timeout before it parses anything, so catastrophic backtracking can’t hang the pipeline.',
+          'The load-bearing decision is that the model does as little as possible. Every stage before it is deterministic and streams in bounded memory, reducing the capture to a small evidence pack; only the closing narrative is generated. That ordering is what makes the output reproducible, cheap, and safe to run on a machine the data cannot leave.',
+          'It also means the pipeline degrades rather than fails. With no model available the report still renders, minus the prose — a diagnostic tool that stops working when an API is down is not a diagnostic tool.',
         ],
       },
     ],
@@ -236,6 +228,19 @@ export const projects: Project[] = [
     ],
   },
 ]
+
+// Client work under NDA: no public repo, and nothing in it may be shown. It gets a CV entry
+// and no card, so it stays out of `projects` — everything in that array is a showroom card and
+// a `/projects/<slug>` story route.
+export const hrHelpdesk: Pick<Project, 'slug' | 'title' | 'cvWhen' | 'chips' | 'cv' | 'github'> = {
+  slug: 'hrdesk',
+  title: 'HR Helpdesk',
+  cvWhen: 'FEB 2026',
+  chips: ['Python', 'FastAPI', 'RAG', 'WeCom'],
+  cv: [
+    'Shipped a policy/onboarding Q&A bot into company chat at a 100-person business, in production since March; built in an abstention path that hands 25% of queries to a named HR contact',
+  ],
+}
 
 // The three the landing showroom puts up front, in order. /projects lists all five,
 // newest first — this is a curation, not the top of that list.

@@ -1,5 +1,4 @@
-/* Home page (blog, tweaks panel and
-   intensity-subtle overrides dropped — site ships intensity-max only). */
+/* Home page */
 
 /* ---------- Hero ---------- */
 .hero { position: relative; padding: var(--s-9) 0 var(--s-8); overflow: hidden; }
@@ -14,8 +13,7 @@
   color: transparent; -webkit-text-stroke: 2px var(--on-paper);
 }
 .hero h1 .hl { color: var(--accent); -webkit-text-stroke: 2px var(--ink);
-  text-shadow: 4px 4px 0 var(--ink); }
-body.intensity-max .hero h1 .hl { animation: glitch 3.2s infinite steps(1); }
+  text-shadow: 4px 4px 0 var(--ink); animation: glitch 3.2s infinite steps(1); }
 @keyframes glitch {
   0%,92%,100% { text-shadow: 4px 4px 0 var(--ink); transform: translate(0); }
   93% { text-shadow: -3px 0 var(--magenta), 3px 0 var(--cyan), 4px 4px 0 var(--ink); transform: translate(2px,-1px); }

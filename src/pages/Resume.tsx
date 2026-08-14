@@ -1,34 +1,112 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import HudTop from '../components/HudTop'
 import ContactFooter from '../components/ContactFooter'
 import { profile } from '../content/profile'
-import { projects } from '../content/projects'
+import { bulletTexts, LANE_KEYS, type Lane } from '../content/lanes'
+import { hrHelpdesk, projects } from '../content/projects'
 import './resume.css'
 
+// A link's visible text is the link, minus the parts a reader doesn't need. Derived rather
+// than typed so it cannot name one profile while the href points at another.
+// `linkedin.com/` goes too: the full URL is 6px wider than the value column on a phone, and
+// `in/handle` is the form a CV uses anyway. The label next to it already says which site.
+const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/^linkedin\.com\//, '').replace(/\/$/, '')
+
+// Picked by slug, not by array index: the CV lists personal work only, and `projects` is
+// ordered for the showroom, so an index here silently follows whatever it is reordered to.
+const cvProjects = [hrHelpdesk, ...['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!)]
+
+// Space Mono draws a dash on the lowercase mid-line while its digits run the full cap height,
+// so between two all-caps dates the dash sits about 0.09em low. Nudging it needs it in an
+// element of its own, which is all this does.
+const dated = (when: string) => {
+  const [from, to] = when.split(' — ')
+  return to ? <>{from} <span className="dash">—</span> {to}</> : when
+}
+
+// A run of real spaces that stretches across the gap between a left run and a right-aligned one
+// on paper. A PDF orders text by paint order, so two runs pushed to opposite ends of a line with
+// nothing between them extract as separate objects and the right one drifts — measured, it put
+// every date under the *next* job's title. Bridging the gap with text keeps them together.
+// Hidden on screen, which lays the same rows out with flex and needs no filler.
+// ponytail: 400 is simply more than the widest gap on a 688px sheet; the span is clipped, so
+// the count only has to be enough. If the sheet ever gets much wider, raise it.
+const GAP = <span className="r-gap">{' '.repeat(400)}</span>
+
+// Taken verbatim as a filename, so: legal name, plain hyphen, no dots.
+const pdfName = 'Zixuan Chen - Resume'
+
+// Button text only — which lanes exist and in what order is `LANE_KEYS`. Typed as a total map
+// over those keys, so adding a lane there without a label here does not compile.
+// Abbreviated: the switch shares the bar with the brand, and spelled-out role names do not fit
+// a phone. The label does not follow the key, which is a URL address and cannot be renamed.
+// Both lanes print under one filename on purpose, and no suffix may be added back — the print
+// dialog renames at save time, which is the moment the sender knows which sheet this is.
+const LABELS: Record<Lane, string> = { swe: 'SDE' }
+
 export default function Resume() {
-  const [name1, name2] = [profile.name.split(' ')[1] ?? profile.name, profile.name.split(' ')[0]]
+  const [params] = useSearchParams()
+  // Resolved once, so an unrecognised `?lane=` falls back to the default sheet everywhere at
+  // the same time rather than in each reader of it separately.
+  const current = LANE_KEYS.find(k => k === params.get('lane')) ?? LANE_KEYS[0]
+  const lane = profile.lanes[current]
+  const role = lane?.role ?? profile.role
+  const summary = lane?.summary ?? profile.resumeSummary
+  const skillGroups = (lane?.skills ?? Object.keys(profile.skills)).map(g => [g, profile.skills[g]] as const)
+
+  // Chrome names a printed PDF after the document title, which is otherwise one static string
+  // for every route. It also lands in the PDF's metadata Title, which some readers extract.
+  useEffect(() => {
+    const prev = document.title
+    document.title = pdfName
+    return () => { document.title = prev }
+  }, [])
+
   return (
     <div className="resume-page">
-      <HudTop status="// CV" />
+      <HudTop status={
+        <>
+          {'// CV'}
+          <span className="lane-switch">
+            {/* Links, not buttons: the address is the point. Every lane names itself in the
+                query — bare `/resume` is the default's address, not any one lane's, so linking
+                a lane to it would light the wrong button the day the default moves. */}
+            {LANE_KEYS.map(k => (
+              <Link key={k} to={`/resume?lane=${k}`}
+                className={k === current ? 'on' : ''}>{LABELS[k]}</Link>
+            ))}
+          </span>
+        </>
+      } />
 
       <div className="container">
         <div className="sheet">
+          <button className="btn print-btn" onClick={() => window.print()}>↓ Print</button>
           <div className="sheet-inner">
 
             <div className="r-head">
               <div>
-                <h1 className="name">{name2}<br />{name1}</h1>
-                <p className="role">{profile.role}</p>
-                <p className="summary">Generative AI &amp; agentic systems, full-stack development &amp; performance tuning, agile development and leadership.</p>
+                {/* The break goes between name and alias — a first name and a last name belong
+                    on one line. Keep the quotes: unquoted, AMOS reads as part of the legal
+                    name, which it is not. */}
+                <h1 className="name">{profile.name}<br /><span className="alias">“{profile.alias}”</span></h1>
+                <p className="role">{role}</p>
+                <p className="summary">{summary}</p>
               </div>
-              <div>
-                <div className="r-contact">
-                  <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
-                  <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">github.com/AmosChenZixuan</a></div>
-                  <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">in/amoschenzixuan</a></div>
-                </div>
-                <button className="print-btn" onClick={() => window.print()}>↓ Print</button>
-                <a className="print-btn" href={profile.resumePdf} download>↓ PDF</a>
+              <div className="r-contact">
+                <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
+                {/* `tel:` needs the number without its separators; the visible text keeps them. */}
+                <div className="line"><span className="k">Phone</span><a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`}>{profile.phone}</a></div>
+                {/* Second, above the profile links: it is the one address that shows the work
+                    rather than pointing at where the work is filed. `Portfolio`, not the domain's
+                    own word — two rows reading `github` would take a beat to tell apart. */}
+                <div className="line"><span className="k">Portfolio</span><a href={profile.siteUrl} target="_blank" rel="noopener">{short(profile.siteUrl)}</a></div>
+                <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">{short(profile.github)}</a></div>
+                <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
+                {/* The last employer on this sheet is in Sweden; without a city a US screener
+                    files the whole CV as an overseas candidate. */}
+                <div className="line"><span className="k">Location</span><span>{profile.location}</span></div>
               </div>
             </div>
 
@@ -36,44 +114,90 @@ export default function Resume() {
 
             <div className="r-cols">
               <main>
-                <section className="r-sec">
+                <section className="r-sec r-exp">
                   <h2><span className="tick">{'//'}</span> Experience</h2>
                   {profile.work.map(w => {
                     const [title, co] = w.title.split(' · ')
                     return (
                       <div className="job" key={w.title}>
-                        <div className="top">
-                          <div className="title">{title} · <span className="co">{co}</span></div>
-                          <div className="when">{w.when}</div>
-                        </div>
+                        {/* Stacked, not side by side: sharing a row with a 40-character
+                            place-and-date string wrapped the long Volvo title to four lines. */}
+                        <div className="title">{title} · <span className="co">{co}</span></div>
+                        {/* Two elements, not one text node: the date is pushed to the right edge,
+                            which is where a reader's eye goes for it and where the sheet was empty.
+                            `GAP` is what keeps the two extractable as one line — see its note. */}
+                        <div className="when"><span>{w.loc}</span>{GAP}<span>{dated(w.when)}</span></div>
                         <ul>
-                          {w.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
+                          {bulletTexts(w.bullets, current).map(t => (
+                            <li key={t.slice(0, 24)}>{t}</li>
+                          ))}
                         </ul>
                       </div>
                     )
                   })}
                 </section>
 
-                <section className="r-sec">
-                  <h2><span className="tick">{'//'}</span> Selected Projects</h2>
-                  <div className="job">
-                    <div className="top">
-                      <div className="title"><Link to="/projects">Showroom →</Link></div>
-                      <div className="when">amoschenzixuan.github.io/projects</div>
+                {/* The section classes are print's running order — see the `order` rules in
+                    resume.css. On screen they do nothing. */}
+                <section className="r-sec r-proj">
+                  {/* A plain anchor, not a router Link: `to` renders a relative href, and Chrome
+                      resolves that against whatever host the sheet was printed from — a PDF made
+                      on a local preview carries a localhost link forever. Costs a full page load
+                      on screen, which the nav already offers a cheaper route to. */}
+                  <h2><span className="tick">{'//'}</span> Selected Projects
+                    <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
+                  </h2>
+                  {/* An entry each, not one list of sentences: a project a reader has to find
+                      mid-line is a project they skip. */}
+                  {cvProjects.map(p => (
+                    <div className="job" key={p.slug}>
+                      {/* The name is the repo link. Undecorated, so the printed sheet is
+                          unchanged and the PDF gains a live link per project. */}
+                      {/* Each project carries its own range: the two started months apart, and
+                          either can stop while the other runs. Rides the title line, so it
+                          costs no height. */}
+                      <div className="title">
+                        <a href={p.github} target="_blank" rel="noopener">{p.title}</a>
+                        {GAP}
+                        <span className="range">{dated(p.cvWhen!)}</span>
+                      </div>
+                      <ul>
+                        {/* `chips` rides the last bullet. Tools may be named here; this section
+                            is personal work. */}
+                        {bulletTexts(p.cv!, current).map((t, i, all) => {
+                          return (
+                            <li key={t.slice(0, 24)}>
+                              {t}.{i === all.length - 1 && <> <span className="stack">{p.chips.join(', ')}</span></>}
+                            </li>
+                          ) })}
+                      </ul>
                     </div>
-                    <ul>
-                      {[projects[0], projects[3]].map(p => (
-                        <li key={p.slug}>{p.title} — {p.card}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  ))}
                 </section>
               </main>
 
               <aside>
-                <section className="r-sec">
+                {/* First in the aside, so on screen it sits level with the Volvo entry and the
+                    two read across as one timeline. Screen only — `resume.css` hides this
+                    section in print, and the reason is stated there. */}
+                <section className="r-sec cur">
+                  <h2><span className="tick">{'//'}</span> Current</h2>
+                  <div className="job">
+                    <div className="title">{profile.now.title}</div>
+                    {/* No place, unlike an Experience entry — it would repeat the header. The
+                        span is what keeps the row to one flex item: `dated` returns three, and
+                        the row spaces its items apart, which would spread this date across
+                        the column. */}
+                    <div className="when"><span>{dated(profile.now.when)}</span></div>
+                    <ul>
+                      {profile.now.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
+                    </ul>
+                  </div>
+                </section>
+
+                <section className="r-sec r-skills">
                   <h2><span className="tick">{'//'}</span> Skills</h2>
-                  {Object.entries(profile.skills).map(([group, items], gi) => (
+                  {skillGroups.map(([group, items], gi) => (
                     <div className="skill-group" key={group}>
                       <div className="lbl">{group}</div>
                       <div className="row">
@@ -88,20 +212,20 @@ export default function Resume() {
                   {profile.education.map(e => (
                     <div className="item" key={e.deg}>
                       <div className="deg">{e.deg}</div>
-                      <div className="sch">{e.sch}</div>
-                      <div className="yr">{e.yr}</div>
+                      {/* School and attainment share a line on paper and take one each on
+                          screen, so the separator between them is a CSS `::before` on `.meta`
+                          rather than text sitting here. The year rides this line rather than the
+                          degree's: the filler only bridges runs written next to it in the DOM,
+                          and here that puts it on the same line as the school it belongs to. */}
+                      <div className="sch">{e.sch}
+                        <span className="meta"><span className="nb">{e.gpa}</span>{e.honors && ` · ${e.honors}`}</span>
+                        {GAP}
+                        <div className="yr">{e.yr}</div>
+                      </div>
                     </div>
                   ))}
                 </section>
 
-                <section className="r-sec">
-                  <h2><span className="tick">{'//'}</span> Find Me</h2>
-                  <div className="r-links">
-                    <a href={profile.github} target="_blank" rel="noopener"><span>GitHub</span><span className="ar">↗</span></a>
-                    <a href={profile.linkedin} target="_blank" rel="noopener"><span>LinkedIn</span><span className="ar">↗</span></a>
-                    <a href={`mailto:${profile.email}`}><span>Email</span><span className="ar">↗</span></a>
-                  </div>
-                </section>
               </aside>
             </div>
 

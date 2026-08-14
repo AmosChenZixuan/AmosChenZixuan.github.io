@@ -28,7 +28,8 @@
   --on-paper:   #161510;   /* text on paper                         */
   --on-paper-dim:#5A564A;  /* muted text on paper                   */
 
-  /* Default themeable accent (Tweaks can swap this) */
+  /* Indirection on purpose: every accented surface reads --accent, never --hi directly,
+     so the whole site's accent changes from these three lines. */
   --accent:     var(--hi);
   --accent-deep:var(--hi-deep);
   --on-accent:  var(--ink);
@@ -67,7 +68,6 @@
   --shadow-hard:  6px 6px 0 var(--ink);
   --shadow-hard-sm: 4px 4px 0 var(--ink);
   --shadow-accent: 6px 6px 0 var(--accent);
-  --shadow-soft:  0 8px 30px rgba(0,0,0,.28);   /* used sparingly  */
 
   /* ---- Motion — snappy, mechanical ------------------------- */
   --ease-pop: cubic-bezier(0.16, 1, 0.3, 1);

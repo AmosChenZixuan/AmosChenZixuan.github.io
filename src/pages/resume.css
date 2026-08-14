@@ -2,26 +2,68 @@
 .resume-page { background: #d9d4c4; min-height: 100vh; }
 .resume-page .container { max-width: 1040px; margin-inline: auto; padding-inline: var(--gutter); }
 
+/* ---- Lane switch ----
+   Sits inside `.hud-status`, so it inherits that block's mono, size and tracking, and print
+   needs no rule for it: the print block below already hides `.hud-top`. */
+.lane-switch { display: inline-flex; align-items: center; gap: var(--s-3); }
+/* The marker and the options are all short mono caps in one colour, so without a stop between
+   the label and the choices — `// CV SDE AI` — the whole run reads as a row of tabs. Punctuation rather than
+   content, so it lives here and not in the status string the page hands to `HudTop`.
+   Both margins are balance, not padding: the dot inherits 16px from `.hud-status` on its left
+   and 12px from this block's own `gap` on its right, and 8 + 12 evens them to 24 each.
+   `/ ""` is alt text. Generated content is announced otherwise, and a lone dot between two
+   links is noise; engines without the syntax drop the glyph, which costs only the stop. */
+.lane-switch::before { content: "·" / ""; opacity: .55;
+  margin-left: var(--s-2); margin-right: var(--s-3); }
+/* Underlined, not just recoloured: a lane is a state, a nav link is a destination. */
+.lane-switch a { border-bottom: 1px solid transparent; transition: color var(--dur-fast); }
+.lane-switch a:hover { color: var(--on-ink); }
+.lane-switch a.on { color: var(--accent); border-bottom-color: var(--accent); }
+/* No breakpoint hides this: a phone is where most of these links get opened, and the
+   abbreviations leave the bar room to spare even at 320px. */
+
 /* ---- The sheet ---- */
-.sheet { background: var(--paper); margin: var(--s-6) auto var(--s-8); max-width: 920px;
+/* Positioned for the print tab, which hangs off the top edge — see `.print-btn`. */
+.sheet { background: var(--paper); margin: var(--s-6) auto var(--s-8); max-width: 920px; position: relative;
   border: 2px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); }
 .sheet-inner { padding: clamp(28px, 5vw, 56px); }
 
 /* header */
 .r-head { display: grid; grid-template-columns: 1.5fr 1fr; gap: var(--s-6); align-items: end; }
-.r-head .name { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5.5rem); text-transform: uppercase;
+/* Capped lower than the home hero: that one stacks three short words, this one has to fit
+   `Zixuan Chen` on a single line in a ~466px column. */
+.r-head .name { font-family: var(--font-display); font-size: clamp(2.4rem, 6.5vw, 4.4rem); text-transform: uppercase;
   line-height: .86; margin: 0; }
+.r-head .name .alias { color: var(--accent-deep); }
 .r-head .role { font-weight: 900; font-style: italic; font-size: var(--t-lg); margin: var(--s-3) 0 0; }
 .r-head .summary { color: var(--on-paper-dim); margin: var(--s-3) 0 0; max-width: 48ch; font-size: var(--t-sm); }
-.r-contact { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .04em; display: grid; gap: 7px; }
+/* `anywhere`, not `break-word`: on a phone the value column is ~200px and the LinkedIn URL is
+   almost exactly that wide, so it has to be able to break mid-token or it overflows the sheet. */
+.r-contact { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .04em; display: grid; gap: 7px;
+  overflow-wrap: anywhere; }
 .r-contact .line { display: grid; grid-template-columns: 72px 1fr; gap: 8px; }
-.r-contact .k { color: var(--accent-deep); text-transform: uppercase; }
+/* Dim ink, not accent: a label must not outshout the address beside it, and yellow on this
+   paper is unreadable regardless — see the note on `.tick` below. */
+.r-contact .k { color: var(--on-paper-dim); text-transform: uppercase; }
 .r-contact a { border-bottom: 1px solid var(--paper-edge); }
-.print-btn { margin-top: var(--s-4); margin-right: var(--s-2); display: inline-block; font-family: var(--font-ui); font-weight: 800; font-size: var(--t-xs);
-  text-transform: uppercase; letter-spacing: .04em; padding: 10px 16px; background: var(--accent); color: var(--ink);
-  border: 2px solid var(--ink); box-shadow: var(--shadow-hard-sm); cursor: pointer; transition: transform var(--dur-fast); }
-.print-btn:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
-@media (max-width: 640px){ .r-head { grid-template-columns: 1fr; } }
+/* A tab straddling the sheet's top-right border, half on the paper and half above it, the way
+   one sticks out of a file. Rotated like the tape holding the portrait on `/about`.
+   Lives in the sheet's `--s-6` top margin: an `overflow: hidden` on any ancestor clips it.
+   Type, colour, border, shadow and the press timing all come from `.btn` on the element. */
+.print-btn { position: absolute; top: 0; right: var(--s-6); transform: translateY(-52%) rotate(-1.2deg); }
+/* Both states restate the transform in full: `transform` is one property, so `.btn`'s bare
+   `translate(...)` would replace the offset and the tilt outright and drop the tab into the
+   sheet. The 2px each way is `.btn`'s own press, carried over.
+   Doubled selector for the weight: tokens.css is emitted after this file (see the note in the
+   print block below), so at equal specificity `.btn:hover` would win on source order. */
+.btn.print-btn:hover { transform: translateY(-52%) rotate(0deg) translate(-2px,-2px); }
+.btn.print-btn:active { transform: translateY(-52%) rotate(0deg) translate(2px,2px); }
+@media (max-width: 640px){
+  .r-head { grid-template-columns: 1fr; }
+  /* Nothing forces this — the tab clears the name and the sheet edge either way. It is that on
+     a 288–590px sheet the base 32px reads as the tab drifting inward, off the corner it belongs to. */
+  .print-btn { right: var(--s-4); }
+}
 
 .rule { height: 12px; background: var(--caution-stripes); margin: var(--s-6) 0; }
 
@@ -29,29 +71,43 @@
 .r-cols { display: grid; grid-template-columns: 1.7fr 1fr; gap: var(--s-7); }
 @media (max-width: 760px){ .r-cols { grid-template-columns: 1fr; } }
 
-.r-sec { margin-bottom: var(--s-6); break-inside: avoid; }
-.r-sec > h2 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase;
+.r-sec { margin-bottom: var(--s-6); }
+/* flow-root so the floated .more counts toward the height — without it the rule is drawn at
+   the label's baseline and strikes through the URL once it wraps to its own line. */
+.r-sec > h2 { display: flow-root; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase;
   color: var(--on-paper); margin: 0 0 var(--s-4); padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
-.r-sec > h2 .tick { color: var(--accent-deep); }
-
+/* Yellow is a fill on this page, never text: even `--accent-deep`, the darkest yellow the
+   palette has, lands at 1.44:1 on this paper. Darkening it far enough to read stops it being
+   yellow, so the accent stays where it works — the chips, the buttons, the caution rule, and
+   the name — and everything on the paper itself is ink. */
+.r-sec > h2 .tick { color: var(--on-paper-dim); }
+/* floated, not flex: the heading's other children are bare text nodes, which flex would each
+   promote to an item and space apart. */
+.r-sec > h2 .more { float: right; text-transform: none; letter-spacing: .06em; color: var(--on-paper-dim); }
 /* experience entry */
 .job { margin-bottom: var(--s-5); break-inside: avoid; }
 .job:last-child { margin-bottom: 0; }
-.job .top { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4); }
 .job .title { font-family: var(--font-ui); font-weight: 900; font-size: 1.15rem; line-height: 1.15; }
-.job .title .co { color: var(--accent-deep); }
-.job .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .06em; color: var(--on-paper-dim); white-space: nowrap; }
+/* Full ink: the employer is a headline fact on this sheet, not a caption on the role. The
+   `·` already separates the two. */
+.job .title .co { color: var(--on-paper); }
+/* Print's gap filler. Screen lays these rows out with flex and needs no filler, and a visible
+   one would be a third flex item spaced apart like a column of its own. */
+.r-gap { display: none; }
+/* Place left, date hard right. gap so the two never touch when the column is narrow; wrap so a
+   phone stacks them instead of squeezing. Everything that uses this row has to hand it exactly
+   two visible children, or one for a lone date — a stray third gets spaced apart like a column
+   of its own, which is why `.r-gap` above is `display: none` here rather than transparent. */
+.job .when { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px;
+  font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .06em; color: var(--on-paper-dim); margin-top: 3px; }
+/* Optical centring between two all-caps dates — the font puts the dash on the lowercase
+   mid-line. Relative, so nothing reflows. */
+.dash { position: relative; top: -.09em; }
 .job ul { margin: var(--s-3) 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
 .job li { position: relative; padding-left: 18px; font-size: var(--t-sm); line-height: 1.55; }
-.job li::before { content: "▪"; position: absolute; left: 0; color: var(--accent-deep); }
-/* On one column the entry header has no room for a title and a long right-hand value side by
-   side — the Selected Projects row carries a full URL. Nowrap there sets a minimum width
-   wider than a phone, and the page silently overflows. Let the value drop to its own line
-   and break. Dates are far shorter and still fit on one, so they do not wrap. */
-@media (max-width: 760px) {
-  .job .top { flex-wrap: wrap; }
-  .job .when { white-space: normal; overflow-wrap: anywhere; }
-}
+.job li::before { content: "▪"; position: absolute; left: 0; color: var(--on-paper-dim); }
+/* Dim like .job .when — same job, metadata trailing a line of prose. */
+.job li .stack { color: var(--on-paper-dim); }
 
 /* aside blocks */
 .skill-group { margin-bottom: var(--s-4); }
@@ -60,25 +116,178 @@
 .r-sec.edu .item { margin-bottom: var(--s-4); }
 .r-sec.edu .deg { font-weight: 800; font-size: var(--t-sm); }
 .r-sec.edu .sch, .r-sec.edu .yr { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--on-paper-dim); }
-.r-links { display: grid; gap: 6px; font-family: var(--font-mono); font-size: var(--t-xs); }
-.r-links a { display: flex; justify-content: space-between; border-bottom: 1px solid var(--paper-edge); padding-bottom: 5px; }
-.r-links a .ar { color: var(--accent-deep); }
+/* Own line: the aside is ~300px, and school, grade and honours on one run there break inside
+   a school's name. Each fits alone. */
+.r-sec.edu .meta { display: block; }
+.r-sec.edu .nb { white-space: nowrap; }
+/* Same markup as an Experience entry, in a ~300px aside — the title drops to body size. */
+.cur .title { font-size: var(--t-sm); font-weight: 800; }
+/* A project name is not an employer — same markup, one step quieter. flow-root contains the
+   floated date: on a phone it drops to a second line, and uncontained it juts into the bullets
+   below and wraps the first one into a narrow column. */
+.r-proj .title { font-size: var(--t-md); display: flow-root; }
+/* Floated right so it lands on the same edge as the Experience dates — a project has no
+   location line to hang a date under. Same trick as `.more` on the section headings.
+   Dim mono at 400: inherited, the title's 900-weight sans prints the date louder than
+   the project name it dates. */
+.r-proj .title .range { float: right; font-family: var(--font-mono); font-size: var(--t-xs);
+  font-weight: 400; letter-spacing: .06em; color: var(--on-paper-dim); }
+/* The only cue that the name is a link, and it is the accent used the way the rest of the site
+   uses it — as a fill behind ink, never as text colour. The box-shadow is the padding: it bleeds
+   the highlight past the glyphs without giving the span a box that would reflow the line. */
+.r-proj .title a:hover { background: var(--accent); box-shadow: 0 0 0 3px var(--accent); }
 
 /* ============================================================
    PRINT — clean black-on-white, no chrome, fits A4/Letter
    ============================================================ */
 @media print {
   @page { margin: 14mm; }
-  body, .resume-page { background: #fff; }
+  body, .resume-page, .sheet { background: #fff; }
+  /* The page wrapper is `min-height: 100vh`; in print a vh is the paper, so an otherwise
+     one-page sheet was padded out to a full page and anything after it started a second. */
+  .resume-page { min-height: 0; }
   .hud-top, .print-btn, .contact-footer, .nav-dock,
   .fx-noise, .fx-scanlines, .scroll-prog { display: none !important; }
   .sheet { box-shadow: none; border: 0; margin: 0; max-width: none; }
   .sheet-inner { padding: 0; }
   .rule { background: none; height: 0; border-top: 3px solid #000; margin: 16px 0; }
-  .r-head .name { color: #000; }
-  .r-contact .k, .r-sec > h2 .tick, .job .title .co,
-  .job li::before, .r-links a .ar { color: #000 !important; }
-  .chip { background: #eee !important; color: #000 !important; border: 1px solid #000; }
+  .r-head .name, .r-head .name .alias { color: #000; }
+  /* Only the two whose reason for being dim does not survive paper: the employer, one of the
+     three things a screener reads, and the bullet glyph, which is structure. Anything that
+     captions something stays dim — blackened, it outranks what it captions. */
+  .job .title .co, .job li::before { color: #000 !important; }
+  /* The slashes carry no information, and a résumé parser that matches section headings by
+     exact string sees `// EXPERIENCE` rather than `EXPERIENCE`. Most parsers normalise
+     punctuation away and would cope; the ones that do not fail silently, and the mark costs
+     nothing to give up on paper. Screen keeps it. */
+  .r-sec > h2 .tick { display: none; }
   a { color: #000; text-decoration: none; }
-  .r-sec, .job { break-inside: avoid; }
+  /* Keep each entry whole, but never a whole section: Experience is taller than a page, and
+     an unbreakable block that cannot fit gets pushed to a fresh page and then overflows
+     anyway, leaving the page before it half empty. */
+  .job, .skill-group, .r-sec.edu .item { break-inside: avoid; }
+  .r-sec > h2 { break-after: avoid; }
+
+  /* One column, in résumé order. `display: contents` dissolves main and aside so the five
+     sections become siblings of one flex column and `order` can place them — the screen keeps
+     its two-column grid and no markup moves. Two columns fit more content per sheet, but they
+     paginate unpredictably (a grid row taller than a page relocates whole blocks) and are the
+     classic ATS reading-order hazard. Experience leads: it holds the employers and every
+     measured outcome, and it is the block a reader gives their first seconds to. */
+  .r-cols { display: flex; flex-direction: column; gap: 0; }
+  .r-cols > main, .r-cols > aside { display: contents; }
+  /* `r-` prefixed: page stylesheets are global here, and a bare `.proj` is the home page's
+     project card — it painted this whole section black. */
+  .r-sec.r-exp { order: 1 } .r-sec.r-proj { order: 2 }
+  .r-sec.edu { order: 3 } .r-sec.r-skills { order: 4 }
+  /* Current is dropped on paper, not reordered: an entry with no employer, whose one bullet
+     restates the projects below it, is the shape a résumé parser misfiles. Screen keeps the
+     block — the About timeline shares its copy. The projects carry their own dates, so the
+     sheet still shows work running past the last employment date. */
+  .r-sec.cur { display: none; }
+
+  /* Résumé density. Sizes here are px, not the rem the screen block uses: the print box is a
+     fixed 688px and does not scale, so a relative scale buys nothing and only hides how tall
+     the sheet actually is. */
+  /* One inherited leading for the whole sheet. Without it the small mono lines — dates, school,
+     year — kept the body scale's 27.5px leading and cost more than double their own height. */
+  .sheet-inner { line-height: 1.3; }
+  .r-head { gap: 20px; }
+  .r-head .name { font-size: 27px; line-height: 1.02; }
+  .r-head .role { font-size: 13.5px; line-height: 1.2; margin-top: 4px; }
+  .r-head .summary { font-size: 11px; line-height: 1.3; margin-top: 4px; max-width: none; }
+  .r-contact { font-size: 10px; gap: 1px; }
+  .rule { margin: 7px 0; }
+  /* Spacing is set against the page, not by taste. A US Letter sheet at these margins holds
+     950px, and this rule with the three below spend the slack under the last line on leading.
+     Nothing is held in reserve: a printer whose fonts measure 1% larger breaks both sheets onto
+     a second page. Adding a bullet means winding these back further, and `.job li` line-height
+     is the next one to give. */
+  .r-sec { margin-bottom: 10px; }
+  /* Tracking is capped here, not for looks: past roughly .1em a PDF text extractor reads the
+     gaps as spaces and `EXPERIENCE` comes out as `E X P E R I E N C E`, which no résumé parser
+     matches against its section lexicon. Measured break point is between .08em and .12em, so
+     this sits at half of it. Screen keeps .2em. */
+  .r-sec > h2 { font-size: 10px; margin-bottom: 4px; padding-bottom: 3px; letter-spacing: .06em; }
+  /* The heading dropped to 10px and this rode along at the screen's 12px, so the URL printed
+     bigger and bolder than the section it hangs off. */
+  .r-sec > h2 .more { font-size: 10px; }
+  /* Static, so the dash is not a positioned box: positioned inline content becomes its own
+     text object and the extracted date loses its separator — `AUG 2023   DEC 2025`. The
+     optical nudge is a screen-only refinement. */
+  .dash { position: static; }
+  /* The same defect as `.dash`, one level up. A run pushed to the far end of a line — by
+     `space-between`, by a float, by a grid column — is painted as its own text object with
+     nothing between it and the run it belongs to, and extraction loses the pairing: measured,
+     every date came out under the *next* job's title, and a parser taking the nearest date read
+     the wrong range for every role. Filling the gap with real spaces keeps the line continuous.
+     The date stays hard right, which is the whole point of doing it this way rather than simply
+     joining the two runs. */
+  .r-gap { display: block; flex: 1 1 0%; min-width: 0; white-space: pre; overflow: hidden; }
+  /* Only the filler may flex; the runs keep their own width or the date gets clipped. */
+  .job .when > span:not(.r-gap), .r-proj .title > *:not(.r-gap) { flex: 0 0 auto; }
+  /* The 16px column gap was there to keep two runs apart when the column got narrow. The filler
+     does that now, and 16px of it either side would push the date off the right edge. */
+  .job .when { column-gap: 0; }
+  /* flex-start, not baseline: the float this replaces sat at the top of the line box, and
+     baseline alignment drops the date 2px below where the sheet has always had it. */
+  .r-proj .title { display: flex; align-items: flex-start; }
+  .r-proj .title .range { float: none; }
+  /* `•` over the screen's `▪`: both extract as a line of their own, but the round bullet is in
+     every parser's list of markers to strip. */
+  .job li::before { content: "•"; }
+  .job { margin-bottom: 7px; }
+  .job .title { font-size: 12.5px; line-height: 1.22; }
+  .job .when { font-size: 10px; margin-top: 0; }
+  /* The screen's 12px lead-in and 7px bullet gap are body-copy spacing; across eight lists on
+     this sheet they cost more than a bullet each. */
+  .job ul { margin-top: 5px; gap: 4px; }
+  .job li { font-size: 11px; line-height: 1.4; margin-bottom: 0; }
+  .r-proj .title { font-size: 11.5px; }
+  .r-proj .title .range { font-size: 10px; }
+  /* Two lines, not three — a degree at three lines each spent a tenth of the page on six short
+     strings. The gap matches the one between two jobs. */
+  .r-sec.edu .item { margin-bottom: 9px; }
+  /* w900 like every other entry title on the sheet. Screen keeps 800, where this is a size
+     smaller than the other two and does not need to match them. */
+  .r-sec.edu .deg { font-size: 11.5px; font-weight: 900; }
+  /* The school's line carries the year at its right edge, the way a job's does. Same shape as
+     `.job .when`: two runs and the filler between them, all one flex line. The year used to sit
+     opposite the *degree*, in a grid column — which reads better but has no room for a filler
+     between the two, and extracted both years after both schools. Measured on four extractors:
+     on the school's line every year pairs with its own school, on the degree's line none do. */
+  .r-sec.edu .sch { display: flex; align-items: baseline; }
+  .r-sec.edu .sch > *:not(.r-gap) { flex: 0 0 auto; }
+  .r-sec.edu .yr { text-align: right; }
+  /* One line at 688px: nothing wraps there, and a second row costs a full degree's height. */
+  .r-sec.edu .meta { display: inline; }
+  .r-sec.edu .meta::before { content: ' · '; }
+  /* Tracked like the dates and locations it sits beside; untracked it printed about a tenth
+     narrower than every other mono line on the sheet. */
+  .r-sec.edu .sch, .r-sec.edu .yr { font-size: 10px; letter-spacing: .06em; }
+
+  /* Skills as one text line per group. The chips cost ~120px of a page in boxes and padding,
+     and a bordered span is the shape a résumé parser is least sure what to do with. */
+  .skill-group { margin-bottom: 4px; font-size: 11px; line-height: 1.34; }
+  .skill-group .lbl { display: inline; font-size: 11px; letter-spacing: .04em; margin: 0; color: #000; }
+  /* The trailing space is real content: without it the extracted text reads `AI & LLM:Azure`
+     and the first skill is lost to whatever tokenises on whitespace. */
+  .skill-group .lbl::after { content: ': '; }
+  .skill-group .row { display: inline; }
+  /* !important throughout: `.chip` is defined in tokens.css, which the bundle emits after this
+     file, so an equal-specificity print rule loses on source order. */
+  .chip { display: inline !important; background: none !important; color: #000 !important;
+    border: 0 !important; padding: 0 !important; font: inherit !important;
+    letter-spacing: 0 !important; text-transform: none !important; }
+  .chip + .chip::before { content: ', '; }
+
+  /* Selected Projects drops its stack line: those words are nearly all in Skills already, so on
+     a sheet fighting for a page it is a repeat ATS hit rather than new information. Screen keeps it. */
+  .r-proj .stack { display: none; }
+  /* The PDF keeps these as live link annotations, so they stay underlined — with nothing to see,
+     a reader has no reason to try clicking. `justify-self` stops the rule running the width of
+     the grid column, which is what made it read as a blank form field. */
+  .r-contact a { border-bottom: 1px solid currentColor; justify-self: start; }
+  .r-sec > h2 .more { border-bottom: 1px solid currentColor; }
+  .skill-group .lbl { letter-spacing: 0; }
 }
