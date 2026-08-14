@@ -38,7 +38,7 @@ export default function About() {
 
       <section className="track">
         <div className="container">
-          <div className="section-head">
+          <div className="track-head">
             <p className="hud-label kicker"><span className="tick">{'//'}</span> THE LONG VERSION</p>
             <h2>Track Record</h2>
           </div>

@@ -143,6 +143,9 @@ a { color: inherit; text-decoration: none; }
   background: var(--caution-stripes);
 }
 
+/* Accent rule above a page title */
+.slash { width: 64px; height: 6px; background: var(--accent); margin-bottom: var(--s-5); }
+
 /* Buttons — hard offset shadow, mechanical press */
 .btn {
   --bg: var(--accent); --fg: var(--on-accent);

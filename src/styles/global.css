@@ -64,6 +64,27 @@ body.intensity-max .fx-noise { opacity: .05; }
   body { padding-bottom: calc(54px + env(safe-area-inset-bottom)); }
 }
 
+/* ---- Dated timeline: a vertical rule with a square marker per entry ----
+   Used by the home page's resume section and the about page's track record. Both draw the
+   same column and differ only in what each entry contains, so the bodies stay in
+   home.css and about.css. */
+.timeline { position: relative; padding-left: var(--s-6); }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--ink); }
+.tl-item { position: relative; padding-bottom: var(--s-6); }
+.tl-item::before { content: ""; position: absolute; left: -27px; top: 6px; width: 14px; height: 14px;
+  background: var(--accent); border: 2px solid var(--ink); }
+.tl-item .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .1em;
+  color: var(--on-paper-dim); }
+.tl-item h3 { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-lg); margin: 2px 0; }
+
+/* ---- Ink card of skill groups, sitting beside the timeline on home and about ---- */
+.skills-card { background: var(--ink); color: var(--on-ink); padding: var(--s-6);
+  border: 2px solid var(--ink); box-shadow: var(--shadow-accent); }
+.skills-card h4 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-4); }
+.skills-card .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-4); }
+
 /* ---- Scroll progress bar (HUD readout) ---- */
 .scroll-prog { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: var(--accent); z-index: 40; box-shadow: 0 0 8px var(--accent); }
