@@ -37,6 +37,8 @@ export default function About() {
         </div>
       </section>
 
+      <Reveal type="wipe" className="caution-bar" />
+
       <section className="track">
         <div className="container">
           <div className="track-head">
@@ -83,17 +85,6 @@ export default function About() {
               ))}
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      <section className="titles">
-        <div className="container inner">
-          <h2><small>{'//'} STATUS</small>Titles &amp;<br />Honors</h2>
-          <ul>
-            {profile.funTitles.map(t => (
-              <li key={t.k}><span className="k">{t.k}</span><span className="v">{t.v}</span></li>
-            ))}
-          </ul>
         </div>
       </section>
 

@@ -113,8 +113,14 @@ body.intensity-max .fx-noise { opacity: .05; }
   }
   [data-reveal="left"] { transform: translateX(-34px); }
   [data-reveal].in { opacity: 1; transform: none; }
-  /* Caution bars wipe in from the left like a scanning bar */
-  .caution-bar[data-reveal] { opacity: 1; transform: none; clip-path: inset(0 100% 0 0);
-    transition: clip-path var(--dur-slow) var(--ease-mech) var(--reveal-delay,0ms); }
-  .caution-bar[data-reveal].in { clip-path: inset(0 0 0 0); }
+  /* Caution bars wipe in from the left like a scanning bar.
+     The stripes move to a child so the bar's own box stays unclipped: an element clipped to
+     zero width never intersects the viewport, so it would never be told to reveal itself. */
+  .caution-bar[data-reveal] { opacity: 1; transform: none; background: none; }
+  .caution-bar[data-reveal]::after {
+    content: ""; display: block; height: 100%; background: var(--caution-stripes);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path var(--dur-slow) var(--ease-mech) var(--reveal-delay,0ms);
+  }
+  .caution-bar[data-reveal].in::after { clip-path: inset(0 0 0 0); }
 }
