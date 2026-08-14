@@ -1,6 +1,4 @@
-// Story content is drawn from each repo's README, docs (Redline's DESIGN.md
-// and story-assets walkthrough), and demo-scene notes. Stats appear only
-// where the repo states them.
+// A project's story may only state a number its own repo states. Nothing here is estimated.
 
 // One label for "this opens into the project's story" — both the home card and the
 // /projects card read it, so the wording only changes here. Bare words: the arrow and
