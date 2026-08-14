@@ -62,7 +62,6 @@
 
   /* ---- Radius — angular: sharp by default ----------- */
   --r-chip: 2px;            /* the only place softness is allowed  */
-  --notch:  14px;           /* clip-path chamfer size for cards    */
 
   /* ---- Elevation — HARD comic offset shadows, not blurs ----- */
   --shadow-hard:  6px 6px 0 var(--ink);
@@ -119,14 +118,6 @@ a { color: inherit; text-decoration: none; }
   color: var(--on-paper-dim);
 }
 .hud-label .tick { color: var(--accent); }
-
-/* Notched card — chamfered top-right + bottom-left corners */
-.notch-card {
-  --c: var(--notch);
-  clip-path: polygon(
-    0 0, calc(100% - var(--c)) 0, 100% var(--c),
-    100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
-}
 
 /* Corner-bracket HUD frame */
 .hud-frame { position: relative; }

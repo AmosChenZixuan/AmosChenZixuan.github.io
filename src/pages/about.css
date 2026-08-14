@@ -52,7 +52,6 @@
 .about .tl-item--now::before { background: var(--paper); }
 .about .tl-item--now h3::after { content: "NOW"; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .16em;
   background: var(--accent); color: var(--ink); padding: 3px 7px; margin-left: 10px; vertical-align: middle; }
-.about .skills-card h4:not(:first-child) { margin-top: var(--s-5); }
 .about .skills-card .edu { display: grid; gap: var(--s-4); padding-bottom: var(--s-5); border-bottom: 1px solid var(--ink-3); }
 .about .skills-card .edu b { display: block; font-family: var(--font-ui); font-weight: 800; font-size: var(--t-sm); }
 .about .skills-card .edu span { display: block; font-size: var(--t-xs); color: var(--on-ink-dim); }
