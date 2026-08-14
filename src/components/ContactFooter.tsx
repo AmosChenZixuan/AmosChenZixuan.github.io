@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import Kicker from './Kicker'
 import { profile } from '../content/profile'
 
 /* The site's only footer — CTA, copyright, social row. Every page ends on it.
@@ -7,7 +8,7 @@ export default function ContactFooter() {
   return (
     <footer className="contact-footer" id="contact">
       <div className="container">
-        <p className="hud-label kicker"><span className="tick">{'//'}</span> UPLINK</p>
+        <Kicker>UPLINK</Kicker>
         <Reveal className="big">{profile.cta.lead}<br /><a href={`mailto:${profile.email}`}>{profile.cta.link}</a></Reveal>
         <div className="meta">
           <span>© 2026 AMOS.IO — {profile.name} ({profile.alias})</span>

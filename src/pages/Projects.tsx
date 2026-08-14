@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
+import Kicker from '../components/Kicker'
 import ContactFooter from '../components/ContactFooter'
 import Reveal from '../components/Reveal'
 import { projects, storyCta } from '../content/projects'
@@ -11,7 +12,7 @@ export default function Projects() {
       <HudTop status={`// 0${projects.length} ITEMS`} />
 
       <div className="container show-head">
-        <p className="hud-label kicker"><span className="tick">{'//'}</span> SHOWROOM</p>
+        <Kicker>SHOWROOM</Kicker>
         <h1>Selected Work</h1>
         <p className="lead">Things I&rsquo;ve designed, built and shipped. Each opens into how it works — the system, the hard parts, and what they cost.</p>
       </div>
