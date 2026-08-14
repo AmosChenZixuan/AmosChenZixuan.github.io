@@ -5,6 +5,10 @@ import { profile } from '../content/profile'
 import { projects } from '../content/projects'
 import './resume.css'
 
+// A link's visible text is the link, minus the parts a reader doesn't need. Derived rather
+// than typed so it cannot name one profile while the href points at another.
+const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+
 export default function Resume() {
   const [name1, name2] = [profile.name.split(' ')[1] ?? profile.name, profile.name.split(' ')[0]]
   return (
@@ -24,8 +28,8 @@ export default function Resume() {
               <div>
                 <div className="r-contact">
                   <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
-                  <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">github.com/AmosChenZixuan</a></div>
-                  <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">in/amoschenzixuan</a></div>
+                  <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">{short(profile.github)}</a></div>
+                  <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
                 </div>
                 <button className="print-btn" onClick={() => window.print()}>↓ Print</button>
                 <a className="print-btn" href={profile.resumePdf} download>↓ PDF</a>
@@ -59,7 +63,7 @@ export default function Resume() {
                   <div className="job">
                     <div className="top">
                       <div className="title"><Link to="/projects">Showroom →</Link></div>
-                      <div className="when">amoschenzixuan.github.io/projects</div>
+                      <div className="when">{short(profile.siteUrl)}/projects</div>
                     </div>
                     <ul>
                       {[projects[0], projects[3]].map(p => (

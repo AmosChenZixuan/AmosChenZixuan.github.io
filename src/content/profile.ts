@@ -34,6 +34,7 @@ export const profile = {
   github: 'https://github.com/AmosChenZixuan',
   linkedin: 'https://www.linkedin.com/in/amoschenzixuan/',
   resumePdf: '/resume.pdf',
+  siteUrl: 'https://amoschenzixuan.github.io',
 
   // Home status strip. Measured from Amos's own agent telemetry over 2026-03-30 → 05-31
   // (nine weeks), except `where` on the first cell, which is GitHub's contribution API for
