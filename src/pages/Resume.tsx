@@ -19,7 +19,7 @@ export default function Resume() {
               <div>
                 <h1 className="name">{name2}<br />{name1}</h1>
                 <p className="role">{profile.role}</p>
-                <p className="summary">Generative AI &amp; agentic systems, full-stack development &amp; performance tuning, agile development and leadership.</p>
+                <p className="summary">{profile.resumeSummary}</p>
               </div>
               <div>
                 <div className="r-contact">

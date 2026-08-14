@@ -10,6 +10,9 @@ export const profile = {
   // Sits directly under `role` on the home hero — it must add to that line, not restate it.
   blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
   aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
+  // Sits directly under `role` on the résumé sheet — like `blurb`, it must add to that line
+  // rather than restate it.
+  resumeSummary: 'Full-stack development & performance tuning, agile development and leadership.',
   // Status strip under the About hero. Work authorization is deliberately NOT a field here —
   // an application form already asks it. It lands as narrative in the `now` timeline entry instead.
   location: 'Irvine, California',
