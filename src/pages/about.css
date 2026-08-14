@@ -32,18 +32,6 @@
 .bio p:last-child { margin-bottom: 0; }
 .bio strong { font-weight: 800; }
 
-/* ---- Titles strip (Azurtelier "Titles", in the template's Now layout) ---- */
-.titles { background: var(--ink); color: var(--on-ink); }
-.titles .inner { padding: var(--s-7) 0; display: grid; grid-template-columns: 200px 1fr; gap: var(--s-6); }
-.titles h2 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); text-transform: uppercase; margin: 0; line-height: .9; }
-.titles h2 small { display: block; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; color: var(--accent); margin-bottom: 8px; }
-.titles ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-4); }
-.titles li { display: grid; grid-template-columns: 130px 1fr; gap: var(--s-4); align-items: baseline; padding-bottom: var(--s-4); border-bottom: 1px solid var(--ink-3); }
-.titles li:last-child { border-bottom: 0; padding-bottom: 0; }
-.titles .k { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
-.titles .v { color: var(--on-ink); }
-@media (max-width: 680px){ .titles .inner { grid-template-columns: 1fr; } .titles li { grid-template-columns: 1fr; gap: 2px; } }
-
 /* ---- Timeline + Loadout ---- */
 .track { padding: var(--s-9) 0; }
 /* Its own name, not .section-head. That one is the home page's and spreads a heading against

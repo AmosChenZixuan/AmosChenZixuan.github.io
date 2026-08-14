@@ -86,17 +86,6 @@ export default function About() {
         </div>
       </section>
 
-      <section className="titles">
-        <div className="container inner">
-          <h2><small>{'//'} STATUS</small>Titles &amp;<br />Honors</h2>
-          <ul>
-            {profile.funTitles.map(t => (
-              <li key={t.k}><span className="k">{t.k}</span><span className="v">{t.v}</span></li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       <ContactFooter />
     </div>
   )

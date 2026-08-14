@@ -106,10 +106,4 @@ export const profile = {
     'Cloud & Ops': ['AWS', 'Azure', 'GCP', 'Docker', 'CI/CD'],
     Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Kotlin'],
   } as Record<string, readonly string[]>,
-
-  funTitles: [
-    { k: 'Summoner', v: 'League of Legends — Diamond rank' },
-    { k: 'Sapphire Star', v: 'Monster Hunter: World — master of Charge Blade' },
-    { k: 'Traveler', v: 'Renowned traveler of the Teyvat continent — and, off-screen, of Asia, America and Europe' },
-    ],
 } as const
