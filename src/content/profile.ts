@@ -7,13 +7,15 @@ export const profile = {
   name: 'Zixuan Chen',
   alias: 'Amos',
   heroLines: ['ZIXUAN', 'AMOS', 'CHEN'] as const, // middle line gets the .hl glitch treatment
-  role: 'Software Engineer — Generative AI & Agentic Systems',
+  role: 'AI/ML Engineer — Generative AI & Agentic Systems',
   // Sits directly under `role` on the home hero — it must add to that line, not restate it.
   blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
   aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
   // Sits directly under `role` on the résumé sheet — like `blurb`, it must add to that line
-  // rather than restate it.
-  resumeSummary: 'Full-stack development & performance tuning, agile development and leadership.',
+  // rather than restate it. Together the two lines are the CV's headline, so this one carries
+  // the scarce signal: the systems reached production, not a demo. No employer named — the
+  // Experience block below already states it, with dates.
+  resumeSummary: 'Agentic LLM systems taken from prototype to department-wide production.',
   // Status strip under the About hero. Work authorization is deliberately NOT a field here —
   // an application form already asks it. It lands as narrative in the `now` timeline entry instead.
   location: 'Irvine, California',
@@ -70,13 +72,13 @@ export const profile = {
   work: [
     {
       when: 'AUG 2023 — DEC 2025',
-      title: 'Software Developer · Volvo Cars',
+      title: 'Software Developer (Global Graduate Programme) · Volvo Cars',
       loc: 'Gothenburg, Sweden',
       bullets: [
-        '89% faster troubleshooting — an AI agent for test workflows using structured chunking + Map-Reduce over DLT logs; ~5 hours to 40 minutes.',
-        '50% less manual intervention in requirement-document audits, via an LLM multi-agent system that scores and suggests fixes.',
-        'Rebuilt the US-region brand site: dynamic route loading (−35% FCP) and a CDN (−20% LCP), for a 12% lower bounce rate.',
-        'PM on an LLM + legacy voice-control PoC across Shanghai teams; hybrid intent recognition reached 82% semantic accuracy.',
+        'Cut root-cause analysis 89% — ~5 hours to 40 minutes — with an LLM agent for vehicle test troubleshooting, adopted department-wide and rolled out more widely from there.',
+        'Halved manual effort in requirement-document audits with an LLM multi-agent reviewer that scores drafts and suggests fixes; delivered as an MVP and handed to an ADAS team for rollout.',
+        'Rebuilt the US-region brand site, cutting First Contentful Paint 35% and Largest Contentful Paint 20% for a 12% lower bounce rate.',
+        'Led cross-functional Shanghai teams through a PoC integrating LLMs with legacy automotive voice control, reaching 82% semantic accuracy in complex scenarios.',
       ],
     },
     {
@@ -84,7 +86,7 @@ export const profile = {
       title: 'Research Assistant · Carnegie Mellon CyLab',
       loc: 'Pittsburgh, PA',
       bullets: [
-        'Deployed vulnerability-detection models on GCP with PyTorch; +19% performance via hyper-parameter tuning and variable obfuscation.',
+        'Deployed vulnerability-detection models on GCP with PyTorch, raising model performance 19% through hyper-parameter tuning and variable obfuscation.',
       ],
     },
     {
@@ -92,9 +94,9 @@ export const profile = {
       title: 'Software Engineer · Glinsun AI',
       loc: 'Wuhan, China',
       bullets: [
-        'Real-time C++/CUDA cloth-simulation engine with 10 engineers; added fluid, smoke, air-inflation and two-way coupling.',
-        'Unified particle model cut data duplication 50%, holding 60+ FPS across millions of particles in parallel.',
-        'Semi-supervised human-body-measurement system in PyTorch; 87% F1 on 6,000 images.',
+        'Built a real-time C++/CUDA cloth-simulation engine with 10 engineers, adding fluid, smoke, air-inflation and two-way coupling.',
+        'Unified the simulator onto a single particle model, cutting data duplication 50% while holding 60+ FPS across millions of particles in parallel.',
+        'Developed a semi-supervised human-body-measurement system in PyTorch, reaching 87% F1 on a 6,000-image dataset.',
       ],
     },
   ],
@@ -105,11 +107,14 @@ export const profile = {
   ],
 
   // Key order is priority order: the home page shows only the first two groups, so whatever
-  // leads here is what a screener reads under the role line.
+  // leads here is what a screener reads under the role line. AI leads because the role line
+  // claims agentic systems — a skills block that opens with web frameworks contradicts it.
+  // Named vendors and libraries belong here, stated as competencies, rather than inside a
+  // work bullet where they would disclose an employer's stack.
   skills: {
-    Practice: ['Agentic Systems', 'Performance Tuning', 'Agile Leadership'],
-    'Frameworks & AI': ['FastAPI', 'React', 'Next.js', 'PyTorch', 'Spring', 'Django'],
-    'Cloud & Ops': ['AWS', 'Azure', 'GCP', 'Docker', 'CI/CD'],
+    'AI & LLM': ['Azure OpenAI', 'LangChain', 'RAG & Hybrid Retrieval', 'Multi-Agent Orchestration', 'ChromaDB', 'PyTorch', 'Agentic Systems'],
     Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Kotlin'],
+    'Backend & Web': ['FastAPI', 'React', 'Next.js', 'Spring', 'Django'],
+    'Cloud & Ops': ['Azure', 'AWS', 'GCP', 'Docker', 'CI/CD'],
   } as Record<string, readonly string[]>,
 } as const
