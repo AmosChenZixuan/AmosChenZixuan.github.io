@@ -29,7 +29,7 @@ export default function ProjectStory() {
         <div className="meta-row">
           {/* No Category column — the kicker above the title already is `cat`. */}
           <div className="m"><span className="k">Language</span><span className="v">{p.language}</span></div>
-          <div className="m"><span className="k">Links</span><span className="v"><a href={p.github} target="_blank" rel="noopener">GitHub ↗</a></span></div>
+          {p.github && <div className="m"><span className="k">Links</span><span className="v"><a href={p.github} target="_blank" rel="noopener">GitHub ↗</a></span></div>}
         </div>
         {p.hero && (
           <figure className="shot">
@@ -77,10 +77,12 @@ export default function ProjectStory() {
                 {p.chips.map((c, ci) => <span key={c} className={ci === 0 ? 'chip chip--hi' : 'chip'}>{c}</span>)}
               </div>
             </div>
-            <div>
-              <div className="k">Links</div>
-              <div className="v"><a href={p.github} target="_blank" rel="noopener">GitHub ↗</a></div>
-            </div>
+            {p.github && (
+              <div>
+                <div className="k">Links</div>
+                <div className="v"><a href={p.github} target="_blank" rel="noopener">GitHub ↗</a></div>
+              </div>
+            )}
           </div>
         </div>
       </div>
