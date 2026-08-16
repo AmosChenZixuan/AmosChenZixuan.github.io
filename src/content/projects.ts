@@ -13,6 +13,8 @@ export type Project = {
   title: string
   cat: string            // showroom card category line
   card: string           // showroom card blurb
+  cv?: string            // CV one-liner; only on projects the résumé lists. CV register is not
+                         // card register, so it is written rather than derived from `card`.
   tagline: string        // story-page hero tagline
   chips: string[]
   github?: string       // absent where no public repo exists — the story page drops the Links row
@@ -34,6 +36,9 @@ export const projects: Project[] = [
     title: 'BibiLab',
     cat: '2026 · AI · Local-first · Python',
     card: 'A local, private NotebookLM for video — turn videos & playlists into a searchable, citation-backed AI notebook. No cloud.',
+    // Retrieval leads, deployment trails. `card` opens on local-first because that is the
+    // pitch against NotebookLM, but local is a deployment property, not a capability.
+    cv: 'A searchable, citation-backed AI notebook over video, local and self-hosted',
     tagline: 'Turn a playlist into a private notebook, then ask questions across every transcript — answers cite their sources, and citations seek the video.',
     chips: ['Python', 'FastAPI', 'React', 'SQLite', 'ChromaDB', 'RAG'],
     github: 'https://github.com/AmosChenZixuan/BibiLab',
@@ -78,6 +83,7 @@ export const projects: Project[] = [
     title: 'Agentic Working Contract',
     cat: '2026 · AI Agents · Tooling',
     card: 'Personal skills collection for AI coding agents — /shipit, /razor, /grill-me and friends. Built for Claude Code, works cross-platform.',
+    cv: 'Personal skills collection for AI coding agents',
     tagline: 'Stop re-teaching your agent your standards every session — install the contract once, get the same discipline everywhere.',
     chips: ['Claude Code', 'Agent Skills', 'Markdown', 'OpenCode', 'Codex'],
     github: 'https://github.com/AmosChenZixuan/Agentic-working-contract',
