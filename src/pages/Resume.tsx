@@ -9,8 +9,11 @@ import './resume.css'
 // than typed so it cannot name one profile while the href points at another.
 const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
+// Picked by slug, not by array index: the CV lists personal work only, and an index silently
+// pointed at Volvo work once the array was reordered. `cat` starts with the year.
+const cvProjects = ['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!)
+
 export default function Resume() {
-  const [name1, name2] = [profile.name.split(' ')[1] ?? profile.name, profile.name.split(' ')[0]]
   return (
     <div className="resume-page">
       <HudTop status="// CV" />
@@ -21,7 +24,10 @@ export default function Resume() {
 
             <div className="r-head">
               <div>
-                <h1 className="name">{name2}<br />{name1}</h1>
+                {/* The break goes between name and alias — a first name and a last name belong
+                    on one line. Keep the quotes: unquoted, AMOS reads as part of the legal
+                    name, which it is not. */}
+                <h1 className="name">{profile.name}<br /><span className="alias">“{profile.alias}”</span></h1>
                 <p className="role">{profile.role}</p>
                 <p className="summary">{profile.resumeSummary}</p>
               </div>
@@ -30,6 +36,9 @@ export default function Resume() {
                   <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
                   <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">{short(profile.github)}</a></div>
                   <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
+                  {/* The last employer on this sheet is in Sweden; without a city a US screener
+                      files the whole CV as an overseas candidate. */}
+                  <div className="line"><span className="k">Location</span><span>{profile.location}</span></div>
                 </div>
                 <button className="print-btn" onClick={() => window.print()}>↓ Print</button>
                 <a className="print-btn" href={profile.resumePdf} download>↓ PDF</a>
@@ -46,10 +55,10 @@ export default function Resume() {
                     const [title, co] = w.title.split(' · ')
                     return (
                       <div className="job" key={w.title}>
-                        <div className="top">
-                          <div className="title">{title} · <span className="co">{co}</span></div>
-                          <div className="when">{w.when}</div>
-                        </div>
+                        {/* Stacked, not side by side: sharing a row with a 40-character
+                            place-and-date string wrapped the long Volvo title to four lines. */}
+                        <div className="title">{title} · <span className="co">{co}</span></div>
+                        <div className="when">{w.loc} · {w.when}</div>
                         <ul>
                           {w.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
                         </ul>
@@ -59,15 +68,23 @@ export default function Resume() {
                 </section>
 
                 <section className="r-sec">
-                  <h2><span className="tick">{'//'}</span> Selected Projects</h2>
+                  {/* The URL rides the heading. It used to sit in the slot Experience uses for
+                      an employer, labelled "Showroom" — a nav label from this site, which is
+                      not a thing a CV names. */}
+                  <h2><span className="tick">{'//'}</span> Selected Projects
+                    <Link className="more" to="/projects">{short(profile.siteUrl)}/projects</Link>
+                  </h2>
                   <div className="job">
-                    <div className="top">
-                      <div className="title"><Link to="/projects">Showroom →</Link></div>
-                      <div className="when">{short(profile.siteUrl)}/projects</div>
-                    </div>
                     <ul>
-                      {[projects[0], projects[3]].map(p => (
-                        <li key={p.slug}>{p.title} — {p.card}</li>
+                      {/* `cv`, not `card`: card copy leads with whatever sells the project,
+                          which is rarely what a screener should read first. `chips` follows —
+                          personal work has no employer stack to protect, so this section can
+                          name tools freely. */}
+                      {cvProjects.map(p => (
+                        <li key={p.slug}>
+                          {p.title} · {p.cat.split(' · ')[0]} — {p.cv}.{' '}
+                          <span className="stack">{p.chips.join(', ')}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -75,6 +92,21 @@ export default function Resume() {
               </main>
 
               <aside>
+                {/* First in the aside, so it sits level with the Volvo entry and the two read
+                    across as one timeline. Last, a reader reaches the bottom still thinking
+                    the sheet ends at DEC 2025. */}
+                <section className="r-sec cur">
+                  <h2><span className="tick">{'//'}</span> Current</h2>
+                  <div className="job">
+                    <div className="title">{profile.now.title}</div>
+                    {/* No place, unlike an Experience entry — it would repeat the header. */}
+                    <div className="when">{profile.now.when}</div>
+                    <ul>
+                      {profile.now.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
+                    </ul>
+                  </div>
+                </section>
+
                 <section className="r-sec">
                   <h2><span className="tick">{'//'}</span> Skills</h2>
                   {Object.entries(profile.skills).map(([group, items], gi) => (
@@ -98,14 +130,6 @@ export default function Resume() {
                   ))}
                 </section>
 
-                <section className="r-sec">
-                  <h2><span className="tick">{'//'}</span> Find Me</h2>
-                  <div className="r-links">
-                    <a href={profile.github} target="_blank" rel="noopener"><span>GitHub</span><span className="ar">↗</span></a>
-                    <a href={profile.linkedin} target="_blank" rel="noopener"><span>LinkedIn</span><span className="ar">↗</span></a>
-                    <a href={`mailto:${profile.email}`}><span>Email</span><span className="ar">↗</span></a>
-                  </div>
-                </section>
               </aside>
             </div>
 

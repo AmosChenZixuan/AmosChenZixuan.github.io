@@ -7,18 +7,23 @@ export const profile = {
   name: 'Zixuan Chen',
   alias: 'Amos',
   heroLines: ['ZIXUAN', 'AMOS', 'CHEN'] as const, // middle line gets the .hl glitch treatment
-  role: 'Software Engineer — Generative AI & Agentic Systems',
+  // `AI Engineer`, not `AI/ML Engineer`: the two are different hiring funnels, and a recruiter
+  // searching the exact phrase "AI Engineer" does not match the string "AI/ML Engineer". The
+  // ML keyword is carried by PyTorch in `skills` instead.
+  role: 'AI Engineer — Generative AI & Agentic Systems',
   // Sits directly under `role` on the home hero — it must add to that line, not restate it.
   blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
   aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
   // Sits directly under `role` on the résumé sheet — like `blurb`, it must add to that line
-  // rather than restate it.
-  resumeSummary: 'Full-stack development & performance tuning, agile development and leadership.',
+  // rather than restate it. Together the two lines are the CV's headline, so this one carries
+  // the scarce signal: the systems reached production, not a demo. No employer named — the
+  // Experience block below already states it, with dates.
+  resumeSummary: 'Agentic LLM systems taken from prototype to department-wide production.',
   // Status strip under the About hero. Work authorization is deliberately NOT a field here —
   // an application form already asks it. It lands as narrative in the `now` timeline entry instead.
   location: 'Irvine, California',
   timeZone: 'America/Los_Angeles',
-  openTo: 'AI/ML · Full-Stack · Forward-Deployed Engineer',
+  openTo: 'AI · Full-Stack · Forward-Deployed Engineer',
   // Hero sticker badges. Placement (which corner, what rotation) stays in home.css, keyed by
   // index — a seventh entry needs a matching .sticker--7 rule there or it renders unpositioned.
   stickers: ['★ CMU ALUM', '🚗 EX-VOLVO', '⚡ LLM IN PROD', '◆ CLAUDE CODE', '🐍 PYTHON', '📍 IRVINE, CA'] as const,
@@ -53,8 +58,8 @@ export const profile = {
     { num: '192K', verb: 'CONTEXT', what: 'Average session', where: '17 fresh sessions a day, handed off clean' },
   ],
 
-  // Current chapter — About timeline only, deliberately kept out of `work` so the CV
-  // Experience list stays employment-only.
+  // Current chapter — About timeline, and the CV aside so the sheet does not end at DEC 2025
+  // with nothing said about the months since. Out of `work`: Experience stays employment-only.
   now: {
     when: 'JAN 2026 — NOW',
     title: 'Relocation & Independent Build',
@@ -70,13 +75,26 @@ export const profile = {
   work: [
     {
       when: 'AUG 2023 — DEC 2025',
-      title: 'Software Developer · Volvo Cars',
+      title: 'Software Developer (Global Graduate Programme) · Volvo Cars',
       loc: 'Gothenburg, Sweden',
       bullets: [
-        '89% faster troubleshooting — an AI agent for test workflows using structured chunking + Map-Reduce over DLT logs; ~5 hours to 40 minutes.',
-        '50% less manual intervention in requirement-document audits, via an LLM multi-agent system that scores and suggests fixes.',
-        'Rebuilt the US-region brand site: dynamic route loading (−35% FCP) and a CDN (−20% LCP), for a 12% lower bounce rate.',
-        'PM on an LLM + legacy voice-control PoC across Shanghai teams; hybrid intent recognition reached 82% semantic accuracy.',
+        'Cut root-cause analysis 89% — ~6 hours to 40 minutes — with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
+        // No outcome figure here on purpose: the 50% that used to sit in this line was the
+        // target written into the functional requirement, and the system never ran in
+        // production here, so nothing measured it. The evaluation set is a real fact and a
+        // better one. Its size is an internal document count, so it stays off the page.
+        // He left before the receiving team rolled it out, so the handoff stays mid-sentence:
+        // `adopted by`, `for rollout` and the like claim an outcome he cannot confirm.
+        'Built an LLM multi-agent reviewer for ADAS requirement-document audits, delivered as an MVP to the owning team and evaluated against a human-annotated set extended with synthetic requirements.',
+        // Not `Acted as product manager`: he never formally held the title, and the hedge was
+        // audible. `running the product side` describes the same work without claiming it.
+        // A product-lane variant of this CV would lead with the role instead.
+        'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice, and test teams with an external LLM vendor.',
+        // The 12% covers features and performance together, so it attaches to "the releases",
+        // not to any one change. No causal phrasing: the experiment design is not recallable.
+        // FCP −35% and LCP −20% also came out of this work; they belong in a full-stack
+        // variant of this CV, not under a headline claiming agentic systems.
+        'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory — bounce rate down 12% across the releases.',
       ],
     },
     {
@@ -84,17 +102,24 @@ export const profile = {
       title: 'Research Assistant · Carnegie Mellon CyLab',
       loc: 'Pittsburgh, PA',
       bullets: [
-        'Deployed vulnerability-detection models on GCP with PyTorch; +19% performance via hyper-parameter tuning and variable obfuscation.',
+        // Two claims, deliberately not chained by `through`: tuning moved the F1, while
+        // obfuscation is a generalization fix that usually costs in-distribution F1 rather
+        // than adding to it. `relative` because the unit is not recallable, and the
+        // conservative reading is the one that survives "what was the baseline?".
+        'Deployed vulnerability-detection models on GCP with PyTorch, tuning hyper-parameters for a 19% relative F1 gain and debiasing against identifier names with variable obfuscation.',
       ],
     },
     {
-      when: 'MAY 2021 — NOV 2021',
+      when: 'FEB 2021 — NOV 2021',
       title: 'Software Engineer · Glinsun AI',
       loc: 'Wuhan, China',
       bullets: [
-        'Real-time C++/CUDA cloth-simulation engine with 10 engineers; added fluid, smoke, air-inflation and two-way coupling.',
-        'Unified particle model cut data duplication 50%, holding 60+ FPS across millions of particles in parallel.',
-        'Semi-supervised human-body-measurement system in PyTorch; 87% F1 on 6,000 images.',
+        // His modules lead the sentence; the unified particle model was the team's call, so it
+        // appears as what they run on rather than as something he decided.
+        'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine — data duplication down 50%, 60+ FPS across millions of particles.',
+        // F1 belongs to the classification step; measuring a body is regression, and the old
+        // wording attached a classification metric to it.
+        'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',
       ],
     },
   ],
@@ -105,11 +130,20 @@ export const profile = {
   ],
 
   // Key order is priority order: the home page shows only the first two groups, so whatever
-  // leads here is what a screener reads under the role line.
+  // leads here is what a screener reads under the role line. AI leads because the role line
+  // claims agentic systems — a skills block that opens with web frameworks contradicts it.
+  // Named vendors and libraries belong here, stated as competencies, rather than inside a
+  // work bullet where they would disclose an employer's stack.
+  // Every entry has to survive five minutes of interview questions, which is why Java and
+  // Spring are absent. `Evaluation & Benchmarking` is earned: each LLM system was scored
+  // against a labelled set, not spot-checked.
   skills: {
-    Practice: ['Agentic Systems', 'Performance Tuning', 'Agile Leadership'],
-    'Frameworks & AI': ['FastAPI', 'React', 'Next.js', 'PyTorch', 'Spring', 'Django'],
-    'Cloud & Ops': ['AWS', 'Azure', 'GCP', 'Docker', 'CI/CD'],
-    Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Java', 'Kotlin'],
+    'AI & LLM': ['Azure OpenAI', 'LangChain', 'RAG & Hybrid Retrieval', 'Multi-Agent Orchestration', 'Evaluation & Benchmarking', 'ChromaDB', 'PyTorch'],
+    Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Kotlin'],
+    // `SQL` rides alongside `PostgreSQL` on purpose: ATS keyword filters match tokens, so a
+    // screen for `SQL` does not necessarily hit the string `PostgreSQL` — and a full-stack
+    // claim with no data layer anywhere is the first thing an interviewer pulls on.
+    'Backend & Web': ['FastAPI', 'React', 'Next.js', 'Django', 'PostgreSQL', 'SQL', 'GraphQL (Apollo)'],
+    'Cloud & Ops': ['Azure', 'AWS', 'GCP', 'Docker', 'CI/CD'],
   } as Record<string, readonly string[]>,
 } as const
