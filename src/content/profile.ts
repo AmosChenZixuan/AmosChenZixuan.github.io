@@ -64,10 +64,13 @@ export const profile = {
     when: 'JAN 2026 — NOW',
     title: 'Relocation & Independent Build',
     loc: 'Irvine, CA',
+    // No work-authorization line: an application form asks it with a checkbox, and answering
+    // it unprompted raises the question instead of settling it. The tax-exam line went for a
+    // related reason — on a sheet headlined agentic systems it reads as a career change, and
+    // it puts immigration back on the page. It survives as narrative in `aboutBio`.
     bullets: [
-      'Relocated Gothenburg → Irvine; US work authorization granted.',
+      'Relocated Gothenburg → Irvine.',
       'Self-directed deep dive into agentic coding — multi-agent workflows and AI-assisted delivery, applied end-to-end on side projects.',
-      'Sat the IRS Special Enrollment Exams (Enrolled Agent, in progress) — US tax code, for the family’s immigration planning.',
     ],
   },
 
