@@ -17,8 +17,9 @@ export const profile = {
   // Sits directly under `role` on the résumé sheet — like `blurb`, it must add to that line
   // rather than restate it. Together the two lines are the CV's headline, so this one carries
   // the scarce signal: the systems reached production, not a demo. No employer named — the
-  // Experience block below already states it, with dates.
-  resumeSummary: 'Agentic LLM systems taken from prototype to department-wide production.',
+  // Experience block below already states it, with dates. `department-wide` is deliberately
+  // not repeated here; it belongs to the bullet a few lines down that has a number behind it.
+  resumeSummary: 'LLM systems taken from prototype to production — agents, retrieval, evaluation, and the full-stack work it takes to ship them.',
   // Status strip under the About hero. Work authorization is deliberately NOT a field here —
   // an application form already asks it. It lands as narrative in the `now` timeline entry instead.
   location: 'Irvine, California',
@@ -68,8 +69,9 @@ export const profile = {
     // it unprompted raises the question instead of settling it. The tax-exam line went for a
     // related reason — on a sheet headlined agentic systems it reads as a career change, and
     // it puts immigration back on the page. It survives as narrative in `aboutBio`.
+    // The relocation itself is not a bullet: the title says Relocation, the header says Irvine,
+    // and the Volvo entry says Gothenburg — three statements of it within one screen.
     bullets: [
-      'Relocated Gothenburg → Irvine.',
       'Self-directed deep dive into agentic coding — multi-agent workflows and AI-assisted delivery, applied end-to-end on side projects.',
     ],
   },
@@ -81,18 +83,26 @@ export const profile = {
       title: 'Software Developer (Global Graduate Programme) · Volvo Cars',
       loc: 'Gothenburg, Sweden',
       bullets: [
-        'Cut root-cause analysis 89% — ~6 hours to 40 minutes — with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
+        // Before-and-after times rather than the percentage they imply: 6h → 40min *is* 89%,
+        // so stating both said one thing twice — and an approximate baseline cannot support an
+        // exact percentage. The concrete pair is also the one a reader remembers.
+        'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
         // No outcome figure here on purpose: the 50% that used to sit in this line was the
         // target written into the functional requirement, and the system never ran in
         // production here, so nothing measured it. The evaluation set is a real fact and a
         // better one. Its size is an internal document count, so it stays off the page.
-        // He left before the receiving team rolled it out, so the handoff stays mid-sentence:
-        // `adopted by`, `for rollout` and the like claim an outcome he cannot confirm.
-        'Built an LLM multi-agent reviewer for ADAS requirement-document audits, delivered as an MVP to the owning team and evaluated against a human-annotated set extended with synthetic requirements.',
+        // He left before the receiving team rolled it out, so nothing here claims an outcome he
+        // cannot confirm: `delivered` is his own action, where `adopted by` or `for rollout`
+        // would be theirs. `synthetic augmentation` rather than `extended with synthetic
+        // requirements` — the first reads as method, the second as padding a thin dataset.
+        'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered as an MVP to the owning team.',
         // Not `Acted as product manager`: he never formally held the title, and the hedge was
         // audible. `running the product side` describes the same work without claiming it.
         // A product-lane variant of this CV would lead with the role instead.
-        'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice, and test teams with an external LLM vendor.',
+        // The vendor is joined to the teams by `and`, not `with`: all four are parties he
+        // coordinated. `with` dangled — it could attach to the test team or to the verb, and
+        // the second reading made the vendor a co-driver of the product.
+        'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice and test teams and an external LLM vendor.',
         // The 12% covers features and performance together, so it attaches to "the releases",
         // not to any one change. No causal phrasing: the experiment design is not recallable.
         // FCP −35% and LCP −20% also came out of this work; they belong in a full-stack
