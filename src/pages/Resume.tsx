@@ -7,7 +7,9 @@ import './resume.css'
 
 // A link's visible text is the link, minus the parts a reader doesn't need. Derived rather
 // than typed so it cannot name one profile while the href points at another.
-const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+// `linkedin.com/` goes too: the full URL is 6px wider than the value column on a phone, and
+// `in/handle` is the form a CV uses anyway. The label next to it already says which site.
+const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/^linkedin\.com\//, '').replace(/\/$/, '')
 
 // Picked by slug, not by array index: the CV lists personal work only, and an index silently
 // pointed at Volvo work once the array was reordered. `cat` starts with the year.
