@@ -35,6 +35,10 @@ export default function Resume() {
               <div>
                 <div className="r-contact">
                   <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
+                  {/* Second, above the profile links: it is the one address that shows the work
+                      rather than pointing at where the work is filed. `Portfolio`, not the domain's
+                      own word — two rows reading `github` would take a beat to tell apart. */}
+                  <div className="line"><span className="k">Portfolio</span><a href={profile.siteUrl} target="_blank" rel="noopener">{short(profile.siteUrl)}</a></div>
                   <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">{short(profile.github)}</a></div>
                   <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
                   {/* The last employer on this sheet is in Sweden; without a city a US screener
