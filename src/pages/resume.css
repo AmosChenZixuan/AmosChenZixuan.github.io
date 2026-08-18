@@ -21,7 +21,9 @@
 .r-contact { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .04em; display: grid; gap: 7px;
   overflow-wrap: anywhere; }
 .r-contact .line { display: grid; grid-template-columns: 72px 1fr; gap: 8px; }
-.r-contact .k { color: var(--accent-deep); text-transform: uppercase; }
+/* Dim ink, not accent. Yellow on this paper is 1.44:1 — below every legibility bar there is,
+   and it had the label shouting louder than the address it labels. See the note on `.tick`. */
+.r-contact .k { color: var(--on-paper-dim); text-transform: uppercase; }
 .r-contact a { border-bottom: 1px solid var(--paper-edge); }
 .print-btn { margin-top: var(--s-4); margin-right: var(--s-2); display: inline-block; font-family: var(--font-ui); font-weight: 800; font-size: var(--t-xs);
   text-transform: uppercase; letter-spacing: .04em; padding: 10px 16px; background: var(--accent); color: var(--ink);
@@ -40,7 +42,11 @@
    the label's baseline and strikes through the URL once it wraps to its own line. */
 .r-sec > h2 { display: flow-root; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase;
   color: var(--on-paper); margin: 0 0 var(--s-4); padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
-.r-sec > h2 .tick { color: var(--accent-deep); }
+/* Yellow is a fill on this page, never text: `--accent-deep` is documented as the *pressed*
+   state of the yellow, and on paper it lands at 1.44:1. Darkening it far enough to read stops
+   it being yellow, so the accent stays where it works — the chips, the buttons, the caution
+   rule, and the name — and everything on the paper itself is ink. */
+.r-sec > h2 .tick { color: var(--on-paper-dim); }
 /* floated, not flex: the heading's other children are bare text nodes, which flex would each
    promote to an item and space apart. */
 .r-sec > h2 .more { float: right; text-transform: none; letter-spacing: .06em; color: var(--on-paper-dim); }
@@ -49,11 +55,13 @@
 .job { margin-bottom: var(--s-5); break-inside: avoid; }
 .job:last-child { margin-bottom: 0; }
 .job .title { font-family: var(--font-ui); font-weight: 900; font-size: 1.15rem; line-height: 1.15; }
-.job .title .co { color: var(--accent-deep); }
+/* Full ink: the employer is one of the three things a screener reads, and it was the least
+   legible text on the sheet. The `·` already separates it from the role. */
+.job .title .co { color: var(--on-paper); }
 .job .when { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .06em; color: var(--on-paper-dim); margin-top: 3px; }
 .job ul { margin: var(--s-3) 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
 .job li { position: relative; padding-left: 18px; font-size: var(--t-sm); line-height: 1.55; }
-.job li::before { content: "▪"; position: absolute; left: 0; color: var(--accent-deep); }
+.job li::before { content: "▪"; position: absolute; left: 0; color: var(--on-paper-dim); }
 /* Dim like .job .when — same job, metadata trailing a line of prose. */
 .job li .stack { color: var(--on-paper-dim); }
 
@@ -73,6 +81,9 @@
 @media print {
   @page { margin: 14mm; }
   body, .resume-page, .sheet { background: #fff; }
+  /* The page wrapper is `min-height: 100vh`; in print a vh is the paper, so an otherwise
+     one-page sheet was padded out to a full page and anything after it started a second. */
+  .resume-page { min-height: 0; }
   .hud-top, .print-btn, .contact-footer, .nav-dock,
   .fx-noise, .fx-scanlines, .scroll-prog { display: none !important; }
   .sheet { box-shadow: none; border: 0; margin: 0; max-width: none; }
@@ -81,11 +92,72 @@
   .r-head .name, .r-head .name .alias { color: #000; }
   .r-contact .k, .r-sec > h2 .tick, .job .title .co, .r-sec > h2 .more,
   .job li::before { color: #000 !important; }
-  .chip { background: #eee !important; color: #000 !important; border: 1px solid #000; }
   a { color: #000; text-decoration: none; }
   /* Keep each entry whole, but never a whole section: Experience is taller than a page, and
      an unbreakable block that cannot fit gets pushed to a fresh page and then overflows
      anyway — which is how the header used to get a page to itself. */
   .job, .skill-group, .r-sec.edu .item { break-inside: avoid; }
   .r-sec > h2 { break-after: avoid; }
+
+  /* One column, in résumé order. `display: contents` dissolves main and aside so the five
+     sections become siblings of one flex column and `order` can place them — the screen keeps
+     its two-column grid and no markup moves. Two columns fit more content per sheet, but they
+     paginate unpredictably (a grid row taller than a page relocates whole blocks) and are the
+     classic ATS reading-order hazard. Current leads: flattened, it would otherwise fall below
+     Projects and the sheet would read as ending DEC 2025. */
+  .r-cols { display: flex; flex-direction: column; gap: 0; }
+  .r-cols > main, .r-cols > aside { display: contents; }
+  /* `r-` prefixed: page stylesheets are global here, and a bare `.proj` is the home page's
+     project card — it painted this whole section black. */
+  .r-sec.cur { order: 1 } .r-sec.r-exp { order: 2 } .r-sec.r-proj { order: 3 }
+  .r-sec.r-skills { order: 4 } .r-sec.edu { order: 5 }
+
+  /* Résumé density. What printed before was the screen scale — a 53pt name, and 47px of height
+     for a one-line bullet — which is why the sheet ran to three pages with nothing wrong with
+     the content. Sizes are px because the print box is a fixed 688px and does not scale. */
+  /* One inherited leading for the whole sheet. Without it the small mono lines — dates, school,
+     year — kept the body scale's 27.5px leading and cost more than double their own height. */
+  .sheet-inner { line-height: 1.3; }
+  .r-head { gap: 20px; }
+  .r-head .name { font-size: 27px; line-height: 1.02; }
+  .r-head .role { font-size: 13.5px; line-height: 1.2; margin-top: 4px; }
+  .r-head .summary { font-size: 11px; line-height: 1.3; margin-top: 4px; max-width: none; }
+  .r-contact { font-size: 10px; gap: 1px; }
+  .rule { margin: 7px 0; }
+  .r-sec { margin-bottom: 10px; }
+  .r-sec > h2 { font-size: 10px; margin-bottom: 4px; padding-bottom: 3px; }
+  .job { margin-bottom: 7px; }
+  .job .title { font-size: 12.5px; line-height: 1.22; }
+  .job .when { font-size: 10px; margin-top: 0; }
+  .job li { font-size: 11px; line-height: 1.28; margin-bottom: 1px; }
+  .cur .title { font-size: 11.5px; }
+  /* School and year share a line — two degrees at three lines each spent a tenth of the page
+     on six short strings. */
+  .r-sec.edu .item { margin-bottom: 5px; }
+  .r-sec.edu .deg { font-size: 11.5px; }
+  .r-sec.edu .sch, .r-sec.edu .yr { display: inline; font-size: 10px; }
+  .r-sec.edu .sch::after { content: ' · '; }
+
+  /* Skills as one text line per group. The chips cost ~120px of a page in boxes and padding,
+     and a bordered span is the shape a résumé parser is least sure what to do with. */
+  .skill-group { margin-bottom: 4px; font-size: 11px; line-height: 1.34; }
+  .skill-group .lbl { display: inline; font-size: 11px; letter-spacing: .04em; margin: 0; color: #000; }
+  .skill-group .lbl::after { content: ':'; }
+  .skill-group .row { display: inline; }
+  /* !important throughout: `.chip` is defined in tokens.css, which the bundle emits after this
+     file, so an equal-specificity print rule loses on source order. */
+  .chip { display: inline !important; background: none !important; color: #000 !important;
+    border: 0 !important; padding: 0 !important; font: inherit !important;
+    letter-spacing: 0 !important; text-transform: none !important; }
+  .chip + .chip::before { content: ', '; }
+
+  /* Selected Projects drops its stack line: those words are nearly all in Skills already, so on
+     a sheet fighting for a page it is a repeat ATS hit rather than new information. Screen keeps it. */
+  .r-proj .stack { display: none; }
+  /* The PDF keeps these as live link annotations, so they stay underlined — with nothing to see,
+     a reader has no reason to try clicking. `justify-self` stops the rule running the width of
+     the grid column, which is what made it read as a blank form field. */
+  .r-contact a { border-bottom: 1px solid #000; justify-self: start; }
+  .r-sec > h2 .more { border-bottom: 1px solid #000; }
+  .skill-group .lbl { letter-spacing: 0; }
 }
