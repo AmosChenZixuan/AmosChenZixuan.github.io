@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import HudTop from '../components/HudTop'
 import ContactFooter from '../components/ContactFooter'
 import { profile } from '../content/profile'
@@ -14,7 +15,18 @@ const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/
 // pointed at Volvo work once the array was reordered. `cat` starts with the year.
 const cvProjects = ['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!)
 
+// Taken verbatim as a filename, so: legal name, plain hyphen, no dots.
+const pdfName = 'Zixuan Chen - Resume'
+
 export default function Resume() {
+  // Chrome names a printed PDF after the document title, which is otherwise one static string
+  // for every route.
+  useEffect(() => {
+    const prev = document.title
+    document.title = pdfName
+    return () => { document.title = prev }
+  }, [])
+
   return (
     <div className="resume-page">
       <HudTop status="// CV" />
@@ -46,7 +58,7 @@ export default function Resume() {
                   <div className="line"><span className="k">Location</span><span>{profile.location}</span></div>
                 </div>
                 <button className="print-btn" onClick={() => window.print()}>↓ Print</button>
-                <a className="print-btn" href={profile.resumePdf} download>↓ PDF</a>
+                <a className="print-btn" href={profile.resumePdf} download={`${pdfName}.pdf`}>↓ PDF</a>
               </div>
             </div>
 
