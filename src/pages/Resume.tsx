@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
 import ContactFooter from '../components/ContactFooter'
 import { profile } from '../content/profile'
@@ -7,7 +6,9 @@ import './resume.css'
 
 // A link's visible text is the link, minus the parts a reader doesn't need. Derived rather
 // than typed so it cannot name one profile while the href points at another.
-const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+// `linkedin.com/` goes too: the full URL is 6px wider than the value column on a phone, and
+// `in/handle` is the form a CV uses anyway. The label next to it already says which site.
+const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/^linkedin\.com\//, '').replace(/\/$/, '')
 
 // Picked by slug, not by array index: the CV lists personal work only, and an index silently
 // pointed at Volvo work once the array was reordered. `cat` starts with the year.
@@ -34,6 +35,10 @@ export default function Resume() {
               <div>
                 <div className="r-contact">
                   <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
+                  {/* Second, above the profile links: it is the one address that shows the work
+                      rather than pointing at where the work is filed. `Portfolio`, not the domain's
+                      own word — two rows reading `github` would take a beat to tell apart. */}
+                  <div className="line"><span className="k">Portfolio</span><a href={profile.siteUrl} target="_blank" rel="noopener">{short(profile.siteUrl)}</a></div>
                   <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">{short(profile.github)}</a></div>
                   <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
                   {/* The last employer on this sheet is in Sweden; without a city a US screener
@@ -49,7 +54,7 @@ export default function Resume() {
 
             <div className="r-cols">
               <main>
-                <section className="r-sec">
+                <section className="r-sec r-exp">
                   <h2><span className="tick">{'//'}</span> Experience</h2>
                   {profile.work.map(w => {
                     const [title, co] = w.title.split(' · ')
@@ -67,12 +72,18 @@ export default function Resume() {
                   })}
                 </section>
 
-                <section className="r-sec">
+                {/* The section classes are print's running order — see the `order` rules in
+                    resume.css. On screen they do nothing. */}
+                <section className="r-sec r-proj">
                   {/* The URL rides the heading. It used to sit in the slot Experience uses for
                       an employer, labelled "Showroom" — a nav label from this site, which is
                       not a thing a CV names. */}
+                  {/* A plain anchor, not a router Link: `to` renders a relative href, and Chrome
+                      resolves that against whatever host the sheet was printed from — a PDF made
+                      on a local preview carries a localhost link forever. Costs a full page load
+                      on screen, which the nav already offers a cheaper route to. */}
                   <h2><span className="tick">{'//'}</span> Selected Projects
-                    <Link className="more" to="/projects">{short(profile.siteUrl)}/projects</Link>
+                    <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
                   </h2>
                   <div className="job">
                     <ul>
@@ -107,7 +118,7 @@ export default function Resume() {
                   </div>
                 </section>
 
-                <section className="r-sec">
+                <section className="r-sec r-skills">
                   <h2><span className="tick">{'//'}</span> Skills</h2>
                   {Object.entries(profile.skills).map(([group, items], gi) => (
                     <div className="skill-group" key={group}>
