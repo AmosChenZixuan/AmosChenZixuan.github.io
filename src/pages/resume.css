@@ -36,7 +36,9 @@
 @media (max-width: 760px){ .r-cols { grid-template-columns: 1fr; } }
 
 .r-sec { margin-bottom: var(--s-6); }
-.r-sec > h2 { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase;
+/* flow-root so the floated .more counts toward the height — without it the rule is drawn at
+   the label's baseline and strikes through the URL once it wraps to its own line. */
+.r-sec > h2 { display: flow-root; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase;
   color: var(--on-paper); margin: 0 0 var(--s-4); padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
 .r-sec > h2 .tick { color: var(--accent-deep); }
 /* floated, not flex: the heading's other children are bare text nodes, which flex would each

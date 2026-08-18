@@ -83,7 +83,10 @@ export const projects: Project[] = [
     title: 'Agentic Working Contract',
     cat: '2026 · AI Agents · Tooling',
     card: 'Personal skills collection for AI coding agents — /shipit, /razor, /grill-me and friends. Built for Claude Code, works cross-platform.',
-    cv: 'Personal skills collection for AI coding agents',
+    // Not `card`'s "skills collection" — on a CV that reads as a config repo, and it tells the
+    // reader what this person counts as a project. The engineering claim is portability: one
+    // set of standards, three vendors' agent tools.
+    cv: 'A portable working contract for AI coding agents: one set of engineering standards, installed once, honoured across tools',
     tagline: 'Stop re-teaching your agent your standards every session — install the contract once, get the same discipline everywhere.',
     chips: ['Claude Code', 'Agent Skills', 'Markdown', 'OpenCode', 'Codex'],
     github: 'https://github.com/AmosChenZixuan/Agentic-working-contract',
