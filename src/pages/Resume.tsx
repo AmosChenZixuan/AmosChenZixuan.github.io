@@ -51,7 +51,7 @@ export default function Resume() {
 
             <div className="r-cols">
               <main>
-                <section className="r-sec">
+                <section className="r-sec r-exp">
                   <h2><span className="tick">{'//'}</span> Experience</h2>
                   {profile.work.map(w => {
                     const [title, co] = w.title.split(' · ')
@@ -69,7 +69,9 @@ export default function Resume() {
                   })}
                 </section>
 
-                <section className="r-sec">
+                {/* The section classes are print's running order — see the `order` rules in
+                    resume.css. On screen they do nothing. */}
+                <section className="r-sec r-proj">
                   {/* The URL rides the heading. It used to sit in the slot Experience uses for
                       an employer, labelled "Showroom" — a nav label from this site, which is
                       not a thing a CV names. */}
@@ -109,7 +111,7 @@ export default function Resume() {
                   </div>
                 </section>
 
-                <section className="r-sec">
+                <section className="r-sec r-skills">
                   <h2><span className="tick">{'//'}</span> Skills</h2>
                   {Object.entries(profile.skills).map(([group, items], gi) => (
                     <div className="skill-group" key={group}>
