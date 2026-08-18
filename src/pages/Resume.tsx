@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import HudTop from '../components/HudTop'
 import ContactFooter from '../components/ContactFooter'
 import { profile } from '../content/profile'
@@ -75,8 +74,12 @@ export default function Resume() {
                   {/* The URL rides the heading. It used to sit in the slot Experience uses for
                       an employer, labelled "Showroom" — a nav label from this site, which is
                       not a thing a CV names. */}
+                  {/* A plain anchor, not a router Link: `to` renders a relative href, and Chrome
+                      resolves that against whatever host the sheet was printed from — a PDF made
+                      on a local preview carries a localhost link forever. Costs a full page load
+                      on screen, which the nav already offers a cheaper route to. */}
                   <h2><span className="tick">{'//'}</span> Selected Projects
-                    <Link className="more" to="/projects">{short(profile.siteUrl)}/projects</Link>
+                    <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
                   </h2>
                   <div className="job">
                     <ul>

@@ -146,7 +146,10 @@
   /* Selected Projects drops its stack line: those words are nearly all in Skills already, so on
      a sheet fighting for a page it is a repeat ATS hit rather than new information. Screen keeps it. */
   .r-proj .stack { display: none; }
-  /* On paper a link is not clickable, and the rule ran the full column width like a blank field. */
-  .r-contact a { border-bottom: 0; }
+  /* The PDF keeps these as live link annotations, so they stay underlined — with nothing to see,
+     a reader has no reason to try clicking. `justify-self` stops the rule running the width of
+     the grid column, which is what made it read as a blank form field. */
+  .r-contact a { border-bottom: 1px solid #000; justify-self: start; }
+  .r-sec > h2 .more { border-bottom: 1px solid #000; }
   .skill-group .lbl { letter-spacing: 0; }
 }
