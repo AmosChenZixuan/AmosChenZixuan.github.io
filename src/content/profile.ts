@@ -38,6 +38,10 @@ export const profile = {
   cta: { lead: 'OPEN TO WORK.', link: 'LET’S TALK →' },
 
   email: 'zixuanchen1999@gmail.com',
+  // Digits, spaces and hyphens only — parentheses around the area code are the form phone
+  // parsers most often split on. The country code stays: the last employer on this CV is
+  // in Europe, so some readers will dial from outside the US.
+  phone: '+1 949-910-6482',
   github: 'https://github.com/AmosChenZixuan',
   linkedin: 'https://www.linkedin.com/in/amoschenzixuan/',
   resumePdf: '/resume.pdf',

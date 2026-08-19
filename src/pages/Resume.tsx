@@ -47,6 +47,8 @@ export default function Resume() {
               <div>
                 <div className="r-contact">
                   <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
+                  {/* `tel:` needs the number without its separators; the visible text keeps them. */}
+                  <div className="line"><span className="k">Phone</span><a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`}>{profile.phone}</a></div>
                   {/* Second, above the profile links: it is the one address that shows the work
                       rather than pointing at where the work is filed. `Portfolio`, not the domain's
                       own word — two rows reading `github` would take a beat to tell apart. */}
@@ -102,7 +104,11 @@ export default function Resume() {
                   {cvProjects.map(p => (
                     <div className="job" key={p.slug}>
                       {/* `cat` starts with the year. Nothing else on this block is dated. */}
-                      <div className="title">{p.title} · {p.cat.split(' · ')[0]}</div>
+                      {/* The name is the repo link. Undecorated, so the printed sheet is
+                          unchanged and the PDF gains a live link per project. */}
+                      <div className="title">
+                        <a href={p.github} target="_blank" rel="noopener">{p.title}</a> · {p.cat.split(' · ')[0]}
+                      </div>
                       <ul>
                         {/* `chips` rides the last bullet — personal work has no employer stack
                             to protect, so this section can name tools freely. */}
