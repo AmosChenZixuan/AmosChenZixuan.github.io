@@ -85,7 +85,9 @@ export default function Resume() {
                         {/* Stacked, not side by side: sharing a row with a 40-character
                             place-and-date string wrapped the long Volvo title to four lines. */}
                         <div className="title">{title} · <span className="co">{co}</span></div>
-                        <div className="when">{w.loc} · {dated(w.when)}</div>
+                        {/* Two elements, not one text node: the date is pushed to the right edge,
+                            which is where a reader's eye goes for it and where the sheet was empty. */}
+                        <div className="when"><span>{w.loc}</span><span>{dated(w.when)}</span></div>
                         <ul>
                           {w.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
                         </ul>
