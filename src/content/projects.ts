@@ -13,8 +13,9 @@ export type Project = {
   title: string
   cat: string            // showroom card category line
   card: string           // showroom card blurb
-  cv?: string            // CV one-liner; only on projects the résumé lists. CV register is not
-                         // card register, so it is written rather than derived from `card`.
+  cv?: string[]          // CV bullets; only on projects the résumé lists. Written, not derived
+                         // from `card` — card copy sells, a CV bullet informs. No trailing
+                         // periods, the component adds them.
   tagline: string        // story-page hero tagline
   chips: string[]
   github?: string       // absent where no public repo exists — the story page drops the Links row
@@ -36,9 +37,19 @@ export const projects: Project[] = [
     title: 'BibiLab',
     cat: '2026 · AI · Local-first · Python',
     card: 'A local, private NotebookLM for video — turn videos & playlists into a searchable, citation-backed AI notebook. No cloud.',
-    // Retrieval leads, deployment trails. `card` opens on local-first because that is the
-    // pitch against NotebookLM, but local is a deployment property, not a capability.
-    cv: 'A searchable, citation-backed AI notebook over video, local and self-hosted',
+    // Over video, not over transcripts — a transcript is an internal step. No BM25 / RRF /
+    // cross-encoder here: every RAG CV lists those components, so naming them proves nothing.
+    // The scarce claims are an agent choosing its own retrieval, and a project that measures itself.
+    cv: [
+      'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
+      // `LLM judge` is said out loud rather than left inside "automatically": a reader who
+      // assumes deterministic metrics and then finds a judge model reads the line as oversold.
+      // The regression claim leads, because measuring your own retrieval between runs is the
+      // scarce part. That an LLM drafts the cases is left out — `curated` already means
+      // reviewing and approving someone else's draft, and spelling it out makes the set read
+      // as a model marking its own homework.
+      'Regression-tested answer quality with a standalone eval package — a hand-curated 35-case set, scored per answer by an LLM judge and compared across runs',
+    ],
     tagline: 'Turn a playlist into a private notebook, then ask questions across every transcript — answers cite their sources, and citations seek the video.',
     chips: ['Python', 'FastAPI', 'React', 'SQLite', 'ChromaDB', 'RAG'],
     github: 'https://github.com/AmosChenZixuan/BibiLab',
@@ -86,7 +97,16 @@ export const projects: Project[] = [
     // Not `card`'s "skills collection" — on a CV that reads as a config repo, and it tells the
     // reader what this person counts as a project. The engineering claim is portability: one
     // set of standards, three vendors' agent tools.
-    cv: 'A portable working contract for AI coding agents: one set of engineering standards, installed once, honoured across tools',
+    // `any coding agent`, not a list of three: naming them reads as a limit when the point is
+    // that there is none. The vendor names live in `skills` instead. No skill count either —
+    // a number makes it sound like a folder of files when the claim is the workflow.
+    // `workflow`, not the project's own word `contract`: coined vocabulary is a term nobody
+    // screens for, and it reads as a legal document. `install into` states that the artifact
+    // is installable rather than a written methodology. Keeping review and merge out of the
+    // agent is a design decision, so the line says who does them instead of who does not.
+    cv: [
+      'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
+    ],
     tagline: 'Stop re-teaching your agent your standards every session — install the contract once, get the same discipline everywhere.',
     chips: ['Claude Code', 'Agent Skills', 'Markdown', 'OpenCode', 'Codex'],
     github: 'https://github.com/AmosChenZixuan/Agentic-working-contract',
