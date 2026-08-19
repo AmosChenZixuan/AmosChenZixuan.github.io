@@ -106,24 +106,23 @@ export default function Resume() {
                       resolves that against whatever host the sheet was printed from — a PDF made
                       on a local preview carries a localhost link forever. Costs a full page load
                       on screen, which the nav already offers a cheaper route to. */}
-                  {/* The date shows in print only. There the Current block is dropped, and
-                      without it the newest date anywhere on the sheet would be the last
-                      employment end date. On screen Current still carries it. */}
-                  {/* The explicit space is load-bearing: JSX trims whitespace that spans a
-                      newline, and without it the extracted PDF text reads `ProjectsJAN`. */}
-                  <h2><span className="tick">{'//'}</span> Selected Projects{' '}
-                    <span className="when">{dated(profile.now.when)}</span>
+                  <h2><span className="tick">{'//'}</span> Selected Projects
                     <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
                   </h2>
                   {/* An entry each, not one list of sentences: a project a reader has to find
                       mid-line is a project they skip. */}
                   {cvProjects.map(p => (
                     <div className="job" key={p.slug}>
-                      {/* `cat` starts with the year. Nothing else on this block is dated. */}
                       {/* The name is the repo link. Undecorated, so the printed sheet is
                           unchanged and the PDF gains a live link per project. */}
+                      {/* Each project states its own range. It used to be one date on the
+                          section heading, which claimed the same span for both and could not
+                          say either had stopped — and a heading followed by a date range is
+                          the shape that reads as an employer. Rides the title line, so it
+                          costs no height. */}
                       <div className="title">
-                        <a href={p.github} target="_blank" rel="noopener">{p.title}</a> · {p.cat.split(' · ')[0]}
+                        <a href={p.github} target="_blank" rel="noopener">{p.title}</a>
+                        <span className="range">{dated(p.cvWhen!)}</span>
                       </div>
                       <ul>
                         {/* `chips` rides the last bullet — personal work has no employer stack
