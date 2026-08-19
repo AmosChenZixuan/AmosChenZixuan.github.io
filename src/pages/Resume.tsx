@@ -97,20 +97,23 @@ export default function Resume() {
                   <h2><span className="tick">{'//'}</span> Selected Projects
                     <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
                   </h2>
-                  <div className="job">
-                    <ul>
-                      {/* `cv`, not `card`: card copy leads with whatever sells the project,
-                          which is rarely what a screener should read first. `chips` follows —
-                          personal work has no employer stack to protect, so this section can
-                          name tools freely. */}
-                      {cvProjects.map(p => (
-                        <li key={p.slug}>
-                          {p.title} · {p.cat.split(' · ')[0]} — {p.cv}.{' '}
-                          <span className="stack">{p.chips.join(', ')}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {/* An entry each, not one list of sentences: a project a reader has to find
+                      mid-line is a project they skip. */}
+                  {cvProjects.map(p => (
+                    <div className="job" key={p.slug}>
+                      {/* `cat` starts with the year. Nothing else on this block is dated. */}
+                      <div className="title">{p.title} · {p.cat.split(' · ')[0]}</div>
+                      <ul>
+                        {/* `chips` rides the last bullet — personal work has no employer stack
+                            to protect, so this section can name tools freely. */}
+                        {p.cv!.map((b, i, all) => (
+                          <li key={b.slice(0, 24)}>
+                            {b}.{i === all.length - 1 && <> <span className="stack">{p.chips.join(', ')}</span></>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </section>
               </main>
 

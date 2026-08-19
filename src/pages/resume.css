@@ -74,6 +74,8 @@
 .r-sec.edu .sch, .r-sec.edu .yr { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--on-paper-dim); }
 /* Same markup as an Experience entry, but the aside is ~300px wide — title drops to body size. */
 .cur .title { font-size: var(--t-sm); font-weight: 800; }
+/* A project name is not an employer — same markup, one step quieter. */
+.r-proj .title { font-size: var(--t-md); }
 
 /* ============================================================
    PRINT — clean black-on-white, no chrome, fits A4/Letter
@@ -104,13 +106,17 @@
      its two-column grid and no markup moves. Two columns fit more content per sheet, but they
      paginate unpredictably (a grid row taller than a page relocates whole blocks) and are the
      classic ATS reading-order hazard. Current leads: flattened, it would otherwise fall below
-     Projects and the sheet would read as ending DEC 2025. */
+     Projects and the sheet would read as ending DEC 2025. Projects follows it rather than
+     Experience — both cover JAN 2026 onward. */
   .r-cols { display: flex; flex-direction: column; gap: 0; }
   .r-cols > main, .r-cols > aside { display: contents; }
   /* `r-` prefixed: page stylesheets are global here, and a bare `.proj` is the home page's
      project card — it painted this whole section black. */
-  .r-sec.cur { order: 1 } .r-sec.r-exp { order: 2 } .r-sec.r-proj { order: 3 }
+  .r-sec.cur { order: 1 } .r-sec.r-proj { order: 2 } .r-sec.r-exp { order: 3 }
   .r-sec.r-skills { order: 4 } .r-sec.edu { order: 5 }
+  /* The heading and the dates say enough, and the title itself names a relocation. Screen keeps
+     it — the About timeline uses the same string as its heading. */
+  .cur .title { display: none; }
 
   /* Résumé density. What printed before was the screen scale — a 53pt name, and 47px of height
      for a one-line bullet — which is why the sheet ran to three pages with nothing wrong with
@@ -129,8 +135,11 @@
   .job { margin-bottom: 7px; }
   .job .title { font-size: 12.5px; line-height: 1.22; }
   .job .when { font-size: 10px; margin-top: 0; }
-  .job li { font-size: 11px; line-height: 1.28; margin-bottom: 1px; }
-  .cur .title { font-size: 11.5px; }
+  /* The screen's 12px lead-in and 7px bullet gap are body-copy spacing; across eight lists on
+     this sheet they cost more than a bullet each. */
+  .job ul { margin-top: 3px; gap: 3px; }
+  .job li { font-size: 11px; line-height: 1.28; margin-bottom: 0; }
+  .r-proj .title { font-size: 11.5px; }
   /* School and year share a line — two degrees at three lines each spent a tenth of the page
      on six short strings. */
   .r-sec.edu .item { margin-bottom: 5px; }

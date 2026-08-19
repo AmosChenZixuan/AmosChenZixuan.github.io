@@ -151,7 +151,9 @@ export const profile = {
   // Spring are absent. `Evaluation & Benchmarking` is earned: each LLM system was scored
   // against a labelled set, not spot-checked.
   skills: {
-    'AI & LLM': ['Azure OpenAI', 'LangChain', 'RAG & Hybrid Retrieval', 'Multi-Agent Orchestration', 'Evaluation & Benchmarking', 'ChromaDB', 'PyTorch'],
+    // `Claude Code` sits here, not in the project bullet that would otherwise name it — there
+    // it would read as a limit on what that project runs on.
+    'AI & LLM': ['Azure OpenAI', 'LangChain', 'RAG & Hybrid Retrieval', 'Multi-Agent Orchestration', 'Evaluation & Benchmarking', 'Claude Code', 'ChromaDB', 'PyTorch'],
     Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Kotlin'],
     // `SQL` rides alongside `PostgreSQL` on purpose: ATS keyword filters match tokens, so a
     // screen for `SQL` does not necessarily hit the string `PostgreSQL` — and a full-stack
