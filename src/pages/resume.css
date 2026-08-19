@@ -85,10 +85,10 @@
 .cur .title { font-size: var(--t-sm); font-weight: 800; }
 /* A project name is not an employer — same markup, one step quieter. */
 .r-proj .title { font-size: var(--t-md); }
-/* The only cue that the name is a link: an underline would shout on bold text, and the
-   printed sheet has to look exactly as it did before. Magenta, not the yellow — yellow on
-   this paper is 1.44:1, magenta is 3:1 and this is bold text in a transient state. */
-.r-proj .title a:hover { color: var(--magenta); }
+/* The only cue that the name is a link, and it is the accent used the way the rest of the site
+   uses it — as a fill behind ink, never as text colour. The box-shadow is the padding: it bleeds
+   the highlight past the glyphs without giving the span a box that would reflow the line. */
+.r-proj .title a:hover { background: var(--accent); box-shadow: 0 0 0 3px var(--accent); }
 
 /* ============================================================
    PRINT — clean black-on-white, no chrome, fits A4/Letter
