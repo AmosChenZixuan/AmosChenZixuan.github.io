@@ -95,19 +95,21 @@ export const profile = {
         // cannot confirm: `delivered` is his own action, where `adopted by` or `for rollout`
         // would be theirs. `synthetic augmentation` rather than `extended with synthetic
         // requirements` — the first reads as method, the second as padding a thin dataset.
-        'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered as an MVP to the owning team.',
+        'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
         // Not `Acted as product manager`: he never formally held the title, and the hedge was
         // audible. `running the product side` describes the same work without claiming it.
         // A product-lane variant of this CV would lead with the role instead.
         // The vendor is joined to the teams by `and`, not `with`: all four are parties he
         // coordinated. `with` dangled — it could attach to the test team or to the verb, and
-        // the second reading made the vendor a co-driver of the product.
-        'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice and test teams and an external LLM vendor.',
+        // the second reading made the vendor a co-driver of the product. The serial comma is
+        // load-bearing for the same reason: without it `test teams and an external LLM vendor`
+        // reads as one item.
+        'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice and test teams, and an external LLM vendor.',
         // The 12% covers features and performance together, so it attaches to "the releases",
         // not to any one change. No causal phrasing: the experiment design is not recallable.
         // FCP −35% and LCP −20% also came out of this work; they belong in a full-stack
         // variant of this CV, not under a headline claiming agentic systems.
-        'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory — bounce rate down 12% across the releases.',
+        'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
       ],
     },
     {
@@ -129,7 +131,7 @@ export const profile = {
       bullets: [
         // His modules lead the sentence; the unified particle model was the team's call, so it
         // appears as what they run on rather than as something he decided.
-        'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine — data duplication down 50%, 60+ FPS across millions of particles.',
+        'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; data duplication down 50%, 60+ FPS across millions of particles.',
         // F1 belongs to the classification step; measuring a body is regression, and the old
         // wording attached a classification metric to it.
         'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',
@@ -153,7 +155,11 @@ export const profile = {
   skills: {
     // `Claude Code` sits here, not in the project bullet that would otherwise name it — there
     // it would read as a limit on what that project runs on.
-    'AI & LLM': ['Azure OpenAI', 'LangChain', 'RAG & Hybrid Retrieval', 'Multi-Agent Orchestration', 'Evaluation & Benchmarking', 'Claude Code', 'ChromaDB', 'PyTorch'],
+    // `Vector Search & Embeddings` is one entry, not two, and it is here for the same reason
+    // `SQL` sits next to `PostgreSQL` below: a keyword filter matches strings, and it cannot
+    // know that ChromaDB is a vector database. Split in two it would put four adjacent entries
+    // on one subject and start to read as keyword stuffing.
+    'AI & LLM': ['Azure OpenAI', 'LangChain', 'RAG & Hybrid Retrieval', 'Vector Search & Embeddings', 'Multi-Agent Orchestration', 'Evaluation & Benchmarking', 'Claude Code', 'ChromaDB', 'PyTorch'],
     Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'Kotlin'],
     // `SQL` rides alongside `PostgreSQL` on purpose: ATS keyword filters match tokens, so a
     // screen for `SQL` does not necessarily hit the string `PostgreSQL` — and a full-stack
