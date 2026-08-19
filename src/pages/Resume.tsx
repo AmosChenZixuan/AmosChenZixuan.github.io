@@ -15,6 +15,14 @@ const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/
 // pointed at Volvo work once the array was reordered. `cat` starts with the year.
 const cvProjects = ['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!)
 
+// Space Mono draws a dash on the lowercase mid-line while its digits run the full cap height,
+// so between two all-caps dates the dash sits about 0.09em low. Nudging it needs it in an
+// element of its own, which is all this does.
+const dated = (when: string) => {
+  const [from, to] = when.split(' — ')
+  return to ? <>{from} <span className="dash">—</span> {to}</> : when
+}
+
 // Taken verbatim as a filename, so: legal name, plain hyphen, no dots.
 const pdfName = 'Zixuan Chen - Resume'
 
@@ -77,7 +85,7 @@ export default function Resume() {
                         {/* Stacked, not side by side: sharing a row with a 40-character
                             place-and-date string wrapped the long Volvo title to four lines. */}
                         <div className="title">{title} · <span className="co">{co}</span></div>
-                        <div className="when">{w.loc} · {w.when}</div>
+                        <div className="when">{w.loc} · {dated(w.when)}</div>
                         <ul>
                           {w.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
                         </ul>
@@ -96,7 +104,13 @@ export default function Resume() {
                       resolves that against whatever host the sheet was printed from — a PDF made
                       on a local preview carries a localhost link forever. Costs a full page load
                       on screen, which the nav already offers a cheaper route to. */}
-                  <h2><span className="tick">{'//'}</span> Selected Projects
+                  {/* The date shows in print only. There the Current block is dropped, and
+                      without it the newest date anywhere on the sheet would be the last
+                      employment end date. On screen Current still carries it. */}
+                  {/* The explicit space is load-bearing: JSX trims whitespace that spans a
+                      newline, and without it the extracted PDF text reads `ProjectsJAN`. */}
+                  <h2><span className="tick">{'//'}</span> Selected Projects{' '}
+                    <span className="when">{dated(profile.now.when)}</span>
                     <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
                   </h2>
                   {/* An entry each, not one list of sentences: a project a reader has to find
@@ -132,7 +146,7 @@ export default function Resume() {
                   <div className="job">
                     <div className="title">{profile.now.title}</div>
                     {/* No place, unlike an Experience entry — it would repeat the header. */}
-                    <div className="when">{profile.now.when}</div>
+                    <div className="when">{dated(profile.now.when)}</div>
                     <ul>
                       {profile.now.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
                     </ul>
