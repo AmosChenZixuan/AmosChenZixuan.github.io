@@ -135,7 +135,7 @@
   /* `r-` prefixed: page stylesheets are global here, and a bare `.proj` is the home page's
      project card — it painted this whole section black. */
   .r-sec.r-exp { order: 1 } .r-sec.r-proj { order: 2 }
-  .r-sec.r-skills { order: 3 } .r-sec.edu { order: 4 }
+  .r-sec.edu { order: 3 } .r-sec.r-skills { order: 4 }
   /* Current is dropped here, not reordered: with its title hidden it was a date range with no
      employer and no job title, which is the shape a résumé parser misfiles, and its one bullet
      only restates the projects below it. Screen keeps the block — the About timeline shares
