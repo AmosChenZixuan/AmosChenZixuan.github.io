@@ -102,8 +102,8 @@ export const profile = {
         'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
         // The 12% covers features and performance together, so it attaches to "the releases",
         // not to any one change. No causal phrasing: the experiment design is not recallable.
-        // That hedge is why it sits mid-list — it is the weakest attribution here, and the
-        // closing slot is read too closely for it.
+        // That hedge is why it sits mid-list rather than last: it is the weakest attribution
+        // here, and the last bullet is one a scan does read.
         // FCP −35% and LCP −20% also came out of this work; they belong in a full-stack
         // variant of this CV, not under a headline claiming agentic systems.
         'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
@@ -140,9 +140,9 @@ export const profile = {
       bullets: [
         // His modules lead the sentence; the unified particle model was the team's call, so it
         // appears as what they run on rather than as something he decided.
-        // `data duplication down 50%` was here and went: a reader knows neither what it measures
-        // in a particle engine nor why it matters, and it diluted the frame rate beside it, which
-        // is the number that reads on its own.
+        // `data duplication down 50%` was cut from this line: a reader knows neither what it
+        // measures in a particle engine nor why it matters, and it diluted the frame rate beside
+        // it, which is the number that reads on its own.
         'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; 60+ FPS across millions of particles.',
         // F1 belongs to the classification step; measuring a body is regression, and the old
         // wording attached a classification metric to it.
@@ -153,8 +153,8 @@ export const profile = {
 
   // `yr` is the date and nothing else: on the printed sheet it is pulled to the right edge, where
   // every other date on the page sits, and a GPA riding along would put a grade in a column a
-  // reader scans for "when". Attainment stays beside the school. About used to regex the GPA back
-  // out of a packed string.
+  // reader scans for "when". Attainment stays beside the school, and About takes the fields it
+  // wants rather than stripping the ones it does not out of a packed string.
   education: [
     { deg: 'M.S. Electrical & Computer Engineering', sch: 'Carnegie Mellon University', yr: 'MAY 2023', gpa: 'GPA 3.72/4.0' },
     { deg: 'B.S. Computer Science', sch: 'University of California, Irvine', yr: 'DEC 2020', gpa: 'GPA 3.96/4.0', honors: 'Summa Cum Laude' },

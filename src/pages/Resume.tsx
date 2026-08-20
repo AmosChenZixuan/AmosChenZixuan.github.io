@@ -115,11 +115,9 @@ export default function Resume() {
                     <div className="job" key={p.slug}>
                       {/* The name is the repo link. Undecorated, so the printed sheet is
                           unchanged and the PDF gains a live link per project. */}
-                      {/* Each project states its own range. It used to be one date on the
-                          section heading, which claimed the same span for both and could not
-                          say either had stopped — and a heading followed by a date range is
-                          the shape that reads as an employer. Rides the title line, so it
-                          costs no height. */}
+                      {/* Each project states its own range, rather than one date on the section
+                          heading: that one claimed the same span for both and could not say
+                          either had stopped. Rides the title line, so it costs no height. */}
                       <div className="title">
                         <a href={p.github} target="_blank" rel="noopener">{p.title}</a>
                         <span className="range">{dated(p.cvWhen!)}</span>

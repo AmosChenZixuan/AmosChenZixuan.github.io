@@ -82,8 +82,8 @@
 /* Same markup as an Experience entry, but the aside is ~300px wide — title drops to body size. */
 .cur .title { font-size: var(--t-sm); font-weight: 800; }
 /* A project name is not an employer — same markup, one step quieter. flow-root contains the
-   floated date: on a phone it drops to a second line, and uncontained it went on jutting into
-   the bullets below and wrapped the first one into a narrow column. */
+   floated date: on a phone it drops to a second line, and uncontained it juts into the bullets
+   below and wraps the first one into a narrow column. */
 .r-proj .title { font-size: var(--t-md); display: flow-root; }
 /* Floated right so it lands on the same edge as the Experience dates — a project has no
    location line to share, so its date rides the title instead of sitting under it. Same
@@ -111,10 +111,10 @@
   .sheet-inner { padding: 0; }
   .rule { background: none; height: 0; border-top: 3px solid #000; margin: 16px 0; }
   .r-head .name, .r-head .name .alias { color: #000; }
-  /* Only the two that are dim on screen for a reason paper undoes: the employer, which is one
-     of the three things a screener reads, and the bullet glyph, which is structure. The contact
-     labels and the heading URL are not here — both are captions, and blackening them made each
-     louder than the thing it captions. */
+  /* Only the two whose reason for being dim does not survive paper: the employer, one of the
+     three things a screener reads, and the bullet glyph, which is structure. The contact labels
+     and the heading URL belong out of this list — both caption something, and blackening them
+     put each above what it captions. */
   .job .title .co, .job li::before { color: #000 !important; }
   /* The slashes carry no information, and a résumé parser that matches section headings by
      exact string sees `// EXPERIENCE` rather than `EXPERIENCE`. Most parsers normalise
@@ -189,22 +189,21 @@
   .job li { font-size: 11px; line-height: 1.4; margin-bottom: 0; }
   .r-proj .title { font-size: 11.5px; }
   .r-proj .title .range { font-size: 10px; }
-  /* School and date share a line — two degrees at three lines each spent a tenth of the page on
-     six short strings. Two columns rather than one run, so the date lands on the same right edge
-     as the employment and project dates; the degree spans both. */
-  /* Same gap as between two jobs. The grid dropped the leading the inline line box used to
-     carry, and at 5px the two degrees sat as close to each other as each degree sat to its
-     own school line. */
+  /* Two lines, not three — a degree at three lines each spent a tenth of the page on six short
+     strings. Two columns so the date reaches the right edge the employment and project dates
+     use. The gap matches the one between two jobs: a grid row carries no line-box leading, and
+     anything smaller left the two degrees as close together as each was to its own school. */
   .r-sec.edu .item { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; margin-bottom: 9px; }
   /* Placed, not flowed: the date is last in the DOM but belongs on the degree's line, opposite
-     it, the way a project's date sits opposite its name. */
-  /* w900 like every other entry title. Screen keeps 800, where this is the smallest of the
-     three and does not sit at the same size as the other two. */
+     it, the way a project's date sits opposite its name. The school takes the row below, across
+     both columns. */
+  /* w900 like every other entry title on the sheet. Screen keeps 800, where this is a size
+     smaller than the other two and does not need to match them. */
   .r-sec.edu .deg { grid-area: 1 / 1; font-size: 11.5px; font-weight: 900; }
   .r-sec.edu .yr { grid-area: 1 / 2; text-align: right; }
   .r-sec.edu .sch { grid-area: 2 / 1 / 2 / -1; }
-  /* Tracked like the dates and locations this now sits beside; untracked it printed about a
-     tenth narrower than every other mono line on the sheet. */
+  /* Tracked like the dates and locations it sits beside; untracked it printed about a tenth
+     narrower than every other mono line on the sheet. */
   .r-sec.edu .sch, .r-sec.edu .yr { font-size: 10px; letter-spacing: .06em; }
 
   /* Skills as one text line per group. The chips cost ~120px of a page in boxes and padding,
