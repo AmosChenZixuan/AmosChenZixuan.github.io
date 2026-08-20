@@ -135,7 +135,10 @@ export const profile = {
       bullets: [
         // His modules lead the sentence; the unified particle model was the team's call, so it
         // appears as what they run on rather than as something he decided.
-        'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; data duplication down 50%, 60+ FPS across millions of particles.',
+        // `data duplication down 50%` was here and went: a reader knows neither what it measures
+        // in a particle engine nor why it matters, and it diluted the frame rate beside it, which
+        // is the number that reads on its own.
+        'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; 60+ FPS across millions of particles.',
         // F1 belongs to the classification step; measuring a body is regression, and the old
         // wording attached a classification metric to it.
         'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',
