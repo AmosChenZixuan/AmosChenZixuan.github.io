@@ -100,6 +100,16 @@ export const profile = {
         // would be theirs. `synthetic augmentation` rather than `extended with synthetic
         // requirements` — the first reads as method, the second as padding a thin dataset.
         'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
+        // The 12% covers features and performance together, so it attaches to "the releases",
+        // not to any one change. No causal phrasing: the experiment design is not recallable.
+        // That hedge is why it sits mid-list — it is the weakest attribution here, and the
+        // closing slot is read too closely for it.
+        // FCP −35% and LCP −20% also came out of this work; they belong in a full-stack
+        // variant of this CV, not under a headline claiming agentic systems.
+        'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
+        // Last, not by priority — the exception to the ordering rule above. A scan reads the
+        // first bullet and the last, and this one ends on a shipped product. Its scope is also
+        // the widest here, which reads as range at the close and as a stretch at the top.
         // Not `Acted as product manager`: he never formally held the title, and the hedge was
         // audible. `running the product side` describes the same work without claiming it.
         // A product-lane variant of this CV would lead with the role instead.
@@ -109,11 +119,6 @@ export const profile = {
         // load-bearing for the same reason: without it `test teams and an external LLM vendor`
         // reads as one item.
         'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice and test teams, and an external LLM vendor.',
-        // The 12% covers features and performance together, so it attaches to "the releases",
-        // not to any one change. No causal phrasing: the experiment design is not recallable.
-        // FCP −35% and LCP −20% also came out of this work; they belong in a full-stack
-        // variant of this CV, not under a headline claiming agentic systems.
-        'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
       ],
     },
     {
