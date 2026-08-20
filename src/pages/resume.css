@@ -198,10 +198,14 @@
   .r-sec.edu .item { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; margin-bottom: 9px; }
   /* Placed, not flowed: the date is last in the DOM but belongs on the degree's line, opposite
      it, the way a project's date sits opposite its name. */
-  .r-sec.edu .deg { grid-area: 1 / 1; font-size: 11.5px; }
+  /* w900 like every other entry title. Screen keeps 800, where this is the smallest of the
+     three and does not sit at the same size as the other two. */
+  .r-sec.edu .deg { grid-area: 1 / 1; font-size: 11.5px; font-weight: 900; }
   .r-sec.edu .yr { grid-area: 1 / 2; text-align: right; }
   .r-sec.edu .sch { grid-area: 2 / 1 / 2 / -1; }
-  .r-sec.edu .sch, .r-sec.edu .yr { font-size: 10px; }
+  /* Tracked like the dates and locations this now sits beside; untracked it printed about a
+     tenth narrower than every other mono line on the sheet. */
+  .r-sec.edu .sch, .r-sec.edu .yr { font-size: 10px; letter-spacing: .06em; }
 
   /* Skills as one text line per group. The chips cost ~120px of a page in boxes and padding,
      and a bordered span is the shape a résumé parser is least sure what to do with. */
