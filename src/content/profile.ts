@@ -143,10 +143,14 @@ export const profile = {
     },
   ],
 
+  // `yr` is the date and nothing else: on the printed sheet it is pulled to the right edge, where
+  // every other date on the page sits, and a GPA riding along would put a grade in a column a
+  // reader scans for "when". Attainment stays beside the school. About used to regex the GPA back
+  // out of a packed string.
   education: [
-    { deg: 'M.S. Electrical & Computer Engineering', sch: 'Carnegie Mellon University', yr: 'MAY 2023 · GPA 3.72/4.0' },
-    { deg: 'B.S. Computer Science', sch: 'University of California, Irvine', yr: 'DEC 2020 · GPA 3.96/4.0 · Summa Cum Laude' },
-  ],
+    { deg: 'M.S. Electrical & Computer Engineering', sch: 'Carnegie Mellon University', yr: 'MAY 2023', gpa: 'GPA 3.72/4.0' },
+    { deg: 'B.S. Computer Science', sch: 'University of California, Irvine', yr: 'DEC 2020', gpa: 'GPA 3.96/4.0', honors: 'Summa Cum Laude' },
+  ] as readonly { deg: string; sch: string; yr: string; gpa: string; honors?: string }[],
 
   // Key order is priority order: the home page shows only the first two groups, so whatever
   // leads here is what a screener reads under the role line. AI leads because the role line
