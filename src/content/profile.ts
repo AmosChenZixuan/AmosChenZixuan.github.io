@@ -66,7 +66,7 @@ export const profile = {
   // Current chapter — About timeline, and the CV aside so the sheet does not end at DEC 2025
   // with nothing said about the months since. Out of `work`: Experience stays employment-only.
   now: {
-    when: 'JAN 2026 — NOW',
+    when: 'JAN 2026 — PRESENT',
     title: 'Relocation & Independent Build',
     loc: 'Irvine, CA',
     // No work-authorization line: an application form asks it with a checkbox, and answering

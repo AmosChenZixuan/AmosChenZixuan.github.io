@@ -79,7 +79,10 @@
 .r-sec.edu .deg { font-weight: 800; font-size: var(--t-sm); }
 .r-sec.edu .sch, .r-sec.edu .yr { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--on-paper-dim); }
 .r-sec.edu .nb { white-space: nowrap; }
-/* Same markup as an Experience entry, but the aside is ~300px wide — title drops to body size. */
+/* Same markup as an Experience entry, but the aside is ~300px wide — title drops to body size.
+   Its date is the one on the page that is not right-aligned, and stays that way: the right edge
+   the others share is the main column's, hundreds of pixels from this one, and with no place
+   name to its left a lone date pushed right reads as a stray rather than half of a row. */
 .cur .title { font-size: var(--t-sm); font-weight: 800; }
 /* A project name is not an employer — same markup, one step quieter. flow-root contains the
    floated date: on a phone it drops to a second line, and uncontained it juts into the bullets
