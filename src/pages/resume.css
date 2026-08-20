@@ -58,8 +58,8 @@
    legible text on the sheet. The `·` already separates it from the role. */
 .job .title .co { color: var(--on-paper); }
 /* Place left, date hard right. gap so the two never touch when the column is narrow; wrap so a
-   phone stacks them instead of squeezing. The Current block puts one child in here and it stays
-   left, which is what a lone date wants. */
+   phone stacks them instead of squeezing. Everything that uses this row has to hand it exactly
+   two children, or one for a lone date — a stray third gets spaced apart like a column of its own. */
 .job .when { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px;
   font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .06em; color: var(--on-paper-dim); margin-top: 3px; }
 /* Optical centring between two all-caps dates — the font puts the dash on the lowercase

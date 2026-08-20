@@ -144,8 +144,10 @@ export default function Resume() {
                   <h2><span className="tick">{'//'}</span> Current</h2>
                   <div className="job">
                     <div className="title">{profile.now.title}</div>
-                    {/* No place, unlike an Experience entry — it would repeat the header. */}
-                    <div className="when">{dated(profile.now.when)}</div>
+                    {/* No place, unlike an Experience entry — it would repeat the header. The
+                        span is what keeps the row to one flex item: `dated` returns three, and
+                        the row spaces its items apart, which spread this date across the column. */}
+                    <div className="when"><span>{dated(profile.now.when)}</span></div>
                     <ul>
                       {profile.now.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
                     </ul>
