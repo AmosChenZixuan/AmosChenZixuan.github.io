@@ -11,8 +11,8 @@ import './resume.css'
 // `in/handle` is the form a CV uses anyway. The label next to it already says which site.
 const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/^linkedin\.com\//, '').replace(/\/$/, '')
 
-// Picked by slug, not by array index: the CV lists personal work only, and an index silently
-// pointed at Volvo work once the array was reordered. `cat` starts with the year.
+// Picked by slug, not by array index: the CV lists personal work only, and `projects` is
+// ordered for the showroom, so an index here silently follows whatever it is reordered to.
 const cvProjects = ['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!)
 
 // Space Mono draws a dash on the lowercase mid-line while its digits run the full cap height,
@@ -99,31 +99,25 @@ export default function Resume() {
                 {/* The section classes are print's running order — see the `order` rules in
                     resume.css. On screen they do nothing. */}
                 <section className="r-sec r-proj">
-                  {/* The URL rides the heading. It used to sit in the slot Experience uses for
-                      an employer, labelled "Showroom" — a nav label from this site, which is
-                      not a thing a CV names. */}
                   {/* A plain anchor, not a router Link: `to` renders a relative href, and Chrome
                       resolves that against whatever host the sheet was printed from — a PDF made
                       on a local preview carries a localhost link forever. Costs a full page load
                       on screen, which the nav already offers a cheaper route to. */}
-                  {/* The date shows in print only. There the Current block is dropped, and
-                      without it the newest date anywhere on the sheet would be the last
-                      employment end date. On screen Current still carries it. */}
-                  {/* The explicit space is load-bearing: JSX trims whitespace that spans a
-                      newline, and without it the extracted PDF text reads `ProjectsJAN`. */}
-                  <h2><span className="tick">{'//'}</span> Selected Projects{' '}
-                    <span className="when">{dated(profile.now.when)}</span>
+                  <h2><span className="tick">{'//'}</span> Selected Projects
                     <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
                   </h2>
                   {/* An entry each, not one list of sentences: a project a reader has to find
                       mid-line is a project they skip. */}
                   {cvProjects.map(p => (
                     <div className="job" key={p.slug}>
-                      {/* `cat` starts with the year. Nothing else on this block is dated. */}
                       {/* The name is the repo link. Undecorated, so the printed sheet is
                           unchanged and the PDF gains a live link per project. */}
+                      {/* Each project carries its own range: the two started months apart, and
+                          either can stop while the other runs. Rides the title line, so it
+                          costs no height. */}
                       <div className="title">
-                        <a href={p.github} target="_blank" rel="noopener">{p.title}</a> · {p.cat.split(' · ')[0]}
+                        <a href={p.github} target="_blank" rel="noopener">{p.title}</a>
+                        <span className="range">{dated(p.cvWhen!)}</span>
                       </div>
                       <ul>
                         {/* `chips` rides the last bullet — personal work has no employer stack
@@ -147,8 +141,11 @@ export default function Resume() {
                   <h2><span className="tick">{'//'}</span> Current</h2>
                   <div className="job">
                     <div className="title">{profile.now.title}</div>
-                    {/* No place, unlike an Experience entry — it would repeat the header. */}
-                    <div className="when">{dated(profile.now.when)}</div>
+                    {/* No place, unlike an Experience entry — it would repeat the header. The
+                        span is what keeps the row to one flex item: `dated` returns three, and
+                        the row spaces its items apart, which would spread this date across
+                        the column. */}
+                    <div className="when"><span>{dated(profile.now.when)}</span></div>
                     <ul>
                       {profile.now.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
                     </ul>
@@ -172,7 +169,9 @@ export default function Resume() {
                   {profile.education.map(e => (
                     <div className="item" key={e.deg}>
                       <div className="deg">{e.deg}</div>
-                      <div className="sch">{e.sch}</div>
+                      {/* nowrap on the grade only: in the ~300px screen aside the line breaks,
+                          and left to itself it broke inside `GPA 3.72/4.0`. */}
+                      <div className="sch">{e.sch} · <span className="nb">{e.gpa}</span>{e.honors && ` · ${e.honors}`}</div>
                       <div className="yr">{e.yr}</div>
                     </div>
                   ))}

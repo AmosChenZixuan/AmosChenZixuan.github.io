@@ -16,6 +16,8 @@ export type Project = {
   cv?: string[]          // CV bullets; only on projects the résumé lists. Written, not derived
                          // from `card` — card copy sells, a CV bullet informs. No trailing
                          // periods, the component adds them.
+  cvWhen?: string        // CV date range. Not derivable from `cat`, which carries a bare year
+                         // for the showroom card and cannot say whether the work is still live.
   tagline: string        // story-page hero tagline
   chips: string[]
   github?: string       // absent where no public repo exists — the story page drops the Links row
@@ -40,6 +42,7 @@ export const projects: Project[] = [
     // Over video, not over transcripts — a transcript is an internal step. No BM25 / RRF /
     // cross-encoder here: every RAG CV lists those components, so naming them proves nothing.
     // The scarce claims are an agent choosing its own retrieval, and a project that measures itself.
+    cvWhen: 'FEB 2026 — PRESENT',
     cv: [
       'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
       // `LLM judge` is said out loud rather than left inside "automatically": a reader who
@@ -104,6 +107,7 @@ export const projects: Project[] = [
     // screens for, and it reads as a legal document. `install into` states that the artifact
     // is installable rather than a written methodology. Keeping review and merge out of the
     // agent is a design decision, so the line says who does them instead of who does not.
+    cvWhen: 'MAR 2026 — PRESENT',
     cv: [
       'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
     ],
