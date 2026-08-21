@@ -70,9 +70,9 @@ export const profile = {
     title: 'Relocation & Independent Build',
     loc: 'Irvine, CA',
     // No work-authorization line: an application form asks it with a checkbox, and answering
-    // it unprompted raises the question instead of settling it. The tax-exam line went for a
-    // related reason — on a sheet headlined agentic systems it reads as a career change, and
-    // it puts immigration back on the page. It survives as narrative in `aboutBio`.
+    // it unprompted raises the question rather than settling it. Nothing about immigration or
+    // the tax exam belongs here either — on a sheet headlined agentic systems both read as a
+    // career change. The tax exam has a home in `aboutBio`, as narrative.
     // The relocation itself is not a bullet: the title says Relocation, the header says Irvine,
     // and the Volvo entry says Gothenburg — three statements of it within one screen.
     bullets: [
@@ -91,10 +91,10 @@ export const profile = {
         // so stating both said one thing twice — and an approximate baseline cannot support an
         // exact percentage. The concrete pair is also the one a reader remembers.
         'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
-        // No outcome figure here on purpose: the 50% that used to sit in this line was the
-        // target written into the functional requirement, and the system never ran in
-        // production here, so nothing measured it. The evaluation set is a real fact and a
-        // better one. Its size is an internal document count, so it stays off the page.
+        // No outcome figure here on purpose: the only number this work has is the target
+        // written into the functional requirement, and the system never ran in production
+        // here, so nothing measured whether it was hit. The evaluation set is a real fact
+        // and a better one. Its size is an internal document count, so it stays off the page.
         // He left before the receiving team rolled it out, so nothing here claims an outcome he
         // cannot confirm: `delivered` is his own action, where `adopted by` or `for rollout`
         // would be theirs. `synthetic augmentation` rather than `extended with synthetic
@@ -140,12 +140,12 @@ export const profile = {
       bullets: [
         // His modules lead the sentence; the unified particle model was the team's call, so it
         // appears as what they run on rather than as something he decided.
-        // `data duplication down 50%` was cut from this line: a reader knows neither what it
-        // measures in a particle engine nor why it matters, and it diluted the frame rate beside
-        // it, which is the number that reads on its own.
+        // One number on purpose. Frame rate against particle count reads on its own; a memory
+        // or dedup figure from a particle engine tells a reader neither what it measures nor
+        // why it matters, and dilutes the one that does.
         'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; 60+ FPS across millions of particles.',
-        // F1 belongs to the classification step; measuring a body is regression, and the old
-        // wording attached a classification metric to it.
+        // The 87% F1 attaches to the classification step, not to the measurement — measuring
+        // a body is regression, which F1 does not score.
         'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',
       ],
     },
@@ -153,8 +153,8 @@ export const profile = {
 
   // `yr` is the date and nothing else: on the printed sheet it is pulled to the right edge, where
   // every other date on the page sits, and a GPA riding along would put a grade in a column a
-  // reader scans for "when". Attainment stays beside the school, and About takes the fields it
-  // wants rather than stripping the ones it does not out of a packed string.
+  // reader scans for "when". Attainment stays beside the school, and each surface takes the
+  // fields it wants — About shows no grade, the sheet shows all three.
   education: [
     { deg: 'M.S. Electrical & Computer Engineering', sch: 'Carnegie Mellon University', yr: 'MAY 2023', gpa: 'GPA 3.72/4.0' },
     { deg: 'B.S. Computer Science', sch: 'University of California, Irvine', yr: 'DEC 2020', gpa: 'GPA 3.96/4.0', honors: 'Summa Cum Laude' },

@@ -11,8 +11,8 @@ import './resume.css'
 // `in/handle` is the form a CV uses anyway. The label next to it already says which site.
 const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/^linkedin\.com\//, '').replace(/\/$/, '')
 
-// Picked by slug, not by array index: the CV lists personal work only, and an index silently
-// pointed at Volvo work once the array was reordered. `cat` starts with the year.
+// Picked by slug, not by array index: the CV lists personal work only, and `projects` is
+// ordered for the showroom, so an index here silently follows whatever it is reordered to.
 const cvProjects = ['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!)
 
 // Space Mono draws a dash on the lowercase mid-line while its digits run the full cap height,
@@ -99,9 +99,6 @@ export default function Resume() {
                 {/* The section classes are print's running order — see the `order` rules in
                     resume.css. On screen they do nothing. */}
                 <section className="r-sec r-proj">
-                  {/* The URL rides the heading. It used to sit in the slot Experience uses for
-                      an employer, labelled "Showroom" — a nav label from this site, which is
-                      not a thing a CV names. */}
                   {/* A plain anchor, not a router Link: `to` renders a relative href, and Chrome
                       resolves that against whatever host the sheet was printed from — a PDF made
                       on a local preview carries a localhost link forever. Costs a full page load
@@ -115,9 +112,9 @@ export default function Resume() {
                     <div className="job" key={p.slug}>
                       {/* The name is the repo link. Undecorated, so the printed sheet is
                           unchanged and the PDF gains a live link per project. */}
-                      {/* Each project states its own range, rather than one date on the section
-                          heading: that one claimed the same span for both and could not say
-                          either had stopped. Rides the title line, so it costs no height. */}
+                      {/* Each project carries its own range: the two started months apart, and
+                          either can stop while the other runs. Rides the title line, so it
+                          costs no height. */}
                       <div className="title">
                         <a href={p.github} target="_blank" rel="noopener">{p.title}</a>
                         <span className="range">{dated(p.cvWhen!)}</span>
@@ -146,7 +143,8 @@ export default function Resume() {
                     <div className="title">{profile.now.title}</div>
                     {/* No place, unlike an Experience entry — it would repeat the header. The
                         span is what keeps the row to one flex item: `dated` returns three, and
-                        the row spaces its items apart, which spread this date across the column. */}
+                        the row spaces its items apart, which would spread this date across
+                        the column. */}
                     <div className="when"><span>{dated(profile.now.when)}</span></div>
                     <ul>
                       {profile.now.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
