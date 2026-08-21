@@ -83,6 +83,17 @@ body { overflow-x: hidden; }
   text-transform: uppercase; color: var(--accent); margin: 0 0 var(--s-4); }
 .skills-card .row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-4); }
 
+/* ---- Dark strip of figures: career stats under the home hero, project stats under a story
+   header. Only the paint is here — ink ground, a display-face accent figure over a mono
+   caption, and the cell's padding. The grid and the cell rules stay on the page: each strip
+   collapses at its own widths, and this file is bundled after the page stylesheets, so a
+   rule here would beat a page's media query at equal specificity rather than lose to it. */
+.stat-strip { background: var(--ink); color: var(--on-ink); }
+.stat-strip .cell { padding: var(--s-6) var(--s-5); }
+.stat-strip .num { font-family: var(--font-display); line-height: 1; color: var(--accent); }
+.stat-strip .cap { font-family: var(--font-mono); font-size: var(--t-xs); text-transform: uppercase;
+  color: var(--on-ink-dim); }
+
 /* ---- Scroll progress bar (HUD readout) ---- */
 .scroll-prog { position: fixed; top: 0; left: 0; height: 3px; width: 0;
   background: var(--accent); z-index: 40; box-shadow: 0 0 8px var(--accent); }
@@ -99,8 +110,9 @@ body { overflow-x: hidden; }
 .contact-footer .meta a:hover { color: var(--accent); }
 
 /* ---- Scroll-reveal (mechanical slide-up) ----
-   data-reveal is applied by the Reveal component, so no-JS/failed-JS
-   leaves all content fully visible. */
+   Guarded on no-preference, so a reduced-motion reader never gets the
+   hidden start state. Everyone else starts hidden and needs Reveal's
+   observer to add `.in`. */
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal] {
     opacity: 0; transform: translateY(28px);

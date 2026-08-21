@@ -15,7 +15,7 @@
 
   /* Signature hi-vis "caution tape" yellow — the brand anchor */
   --hi:         #FFE400;
-  --hi-deep:    #E4C400;   /* pressed / shadow state of yellow      */
+  --hi-deep:    #E4C400;   /* darker yellow, for yellow as text     */
 
   /* Electric secondary accents (CRT / glitch) */
   --magenta:    #FF2E6D;
