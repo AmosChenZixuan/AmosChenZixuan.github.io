@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import ContactFooter from '../components/ContactFooter'
+import SkillGroups from '../components/SkillGroups'
 import HudTop from '../components/HudTop'
 import Kicker from '../components/Kicker'
 import Reveal from '../components/Reveal'
@@ -218,14 +219,9 @@ export default function Home() {
               <Link className="more" to="/resume">Full Resume →</Link>
             </div>
             <Reveal type="left" as="aside" className="skills-card hud-frame">
-              {Object.entries(profile.skills).slice(0, 2).map(([group, items], gi) => (
-                <div key={group}>
-                  <h4>{group}</h4>
-                  <div className="row">
-                    {items.map(s => <span key={s} className={gi === 0 ? 'chip chip--hi' : 'chip'}>{s}</span>)}
-                  </div>
-                </div>
-              ))}
+              {/* Two groups only: this card sits beside a four-entry timeline, and the full
+                  list runs past it. About carries the rest. */}
+              <SkillGroups groups={Object.entries(profile.skills).slice(0, 2)} />
             </Reveal>
           </div>
         </div>
