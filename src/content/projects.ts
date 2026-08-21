@@ -23,7 +23,7 @@ export type Project = {
   github?: string       // absent where no public repo exists — the story page drops the Links row
   language: string
   cardVariant: 'dark' | 'yellow' | 'magenta' | 'cyan' | 'paper'
-  span: 's2' | 's3' | 's4' | 's6'
+  span: 's2' | 's4' | 's6'
   mark?: string          // brand mark for the home-card lockup
   short?: string         // lockup name when the full title is too long for the card
   hero?: Shot            // story-page hero shot
