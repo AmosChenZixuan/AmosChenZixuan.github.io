@@ -169,9 +169,7 @@ export default function Resume() {
                   {profile.education.map(e => (
                     <div className="item" key={e.deg}>
                       <div className="deg">{e.deg}</div>
-                      {/* nowrap on the grade only: in the ~300px screen aside the line breaks,
-                          and left to itself it broke inside `GPA 3.72/4.0`. */}
-                      <div className="sch">{e.sch} · <span className="nb">{e.gpa}</span>{e.honors && ` · ${e.honors}`}</div>
+                      <div className="sch">{e.sch}<span className="nb"> · {e.gpa}</span>{e.honors && ` · ${e.honors}`}</div>
                       <div className="yr">{e.yr}</div>
                     </div>
                   ))}
