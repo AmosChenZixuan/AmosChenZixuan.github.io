@@ -1,5 +1,3 @@
-/* Home page */
-
 /* ---------- Hero ---------- */
 .hero { position: relative; padding: var(--s-9) 0 var(--s-8); overflow: hidden; }
 .hero .kicker { margin-bottom: var(--s-4); }
@@ -19,8 +17,8 @@
   93% { text-shadow: -3px 0 var(--magenta), 3px 0 var(--cyan), 4px 4px 0 var(--ink); transform: translate(2px,-1px); }
   95% { text-shadow: 3px 0 var(--magenta), -3px 0 var(--cyan), 4px 4px 0 var(--ink); transform: translate(-2px,1px); }
 }
-/* No max-width: the role line is a single long phrase, so the container bounds it.
-   An 18ch cap was tuned for the old two-word role and wrapped this one onto four lines. */
+/* No max-width, unlike `.blurb` below: the role is a single long phrase with no good break
+   point, so a character cap wraps it to four ragged lines. The container bounds it instead. */
 .hero .role { font-family: var(--font-ui); font-weight: 900; font-style: italic;
   font-size: var(--t-lg); margin: var(--s-5) 0 var(--s-2); }
 .hero .blurb { max-width: 46ch; color: var(--on-paper-dim); font-size: var(--t-md); }
@@ -73,7 +71,7 @@
     background: transparent; color: var(--on-paper); box-shadow: none;
     border: 1px solid var(--paper-edge); padding: 6px 10px; }
   /* Nothing to catch in the flow row, so no hover state either — on a narrow desktop window
-     it would put back the shadow and lift the fix above was made to remove. */
+     it would put back the shadow and lift that the rule above just removed. */
   .sticker:hover { scale: 1; box-shadow: none; }
 }
 

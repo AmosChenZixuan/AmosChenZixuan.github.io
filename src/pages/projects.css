@@ -1,4 +1,3 @@
-/* Projects showroom */
 .show-head { padding: var(--s-8) 0 var(--s-6); }
 .show-head .kicker { margin-bottom: var(--s-3); }
 .show-head h1 { font-family: var(--font-display); font-size: clamp(2.8rem, 8vw, 6rem); text-transform: uppercase;
@@ -34,11 +33,10 @@
 .card.cyan   { background: var(--cyan);    color: var(--ink); }
 
 /* spans */
-.s2 { grid-column: span 2; } .s3 { grid-column: span 3; }
-.s4 { grid-column: span 4; } .s6 { grid-column: span 6; }
+.s2 { grid-column: span 2; } .s4 { grid-column: span 4; } .s6 { grid-column: span 6; }
 .feat h3 { font-size: clamp(2rem, 4vw, 3rem); }
 .feat p { font-size: var(--t-md); max-width: 52ch; }
 @media (max-width: 900px){ .show-grid { grid-template-columns: 1fr 1fr; }
-  .s2,.s3,.s4,.s6 { grid-column: span 2; } }
+  .s2,.s4,.s6 { grid-column: span 2; } }
 @media (max-width: 560px){ .show-grid { grid-template-columns: 1fr; }
-  .s2,.s3,.s4,.s6 { grid-column: span 1; } }
+  .s2,.s4,.s6 { grid-column: span 1; } }

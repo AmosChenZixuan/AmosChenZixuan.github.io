@@ -99,8 +99,9 @@ body { overflow-x: hidden; }
 .contact-footer .meta a:hover { color: var(--accent); }
 
 /* ---- Scroll-reveal (mechanical slide-up) ----
-   data-reveal is applied by the Reveal component, so no-JS/failed-JS
-   leaves all content fully visible. */
+   Guarded on no-preference, so a reduced-motion reader never gets the
+   hidden start state. Everyone else starts hidden and needs Reveal's
+   observer to add `.in`. */
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal] {
     opacity: 0; transform: translateY(28px);
