@@ -79,35 +79,34 @@
 .hero .watermark { position: absolute; right: -2%; top: 30%; font-family: var(--font-display);
   font-size: 34vw; color: var(--accent); opacity: .12; line-height: 1; pointer-events: none; z-index: -1; }
 
-/* ---------- Status strip (agent telemetry as a game HUD) ---------- */
-.status-strip { background: var(--ink); color: var(--on-ink); }
-.status-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.status-cell { padding: var(--s-6) var(--s-5); border-right: 1px solid var(--ink-3); }
-.status-cell:last-child { border-right: 0; }
-.status-cell .num { font-family: var(--font-display); font-size: clamp(2.2rem,5vw,3.4rem);
-  line-height: 1; color: var(--accent); }
+/* ---------- Status strip (agent telemetry as a game HUD) ----------
+   `.stat-strip` in global.css carries the shared look; only what this strip does differently
+   is here. Its captions are the long ones, which is what the extra rules below are for. */
+.status-strip .grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.status-strip .cell { border-right: 1px solid var(--ink-3); }
+.status-strip .cell:last-child { border-right: 0; }
+.status-strip .num { font-size: clamp(2.2rem,5vw,3.4rem); }
 /* The unit rides the figure rather than sitting on the line below, so `$1.1K SAVED/MO` is a
    complete claim on its own — a bare `$1.1K` means nothing until you read further. */
-.status-cell .num em { font-style: normal; font-size: .42em; letter-spacing: .04em;
+.status-strip .num em { font-style: normal; font-size: .42em; letter-spacing: .04em;
   color: var(--on-ink); vertical-align: .34em; }
-.status-cell .head { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-md);
+/* No counterpart on a story strip, which captions a figure with one line, not two. */
+.status-strip .head { font-family: var(--font-ui); font-weight: 900; font-size: var(--t-md);
   line-height: 1.1; margin-top: var(--s-2); color: var(--on-ink); }
 /* Every caption is written to run at most two lines at the tightest column, so the floor
    here is a guard rather than padding — letter-spaced mono is wide enough that a few extra
    characters tip one caption onto a third line and drop that cell's baseline alone. */
-.status-cell .cap { font-family: var(--font-mono); font-size: var(--t-xs);
-  letter-spacing: .16em; text-transform: uppercase; color: var(--on-ink-dim);
-  line-height: 1.5; min-height: 3em; margin-top: 4px; }
+.status-strip .cap { letter-spacing: .16em; line-height: 1.5; min-height: 3em; margin-top: 4px; }
 /* Column count is driven by the two lines that must not break badly: the claim line
    (`$1.1K SAVED/MO`) must stay on one line, and the longest caption must fit on two. That
    needs ~228px of text width per cell; below it the routing stage list spills to a third
    line and only that cell grows. The thresholds are where the container still clears that at
    each count. Never three columns: four stats would leave an orphan on the second row. */
-@media (max-width: 1199px){ .status-grid { grid-template-columns: repeat(2,1fr); }
-  .status-cell:nth-child(2){ border-right: 0; } }
-@media (max-width: 599px){ .status-grid { grid-template-columns: 1fr; }
-  .status-cell { border-right: 0; border-bottom: 1px solid var(--ink-3); }
-  .status-cell:last-child { border-bottom: 0; } }
+@media (max-width: 1199px){ .status-strip .grid { grid-template-columns: repeat(2,1fr); }
+  .status-strip .cell:nth-child(2){ border-right: 0; } }
+@media (max-width: 599px){ .status-strip .grid { grid-template-columns: 1fr; }
+  .status-strip .cell { border-right: 0; border-bottom: 1px solid var(--ink-3); }
+  .status-strip .cell:last-child { border-bottom: 0; } }
 
 /* ---------- Section scaffolding ---------- */
 section.block { padding: var(--s-9) 0; }

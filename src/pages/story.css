@@ -26,13 +26,14 @@
   text-transform: uppercase; color: var(--on-ink-dim); padding: 8px 12px; border-top: 2px solid var(--accent); }
 .shot--inline { margin-top: var(--s-5); }
 
-/* ---- Stat strip (real, cited numbers) ---- */
-.stats { background: var(--ink); color: var(--on-ink); }
+/* ---- Stat strip (real, cited numbers) ----
+   `.stat-strip` in global.css carries the shared look; a story caption is one short line, so
+   it needs none of the two-line guards the home strip sets. */
 .stats .grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.stats .cell { padding: var(--s-6) var(--s-5); border-right: 1px solid var(--ink-3); }
+.stats .cell { border-right: 1px solid var(--ink-3); }
 .stats .cell:last-child { border-right: 0; }
-.stats .num { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1; color: var(--accent); }
-.stats .cap { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--on-ink-dim); margin-top: var(--s-2); }
+.stats .num { font-size: clamp(2rem, 4.5vw, 3.2rem); }
+.stats .cap { letter-spacing: .12em; margin-top: var(--s-2); }
 @media (max-width: 720px){ .stats .grid { grid-template-columns: 1fr 1fr; } .stats .cell:nth-child(2){ border-right: 0; } }
 
 /* ---- Body prose ---- */

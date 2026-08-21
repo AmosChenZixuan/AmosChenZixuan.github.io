@@ -110,11 +110,11 @@ function Clock() {
 
 function StatusStrip() {
   return (
-    <section className="status-strip">
+    <section className="stat-strip status-strip">
       <div className="container">
-        <div className="status-grid">
+        <div className="grid">
           {profile.stats.map((s, i) => (
-            <Reveal key={s.what} className="status-cell" delay={(i % 4) * 80}>
+            <Reveal key={s.what} className="cell" delay={(i % 4) * 80}>
               <div className="num">{s.num} <em>{s.verb}</em></div>
               <div className="head">{s.what}</div>
               <div className="cap">{s.where}</div>
