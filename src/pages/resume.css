@@ -78,6 +78,9 @@
 .r-sec.edu .item { margin-bottom: var(--s-4); }
 .r-sec.edu .deg { font-weight: 800; font-size: var(--t-sm); }
 .r-sec.edu .sch, .r-sec.edu .yr { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--on-paper-dim); }
+/* Own line: the aside is ~300px, and school, grade and honours on one run there break inside
+   a school's name. Each fits alone. */
+.r-sec.edu .meta { display: block; }
 .r-sec.edu .nb { white-space: nowrap; }
 /* Same markup as an Experience entry, in a ~300px aside — the title drops to body size. */
 .cur .title { font-size: var(--t-sm); font-weight: 800; }
@@ -201,6 +204,10 @@
   .r-sec.edu .deg { grid-area: 1 / 1; font-size: 11.5px; font-weight: 900; }
   .r-sec.edu .yr { grid-area: 1 / 2; text-align: right; }
   .r-sec.edu .sch { grid-area: 2 / 1 / 2 / -1; }
+  /* One line at 688px, where nothing wraps and two rows would spend a degree's height on
+     six short strings. */
+  .r-sec.edu .meta { display: inline; }
+  .r-sec.edu .meta::before { content: ' · '; }
   /* Tracked like the dates and locations it sits beside; untracked it printed about a tenth
      narrower than every other mono line on the sheet. */
   .r-sec.edu .sch, .r-sec.edu .yr { font-size: 10px; letter-spacing: .06em; }

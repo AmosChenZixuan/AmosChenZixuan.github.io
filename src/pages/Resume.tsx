@@ -169,7 +169,12 @@ export default function Resume() {
                   {profile.education.map(e => (
                     <div className="item" key={e.deg}>
                       <div className="deg">{e.deg}</div>
-                      <div className="sch">{e.sch}<span className="nb"> · {e.gpa}</span>{e.honors && ` · ${e.honors}`}</div>
+                      {/* School and attainment share a line on paper and take one each on
+                          screen, so the separator between them is a CSS `::before` on `.meta`
+                          rather than text sitting here. */}
+                      <div className="sch">{e.sch}
+                        <span className="meta"><span className="nb">{e.gpa}</span>{e.honors && ` · ${e.honors}`}</span>
+                      </div>
                       <div className="yr">{e.yr}</div>
                     </div>
                   ))}
