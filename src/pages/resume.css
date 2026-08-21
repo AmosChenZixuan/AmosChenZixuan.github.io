@@ -42,10 +42,10 @@
    the label's baseline and strikes through the URL once it wraps to its own line. */
 .r-sec > h2 { display: flow-root; font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .2em; text-transform: uppercase;
   color: var(--on-paper); margin: 0 0 var(--s-4); padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
-/* Yellow is a fill on this page, never text: `--accent-deep` is documented as the *pressed*
-   state of the yellow, and on paper it lands at 1.44:1. Darkening it far enough to read stops
-   it being yellow, so the accent stays where it works — the chips, the buttons, the caution
-   rule, and the name — and everything on the paper itself is ink. */
+/* Yellow is a fill on this page, never text: even `--accent-deep`, the darkest yellow the
+   palette has, lands at 1.44:1 on this paper. Darkening it far enough to read stops it being
+   yellow, so the accent stays where it works — the chips, the buttons, the caution rule, and
+   the name — and everything on the paper itself is ink. */
 .r-sec > h2 .tick { color: var(--on-paper-dim); }
 /* floated, not flex: the heading's other children are bare text nodes, which flex would each
    promote to an item and space apart. */

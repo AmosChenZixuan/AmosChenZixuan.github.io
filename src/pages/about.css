@@ -7,7 +7,7 @@
   letter-spacing: -0.02em; margin: 0; }
 .about-hero h1 em { font-style: italic; color: var(--on-paper-dim); }
 .about-hero .lead { font-size: var(--t-lg); color: var(--on-paper-dim); max-width: 40ch; margin-top: var(--s-5); }
-/* Status strip: location + work authorization + CV — the facts a resume can't pre-answer */
+/* Status strip: where he is, what he's open to, and the CV — the facts a resume can't pre-answer */
 .about-status { display: grid; justify-items: start; gap: 10px; margin-top: var(--s-6); padding-left: var(--s-4);
   border-left: 3px solid var(--accent);
   font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .06em; color: var(--ink); }
