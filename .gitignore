@@ -4,3 +4,5 @@ docs/
 node_modules/
 dist/
 .shots/
+# tsc's incremental cache. Machine-local, rewritten by every build.
+tsconfig.tsbuildinfo
