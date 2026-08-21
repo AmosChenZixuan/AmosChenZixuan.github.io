@@ -71,7 +71,8 @@ export default function About() {
                   <div key={e.deg}>
                     <b>{e.deg}</b>
                     <span>{e.sch}</span>
-                    <span className="yr">{e.yr.replace(/ · GPA [\d./]+/, '')}</span>
+                    {/* No GPA here — the About card is narrative, and a grade reads as a CV line. */}
+                    <span className="yr">{e.yr}{e.honors && ` · ${e.honors}`}</span>
                   </div>
                 ))}
               </div>
