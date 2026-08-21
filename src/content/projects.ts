@@ -23,7 +23,7 @@ export type Project = {
   github?: string       // absent where no public repo exists — the story page drops the Links row
   language: string
   cardVariant: 'dark' | 'yellow' | 'magenta' | 'cyan' | 'paper'
-  span: 's2' | 's3' | 's4' | 's6'
+  span: 's2' | 's4' | 's6'
   mark?: string          // brand mark for the home-card lockup
   short?: string         // lockup name when the full title is too long for the card
   hero?: Shot            // story-page hero shot
@@ -39,10 +39,10 @@ export const projects: Project[] = [
     title: 'BibiLab',
     cat: '2026 · AI · Local-first · Python',
     card: 'A local, private NotebookLM for video — turn videos & playlists into a searchable, citation-backed AI notebook. No cloud.',
+    cvWhen: 'FEB 2026 — PRESENT',
     // Over video, not over transcripts — a transcript is an internal step. No BM25 / RRF /
     // cross-encoder here: every RAG CV lists those components, so naming them proves nothing.
     // The scarce claims are an agent choosing its own retrieval, and a project that measures itself.
-    cvWhen: 'FEB 2026 — PRESENT',
     cv: [
       'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
       // `LLM judge` is said out loud rather than left inside "automatically": a reader who
@@ -97,6 +97,7 @@ export const projects: Project[] = [
     title: 'Agentic Working Contract',
     cat: '2026 · AI Agents · Tooling',
     card: 'Personal skills collection for AI coding agents — /shipit, /razor, /grill-me and friends. Built for Claude Code, works cross-platform.',
+    cvWhen: 'MAR 2026 — PRESENT',
     // Not `card`'s "skills collection" — on a CV that reads as a config repo, and it tells the
     // reader what this person counts as a project. The engineering claim is portability: one
     // set of standards, three vendors' agent tools.
@@ -107,7 +108,6 @@ export const projects: Project[] = [
     // screens for, and it reads as a legal document. `install into` states that the artifact
     // is installable rather than a written methodology. Keeping review and merge out of the
     // agent is a design decision, so the line says who does them instead of who does not.
-    cvWhen: 'MAR 2026 — PRESENT',
     cv: [
       'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
     ],

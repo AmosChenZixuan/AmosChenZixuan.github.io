@@ -40,7 +40,7 @@ export default function ProjectStory() {
       </div>
 
       {p.stats && (
-        <section className="stats">
+        <section className="stat-strip stats">
           <div className="container">
             <div className="grid">
               {p.stats.map(s => (

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import ContactFooter from '../components/ContactFooter'
+import SkillGroups from '../components/SkillGroups'
 import Kicker from '../components/Kicker'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
@@ -76,14 +77,7 @@ export default function About() {
                   </div>
                 ))}
               </div>
-              {skillGroups.map(([group, items], gi) => (
-                <div key={group}>
-                  <h4>{group}</h4>
-                  <div className="row">
-                    {items.map(s => <span key={s} className={gi === 0 ? 'chip chip--hi' : 'chip'}>{s}</span>)}
-                  </div>
-                </div>
-              ))}
+              <SkillGroups groups={skillGroups} />
             </Reveal>
           </div>
         </div>

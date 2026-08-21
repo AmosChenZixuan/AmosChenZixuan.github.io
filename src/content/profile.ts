@@ -21,7 +21,7 @@ export const profile = {
   // not repeated here; it belongs to the bullet a few lines down that has a number behind it.
   resumeSummary: 'LLM systems taken from prototype to production — agents, retrieval, evaluation, and the full-stack work it takes to ship them.',
   // Status strip under the About hero. Work authorization is deliberately NOT a field here —
-  // an application form already asks it. It lands as narrative in the `now` timeline entry instead.
+  // an application form already asks it. It appears once, as narrative, in `aboutBio`.
   location: 'Irvine, California',
   timeZone: 'America/Los_Angeles',
   openTo: 'AI · Full-Stack · Forward-Deployed Engineer',
@@ -33,8 +33,8 @@ export const profile = {
     'Before that: a B.S. in Computer Science at UC Irvine (summa cum laude) and an M.S. in Electrical & Computer Engineering at Carnegie Mellon, with machine-learning work either side of it — vulnerability detection at CMU CyLab, real-time simulation and computer vision at Glinsun AI.',
     'In January 2026 I moved from Sweden back to Irvine, California, and spent the next eight months waiting on a work permit. I built through it: a deep dive into agentic coding, and the IRS Enrolled Agent exams.',
   ],
-  // Footer CTA, shared by both pages — one ask, worded the same wherever a reader reaches the
-  // bottom. The words live here; where the line breaks stays in the component.
+  // Footer CTA. Every route ends on it, so one ask, worded the same wherever a reader reaches
+  // the bottom. The words live here; where the line breaks stays in the component.
   cta: { lead: 'OPEN TO WORK.', link: 'LET’S TALK →' },
 
   email: 'zixuanchen1999@gmail.com',
