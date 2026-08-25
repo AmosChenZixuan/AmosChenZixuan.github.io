@@ -205,7 +205,7 @@ export default function Home() {
               <Kicker>DOSSIER</Kicker>
               <h2>Resume</h2>
             </div>
-            <a className="more" href={profile.resumePdf} download>Download PDF ↓</a>
+            {/* No exit link: the timeline below already ends on `Full Resume →`. */}
           </Reveal>
           <div className="resume-wrap">
             <div className="timeline">
