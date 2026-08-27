@@ -6,6 +6,7 @@ import HudTop from '../components/HudTop'
 import Kicker from '../components/Kicker'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
+import { bulletTexts } from '../content/lanes'
 import { featured, storyCta } from '../content/projects'
 import './home.css'
 
@@ -213,7 +214,7 @@ export default function Home() {
                 <Reveal key={w.title} className="tl-item" delay={(i % 4) * 80}>
                   <div className="when">{w.when}</div>
                   <h3>{w.title}</h3>
-                  <p>{w.bullets[0]}</p>
+                  <p>{bulletTexts(w.bullets)[0]}</p>
                 </Reveal>
               ))}
               <Link className="more" to="/resume">Full Resume →</Link>

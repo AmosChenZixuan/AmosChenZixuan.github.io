@@ -5,6 +5,7 @@ import Kicker from '../components/Kicker'
 import HudTop from '../components/HudTop'
 import Reveal from '../components/Reveal'
 import { profile } from '../content/profile'
+import { bulletTexts } from '../content/lanes'
 import './about.css'
 
 export default function About() {
@@ -60,7 +61,9 @@ export default function About() {
                   <div className="when">{w.when} · {w.loc}</div>
                   <h3>{w.title}</h3>
                   <ul>
-                    {w.bullets.map(b => <li key={b.slice(0, 24)}>{b}</li>)}
+                    {bulletTexts(w.bullets).map(t => (
+                      <li key={t.slice(0, 24)}>{t}</li>
+                    ))}
                   </ul>
                 </Reveal>
               ))}

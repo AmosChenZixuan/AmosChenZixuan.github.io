@@ -6,3 +6,6 @@ dist/
 .shots/
 # tsc's incremental cache. Machine-local, rewritten by every build.
 tsconfig.tsbuildinfo
+
+# The résumé is rendered from src/content, never served as a static file.
+public/*.pdf
