@@ -63,19 +63,19 @@ export const profile = {
       loc: 'Gothenburg, Sweden',
       bullets: [
         {
-          text: 'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
+          ai: 'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
           swe: 'Cut root-cause analysis on integration builds from 6 hours to 40 minutes with an LLM agent in the CI pipeline, deployed department-wide and live since July 2025.',
         },
         {
-          text: 'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
+          ai: 'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
           swe: 'Built an automated reviewer for the ADAS team’s requirement documents, 86% precision against 400+ human-annotated cases, each finding a verbatim span applied as a deterministic patch.',
         },
         {
-          text: 'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
+          ai: 'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
           swe: 'Owned in-stock vehicle matching on Volvo’s US site, where an exact local match is rare, designing the relaxation policy that defines relevance; bounce down 12% across releases, in production since 2024.',
         },
         {
-          text: 'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice and test teams, and an external LLM vendor.',
+          ai: 'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice and test teams, and an external LLM vendor.',
           swe: 'Led the two-month PoC that moved the car’s voice assistant from a fixed command set to open-domain question answering, across teams in Sweden and China, and an external vendor; the prototype shipped as a product.',
         },
       ],
@@ -86,7 +86,7 @@ export const profile = {
       loc: 'Pittsburgh, PA',
       bullets: [
         {
-          text: 'Deployed vulnerability-detection models on GCP with PyTorch, tuning hyper-parameters for a 19% relative F1 gain and debiasing against identifier names with variable obfuscation.',
+          ai: 'Deployed vulnerability-detection models on GCP with PyTorch, tuning hyper-parameters for a 19% relative F1 gain and debiasing against identifier names with variable obfuscation.',
           swe: 'Built the config-driven pipeline behind a vulnerability-detection study, stripping identifier names and rebalancing a rare positive class for a four-backbone sweep.',
         },
       ],
@@ -97,15 +97,15 @@ export const profile = {
       loc: 'Wuhan, China',
       bullets: [
         {
-          text: 'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; 60+ FPS at 50k+ particles.',
+          ai: 'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; 60+ FPS at 50k+ particles.',
           swe: 'Extended a C++/CUDA cloth engine with two-way coupled fluid, smoke, and air inflation on its unified particle solver, and held 60 FPS by trading expensive solved particles for cheap render-only ones.',
         },
         {
-          text: '',
+          ai: '',
           swe: 'Wrote that solver’s neighbor search as a single-pass uniform grid instead of an O(n²) all-pairs check, keeping lookup near-linear at 50k+ particles.',
         },
         {
-          text: 'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',
+          ai: 'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',
           swe: '',
         },
       ],

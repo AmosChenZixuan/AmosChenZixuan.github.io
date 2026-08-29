@@ -42,7 +42,7 @@ export const projects: Project[] = [
     cvWhen: 'FEB 2026 — PRESENT',
     cv: [
       {
-        text: 'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
+        ai: 'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
         swe: 'Built a self-hosted, model-agnostic RAG system over 100 hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
       },
       'Regression-tested answer quality with a standalone eval package — a hand-curated 35-case set, scored per answer by an LLM judge and compared across runs',
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     cvWhen: 'MAR 2026 — PRESENT',
     cv: [
       {
-        text: 'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
+        ai: 'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
         swe: 'Replaced up-front planning docs with an issue-scoped agent workflow: median lead time 21 → 12 hours, in-branch fixes down two-thirds; self-measured across 223 merged PRs',
       },
     ],

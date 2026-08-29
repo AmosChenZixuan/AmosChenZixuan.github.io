@@ -7,7 +7,7 @@
 // `?lane=swe` links are already in circulation, so a key cannot be renamed for readability.
 //
 // `ai` overrides nothing: no bullet carries an `ai` key and `profile.lanes` has no `ai` entry,
-// so every lookup falls back to `text` and to `profile`'s own defaults, which *are* the AI sheet.
+// so every lookup falls back to `ai` and to `profile`'s own defaults, which *are* the AI sheet.
 export const LANE_KEYS = ['swe'] as const
 
 // A named lane. `''` is not one: it is the *absence* of a lane, which is what the home timeline
@@ -15,20 +15,20 @@ export const LANE_KEYS = ['swe'] as const
 export type Lane = typeof LANE_KEYS[number]
 
 // A bullet one lane rewrites is stored as a pair here, never copied into `profile.lanes`. A
-// plain string is a bullet every lane shares. `text` is what a lane with no entry of its own
-// prints, which is the whole of the AI sheet — it must stay byte-identical or that sheet moves.
+// plain string is a bullet every lane shares. `ai` is the AI wording; the lane-keyed overrides
+// win over it, with an empty override meaning "not on this lane's sheet".
 //
 // Keyed by `Lane`, never an open `[lane: string]`: that took any key and let a misspelt `swe`
 // ship the AI wording on the SDE sheet with the build green. The check only bites where the
 // bullets are closed with `satisfies` — an `as` assertion throws the excess-property check away.
-export type Bullet = string | ({ readonly text: string } & Partial<Record<Lane, string>>)
+export type Bullet = string | ({ readonly ai: string } & Partial<Record<Lane, string>>)
 
 // A lane's rewrite may be the empty string, which means "not on this lane's sheet" — the same
 // fact can be worth a row to one reader and a repetition to another, and the alternative is a
 // second bullet list per lane. `??` rather than `||` is what carries an empty rewrite through
-// instead of falling back to `text`.
+// instead of falling back to `ai`.
 const one = (b: Bullet, lane: Lane | '') =>
-  typeof b === 'string' ? b : lane === '' ? b.text : b[lane] ?? b.text
+  typeof b === 'string' ? b : lane === '' ? (b.swe ?? b.ai) : (b[lane] ?? b.ai)
 
 // Reads a list because the dropped rows must be gone before a caller sees an index — the tool
 // chips ride the last project bullet, and that has to mean the last one on the page.
