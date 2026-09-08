@@ -15,7 +15,7 @@ const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/
 
 // Picked by slug, not by array index: the CV lists personal work only, and `projects` is
 // ordered for the showroom, so an index here silently follows whatever it is reordered to.
-const cvProjects = [hrHelpdesk, ...['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!)]
+const cvProjects = [...['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!), hrHelpdesk]
 
 // Space Mono draws a dash on the lowercase mid-line while its digits run the full cap height,
 // so between two all-caps dates the dash sits about 0.09em low. Nudging it needs it in an
