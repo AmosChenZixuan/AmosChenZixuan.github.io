@@ -1,6 +1,13 @@
 # Local-only workspace: issue tracker, spikes, superpowers artifacts.
 # Nothing in docs/ ships. Force-add if you ever want a tracked doc here.
 docs/
+# The résumé workshop: fact record, JD evals, interview briefs, and the tailoring skill.
+# Its own private repo, nested here so one working tree holds everything. This line is what
+# keeps the public repo from staging it — not even as a gitlink.
+career/
+# Symlinks into career/skills. The skill encodes private rulings and cannot ship.
+.claude/
+.vscode/
 node_modules/
 dist/
 .shots/
