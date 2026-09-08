@@ -98,11 +98,11 @@ export const profile = {
       bullets: [
         {
           ai: 'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; 60+ FPS at 50k+ particles.',
-          swe: 'Extended a C++/CUDA cloth engine with two-way coupled fluid, smoke, and air inflation on its unified particle solver, and held 60 FPS by trading expensive solved particles for cheap render-only ones.',
+          swe: 'Extended a C++/CUDA cloth engine with two-way coupled fluid, smoke and air inflation, and wrote its neighbor search as a single-pass uniform grid instead of an O(n²) all-pairs check, holding 60 FPS at 50k+ particles.',
         },
         {
           ai: '',
-          swe: 'Wrote that solver’s neighbor search as a single-pass uniform grid instead of an O(n²) all-pairs check, keeping lookup near-linear at 50k+ particles.',
+          swe: '',
         },
         {
           ai: 'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',

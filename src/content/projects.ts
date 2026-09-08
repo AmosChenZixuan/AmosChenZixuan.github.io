@@ -43,7 +43,11 @@ export const projects: Project[] = [
     cv: [
       {
         ai: 'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
-        swe: 'Built a self-hosted, model-agnostic RAG system over 100 hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
+        swe: 'Built a self-hosted, model-agnostic RAG system across 200+ hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
+      },
+      {
+        ai: '',
+        swe: 'Dropped time-to-first-token from ~6s to sub-second by starting generation before retrieval rather than blocking on it',
       },
       'Regression-tested answer quality with a standalone eval package — a hand-curated 35-case set, scored per answer by an LLM judge and compared across runs',
     ],
