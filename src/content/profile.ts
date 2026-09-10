@@ -64,11 +64,11 @@ export const profile = {
       bullets: [
         {
           ai: 'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
-          swe: 'Cut root-cause analysis on integration builds from 6 hours to 40 minutes with an LLM agent in the CI pipeline, deployed department-wide and live since July 2025.',
+          swe: 'Cut root-cause analysis on integration builds from ~6 hours to 40 minutes with an LLM agent triggered by the team’s existing CI, deployed department-wide and live since July 2025.',
         },
         {
           ai: 'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
-          swe: 'Built an automated reviewer for the ADAS team’s requirement documents, 86% precision against 400+ human-annotated cases, each finding a verbatim span applied as a deterministic patch.',
+          swe: 'Delivered an automated reviewer for the ADAS team’s requirement documents, 86% precision against 400+ human-annotated cases, each finding a verbatim span applied as a deterministic patch.',
         },
         {
           ai: 'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
@@ -87,7 +87,7 @@ export const profile = {
       bullets: [
         {
           ai: 'Deployed vulnerability-detection models on GCP with PyTorch, tuning hyper-parameters for a 19% relative F1 gain and debiasing against identifier names with variable obfuscation.',
-          swe: 'Built the config-driven pipeline behind a vulnerability-detection study, stripping identifier names and rebalancing a rare positive class for a four-backbone sweep.',
+          swe: 'Wrote the config-driven pipeline behind a vulnerability-detection study, stripping identifier names and rebalancing a rare positive class for a four-backbone sweep.',
         },
       ],
     },
@@ -125,15 +125,15 @@ export const profile = {
   // Named vendors and libraries belong here, stated as competencies — not inside a work bullet.
   skills: {
     // Tools only — a capability stated as a skill ("Multi-Agent Orchestration") is a bullet's job.
-    'AI & LLM': ['Azure OpenAI', 'LangChain', 'MCP', 'BM25', 'ChromaDB', 'Ollama', 'Whisper', 'PyTorch'],
+    'AI & LLM': ['Azure OpenAI', 'LangChain', 'MCP', 'BM25', 'ChromaDB', 'Ollama', 'Whisper', 'PyTorch', 'Claude Code'],
     // A language goes here only if the sheet backs it — that is what makes this list read as
     // depth rather than breadth.
     Languages: ['Python', 'TypeScript', 'JavaScript', 'C++', 'CUDA', 'SQL'],
     // `SQL` sits in `Languages` and `PostgreSQL` here; neither may be dropped as a duplicate of
     // the other, because a keyword filter matches tokens and a screen for one does not hit it.
-    'Backend & Web': ['FastAPI', 'React', 'Next.js', 'PostgreSQL', 'Redis', 'MongoDB', 'Server-Sent Events (SSE)'],
+    'Backend & Web': ['FastAPI', 'React', 'Next.js', 'PostgreSQL', 'Redis', 'MongoDB', 'REST', 'Server-Sent Events (SSE)'],
     // `Linux` is table stakes and stays last — present for a keyword scan, never advertised.
-    'Cloud & Ops': ['Azure', 'AWS', 'Docker', 'CI/CD', 'Jenkins', 'Ansible', 'Linux'],
+    'Cloud & Ops': ['Azure', 'AWS', 'Docker', 'CI/CD', 'GitHub Actions', 'Jenkins', 'Ansible', 'Linux'],
   } as Record<string, readonly string[]>,
 
   // A lane holds only what it changes. The AI sheet is the *absence* of an entry here — `role`,

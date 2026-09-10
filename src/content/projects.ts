@@ -43,7 +43,7 @@ export const projects: Project[] = [
     cv: [
       {
         ai: 'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
-        swe: 'Built a self-hosted, model-agnostic RAG system across 200+ hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
+        swe: 'Built a self-hosted, model-agnostic Agentic-RAG system in FastAPI across 200+ hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
       },
       {
         ai: '',
@@ -99,7 +99,7 @@ export const projects: Project[] = [
     cv: [
       {
         ai: 'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
-        swe: 'Replaced up-front planning docs with an issue-scoped agent workflow: median lead time 21 → 12 hours, in-branch fixes down two-thirds; self-measured across 223 merged PRs',
+        swe: 'Replaced up-front planning docs with an issue-scoped agent workflow installable across three coding agents; gated every PR on a blackbox verifier instead of letting the agent review its own code',
       },
     ],
     tagline: 'Stop re-teaching your agent your standards every session — install the contract once, get the same discipline everywhere.',
