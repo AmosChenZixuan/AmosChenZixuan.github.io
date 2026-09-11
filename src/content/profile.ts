@@ -63,11 +63,11 @@ export const profile = {
       loc: 'Gothenburg, Sweden',
       bullets: [
         {
-          ai: 'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM agent for vehicle test troubleshooting, adopted department-wide.',
-          swe: 'Cut root-cause analysis on integration builds from ~6 hours to 40 minutes with an LLM agent triggered by the team’s existing CI, deployed department-wide and live since July 2025.',
+          ai: 'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM workflow for vehicle test troubleshooting, adopted department-wide.',
+          swe: 'Cut root-cause analysis on integration builds from ~6 hours to 40 minutes with an LLM workflow triggered by the team’s existing CI, deployed department-wide.',
         },
         {
-          ai: 'Built an LLM multi-agent reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
+          ai: 'Built an agentic LLM reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
           swe: 'Delivered an automated reviewer for the ADAS team’s requirement documents, 86% precision against 400+ human-annotated cases, each finding a verbatim span applied as a deterministic patch.',
         },
         {
@@ -133,7 +133,7 @@ export const profile = {
     // the other, because a keyword filter matches tokens and a screen for one does not hit it.
     'Backend & Web': ['FastAPI', 'React', 'Next.js', 'PostgreSQL', 'Redis', 'MongoDB', 'REST', 'Server-Sent Events (SSE)'],
     // `Linux` is table stakes and stays last — present for a keyword scan, never advertised.
-    'Cloud & Ops': ['Azure', 'AWS', 'Docker', 'CI/CD', 'GitHub Actions', 'Jenkins', 'Ansible', 'Linux'],
+    'Cloud & Ops': ['Azure', 'AWS', 'Docker', 'Azure Container Apps', 'CI/CD', 'GitHub Actions', 'Jenkins', 'Ansible', 'Linux'],
   } as Record<string, readonly string[]>,
 
   // A lane holds only what it changes. The AI sheet is the *absence* of an entry here — `role`,
