@@ -162,35 +162,49 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'logsum',
+    slug: 'logelite',
     idx: '04',
-    title: 'LogSum',
+    title: 'LogElite',
     cat: '2024 · Log Analysis · Pipelines',
-    card: 'Turns a multi-gigabyte vehicle log into a one-page incident report. Deterministic core, bounded memory — the LLM is optional.',
-    tagline: 'A capture far too large for any context window, funnelled into an evidence pack small enough to reason about — then written up as an incident story an engineer can act on.',
-    chips: ['Python', 'DLT', 'FastAPI', 'LLM'],
+    card: 'Root cause analysis on failed vehicle test builds, from six hours to forty minutes. Compress the log with fixed rules, compare it against the builds that passed, and let the model explain what changed.',
+    tagline: 'Six hours to find out why a test build failed. The fix was not a bigger model. It was giving the model something it could actually read.',
+    chips: ['Python', 'FastAPI', 'LangChain', 'MongoDB', 'Azure OpenAI'],
     language: 'Python',
     cardVariant: 'cyan',
     span: 's2',
-    mark: '/projects/logsum/mark.svg',
+    mark: '/projects/logelite/mark.svg',
     sections: [
       {
-        kicker: 'THE PROBLEM',
-        title: 'Nobody reads a multi-gigabyte log',
+        kicker: 'THE WRONG PROBLEM',
+        title: 'I treated it like a search problem',
         paras: [
-          'When a test vehicle misbehaves, someone gets a capture measured in gigabytes and a question: what happened? No context window holds it, shipping raw logs to a cloud model is slow, expensive, and leaks things that shouldn’t leave the machine — and the capture is probably damaged anyway, because that’s what a yanked USB stick does.',
+          'A software build gives you one giant log file, around four million lines, and one question: what broke? Troubleshooting took an average engineer six hours, if lucky. Sometimes days.',
+          'My first read was wrong. I treated it like any other long document — too big to read, so search it or summarize it. Neither works here, because the answer is not on the surface.',
+          'Nothing in the log connects the steps of one action, so a single request arrives as scattered pieces that never mention each other. Timestamps come from different machines that do not agree, and they reset whenever part of the car restarts, so the order you read is not the order things happened. Severity labels are decided by whoever wrote each component, so an error in one place is routine noise and an info in another place is a component that stopped. And many failures are something that should have happened and did not. You cannot search for a line that is not there.',
         ],
       },
       {
-        kicker: 'THE SHAPE',
-        title: 'A deterministic funnel with an LLM on top',
+        kicker: 'THE OBVIOUS BUILD',
+        title: 'Map-reduce was the standard, but not the fix',
         paras: [
-          'The load-bearing decision is that the model does as little as possible. Every stage before it is deterministic and streams in bounded memory, reducing the capture to a small evidence pack; only the closing narrative is generated. That ordering is what makes the output reproducible, cheap, and safe to run on a machine the data cannot leave.',
-          'It also means the pipeline degrades rather than fails. With no model available the report still renders, minus the prose — a diagnostic tool that stops working when an API is down is not a diagnostic tool.',
+          'In 2023, everyone was building the same thing: cut the log into chunks, summarize each chunk, then summarize the summaries. I built that first, too.',
+          'It does not fit this problem. Four million lines is far past any context window available then, so most of the file is thrown away before the model ever sees it. And summarizing chunk by chunk costs real money on every run, in a pipeline that fails many times a day.',
+          'So the direction changed. Not to wait for a larger model, but to provide better input for it. The model was good at reasoning over a small piece of structured evidence, and bad at scanning four million lines to find that piece. So I moved the work to the front: deterministic steps that compress the log into structural units, each one small enough for the model to reason about properly. The model still writes the answer. It just stops doing the part it is bad at.',
+          'One side effect matters later. Deterministic steps are testable — same log in, same units out, every time. That let me build a regression set out of real past failures, with ground truth being the lines the engineer actually used to find the bug.',
+        ],
+      },
+      {
+        kicker: 'WHAT THE TESTS SHOWED',
+        title: 'A fault does not announce itself',
+        paras: [
+          'Version 0 shipped with compression and LLMs, but the regression set said it was not good enough. The units were smaller and cleaner, but the lines that mattered often were not in them.',
+          'So I went and observed how engineers actually debug this. I noticed that nobody reads the failing log top to bottom. They start by filtering and narrowing the scope, which is what we already offered. Then they open a build that passed, put it next to the failing one, and look for the difference. That was the part I had missed. A fault rarely looks wrong on its own. It looks wrong next to normal.',
+          'So the system got a baseline. Every build that passes on a branch adds to a picture of what that branch normally prints, and a failed build is compared against that picture. Three kinds of difference come out: what is new, what is missing, and what changed in volume. The missing one is why this works. No search will ever return a line that is not there. A comparison will.',
+          'The new version ended up reaching more engineers beyond my original team, then was adopted by a sister department. Six hours became forty minutes, as reported by actual users.',
         ],
       },
     ],
-    pull: '“Errors are the payload; verbose noise is not.”',
+    pull: '“The answer is not on the surface.”',
   },
   {
     slug: 'pyflexim',
@@ -248,5 +262,5 @@ export const hrHelpdesk: Pick<Project, 'slug' | 'title' | 'cvWhen' | 'chips' | '
 
 // The three the landing showroom puts up front, in order. /projects lists all five,
 // newest first — this is a curation, not the top of that list.
-export const featured = ['bibilab', 'awc', 'logsum']
+export const featured = ['bibilab', 'awc', 'logelite']
   .map(slug => projects.find(p => p.slug === slug)!)
