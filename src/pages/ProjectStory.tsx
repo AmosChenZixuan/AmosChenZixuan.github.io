@@ -59,12 +59,13 @@ export default function ProjectStory() {
                 <Kicker>{s.kicker}</Kicker>
                 <h2>{s.title}</h2>
                 {s.paras.map(t => <p key={t.slice(0, 24)}>{t}</p>)}
-                {s.shot && (
-                  <figure className="shot shot--inline">
-                    <img src={s.shot.src} alt={s.shot.cap} loading="lazy" />
-                    <figcaption>{s.shot.cap}</figcaption>
+                {/* A section may carry one shot, or a sequence of them read in order. */}
+                {s.shot && [s.shot].flat().map(sh => (
+                  <figure className="shot shot--inline" key={sh.src}>
+                    <img src={sh.src} alt={sh.cap} loading="lazy" />
+                    <figcaption>{sh.cap}</figcaption>
                   </figure>
-                )}
+                ))}
               </section>
               {si === 0 && p.pull && <div className="pull">{p.pull}</div>}
             </Fragment>

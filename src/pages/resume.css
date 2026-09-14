@@ -36,7 +36,6 @@
   line-height: .86; margin: 0; }
 .r-head .name .alias { color: var(--accent-deep); }
 .r-head .role { font-weight: 900; font-style: italic; font-size: var(--t-lg); margin: var(--s-3) 0 0; }
-.r-head .summary { color: var(--on-paper-dim); margin: var(--s-3) 0 0; max-width: 48ch; font-size: var(--t-sm); }
 /* `anywhere`, not `break-word`: on a phone the value column is ~200px and the LinkedIn URL is
    almost exactly that wide, so it has to be able to break mid-token or it overflows the sheet. */
 .r-contact { font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: .04em; display: grid; gap: 7px;
@@ -108,6 +107,9 @@
 .job li::before { content: "▪"; position: absolute; left: 0; color: var(--on-paper-dim); }
 /* Dim like .job .when — same job, metadata trailing a line of prose. */
 .job li .stack { color: var(--on-paper-dim); }
+/* 700, not the 900 the titles use: a bullet's emphasis has to read as weight inside a line of
+   prose, not as a second heading competing with the job title above it. */
+.job li strong { font-weight: 700; }
 
 /* aside blocks */
 .skill-group { margin-bottom: var(--s-4); }
@@ -168,18 +170,19 @@
   .job, .skill-group, .r-sec.edu .item { break-inside: avoid; }
   .r-sec > h2 { break-after: avoid; }
 
-  /* One column, in résumé order. `display: contents` dissolves main and aside so the five
-     sections become siblings of one flex column and `order` can place them — the screen keeps
-     its two-column grid and no markup moves. Two columns fit more content per sheet, but they
-     paginate unpredictably (a grid row taller than a page relocates whole blocks) and are the
-     classic ATS reading-order hazard. Experience leads: it holds the employers and every
-     measured outcome, and it is the block a reader gives their first seconds to. */
-  .r-cols { display: flex; flex-direction: column; gap: 0; }
+  /* One column, in résumé order. Two columns fit more content per sheet, but they paginate
+     unpredictably (a grid row taller than a page relocates whole blocks) and are the classic
+     ATS reading-order hazard. Experience leads: it holds the employers and every measured
+     outcome, and it is the block a reader gives their first seconds to.
+
+     Nothing here may be a flex container. A flex box does not fragment across pages in Chrome,
+     so once the sheet outgrows one page it cannot split: the whole column lands on page two and
+     page one holds nothing but the header. That is what `order` used to cost, and it is why the
+     print order now lives in the markup instead — the aside is written Current, Education,
+     Skills, which is the order paper wants once Current is hidden. `display: contents` dissolves
+     both wrappers, every section becomes a block sibling, and block flow fragments normally. */
+  .r-cols { display: block; }
   .r-cols > main, .r-cols > aside { display: contents; }
-  /* `r-` prefixed: page stylesheets are global here, and a bare `.proj` is the home page's
-     project card — it painted this whole section black. */
-  .r-sec.r-exp { order: 1 } .r-sec.r-proj { order: 2 }
-  .r-sec.edu { order: 3 } .r-sec.r-skills { order: 4 }
   /* Current is dropped on paper, not reordered: an entry with no employer, whose one bullet
      restates the projects below it, is the shape a résumé parser misfiles. Screen keeps the
      block — the About timeline shares its copy. The projects carry their own dates, so the
@@ -195,7 +198,6 @@
   .r-head { gap: 20px; }
   .r-head .name { font-size: 27px; line-height: 1.02; }
   .r-head .role { font-size: 13.5px; line-height: 1.2; margin-top: 4px; }
-  .r-head .summary { font-size: 11px; line-height: 1.3; margin-top: 4px; max-width: none; }
   .r-contact { font-size: 10px; gap: 1px; }
   .rule { margin: 7px 0; }
   /* Spacing is set against the page, not by taste. A US Letter sheet at these margins holds

@@ -28,7 +28,7 @@ export type Project = {
   short?: string         // lockup name when the full title is too long for the card
   hero?: Shot            // story-page hero shot
   stats?: { num: string; cap: string }[]
-  sections: { kicker: string; title: string; paras: string[]; shot?: Shot }[]
+  sections: { kicker: string; title: string; paras: string[]; shot?: Shot | Shot[] }[]
   pull?: string
 }
 
@@ -39,17 +39,11 @@ export const projects: Project[] = [
     title: 'BibiLab',
     cat: '2026 · AI · Local-first · Python',
     card: 'A local, private NotebookLM for video — turn videos & playlists into a searchable, citation-backed AI notebook. No cloud.',
-    cvWhen: 'FEB 2026 — PRESENT',
+    cvWhen: 'March 2026 — PRESENT',
     cv: [
-      {
-        ai: 'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
-        swe: 'Built a self-hosted, model-agnostic Agentic-RAG system in FastAPI across 200+ hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
-      },
-      {
-        ai: '',
-        swe: 'Dropped time-to-first-token from ~6s to sub-second by starting generation before retrieval rather than blocking on it',
-      },
-      'Regression-tested answer quality with a standalone eval package — a hand-curated 35-case set, scored per answer by an LLM judge and compared across runs',
+      'Built a **self-hosted, agentic RAG platform** that turns multilingual video sources into a searchable vector knowledge base, powering both grounded chat and automated artifact generation',
+      'Implemented SSE streaming for long-running agent workflows, exposing tool execution and intermediate results through a **live tool ledger**, and started generation ahead of retrieval to drop time-to-first-token to **sub-second**',
+      'Developed a standalone RAG evaluation framework with a **35-case curated golden set** and **LLM-as-a-judge** scoring, for reproducible benchmarking and regression testing',
     ],
     tagline: 'Turn a playlist into a private notebook, then ask questions across every transcript — answers cite their sources, and citations seek the video.',
     chips: ['Python', 'FastAPI', 'React', 'SQLite', 'ChromaDB', 'RAG'],
@@ -95,13 +89,6 @@ export const projects: Project[] = [
     title: 'Agentic Working Contract',
     cat: '2026 · AI Agents · Tooling',
     card: 'Personal skills collection for AI coding agents — /shipit, /razor, /grill-me and friends. Built for Claude Code, works cross-platform.',
-    cvWhen: 'MAR 2026 — PRESENT',
-    cv: [
-      {
-        ai: 'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
-        swe: 'Replaced up-front planning docs with an issue-scoped agent workflow installable across three coding agents; gated every PR on a blackbox verifier instead of letting the agent review its own code',
-      },
-    ],
     tagline: 'Stop re-teaching your agent your standards every session — install the contract once, get the same discipline everywhere.',
     chips: ['Claude Code', 'Agent Skills', 'Markdown', 'OpenCode', 'Codex'],
     github: 'https://github.com/AmosChenZixuan/Agentic-working-contract',
@@ -130,36 +117,50 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'redline',
+    slug: 'reqmaster',
     idx: '03',
-    title: 'Redline',
-    cat: '2025 · Requirements · ADAS',
-    card: 'Agent-driven requirements quality portal — AI peer-review for ADAS functional requirements, with tracked revisions.',
-    tagline: 'AI peer-review for safety requirements: the routine read handled by an agent, the judgement calls left to a human, every revision tracked.',
-    chips: ['LLM Agents', 'Node', 'React', 'ISO 26262'],
-    language: 'TypeScript',
+    title: 'ReqMaster',
+    cat: '2025 · Requirements · Multi-agent',
+    card: 'AI peer-review for functional requirements.',
+    tagline: 'A model that rewrites your safety requirement is no help. One that points at the exact words and waits for you to agree is.',
+    chips: ['Python', 'FastAPI', 'LangGraph', 'React', 'Azure OpenAI', 'MCP', 'Server-Sent Events'],
+    language: 'Python + TypeScript',
     cardVariant: 'magenta',
     span: 's2',
-    hero: { src: '/projects/redline/flow.gif', cap: 'Load → review → apply → publish, end to end' },
+    hero: { src: '/projects/reqmaster/flow.gif', cap: 'Load → review → apply → publish, end to end' },
     sections: [
       {
         kicker: 'THE PROBLEM',
         title: 'Peer review that scales with headcount',
         paras: [
-          'Every ADAS functional requirement gets hand-checked by a peer: writing conventions, conflicts and duplicates against the requirement base, SMART quality, ambiguity. It’s slow, it’s inconsistent between reviewers, and the only way to do more of it is to hire more reviewers.',
-          'Redline replaces the routine part of that read with an agentic workflow — and keeps the human on the judgment calls.',
+          'Every functional requirement is hand-checked by another engineer: writing conventions, missing conditions, conflicts with requirements someone else wrote a year ago, and whether the thing can be objectively tested at all. It is slow, two reviewers rarely come back with the same list, and the only way to review more is to hire more people.',
+          'The target was to cut that review cycle in half. The obvious way to get there is to hand the requirement to a model and ask for a better one. And that is the first thing everyone builds.',
         ],
       },
       {
-        kicker: 'THE SHAPE',
-        title: 'The agent proposes, the human decides',
+        kicker: 'THE WRONG SHAPE',
+        title: 'A better requirement nobody can sign',
         paras: [
-          'The design question worth arguing about is where the human sits. An agent that rewrites requirements on its own is unusable in a regulated process; one that only leaves comments gets ignored. Redline sits in between — it returns categorized findings, the reviewer accepts the ones they agree with, and publishing mints a tracked revision instead of overwriting the source.',
-          'Everything else follows from that choice. Findings have to be specific enough to accept one at a time, and the audit trail has to stay intact for the cases where the agent is simply wrong.',
+          'It comes back cleaner. It is also unusable. The reviewer is holding two blocks of text with no idea what moved, or which of the edits they are agreeing to. Someone signs their name under this wording, and "the model wrote it and it reads better" is not an argument a safety process accepts. Give a model the whole requirement and it will quietly fix things nobody asked it to touch.',
+          'So the model stopped writing requirements and started writing findings — one problem at a time, each naming the exact words it is about. The engineer decides which ones are real, and the application makes the edit, not the model. The text under review is frozen the moment the review starts, and publishing supersedes it instead of overwriting it, so whatever gets signed can be traced back to what was read. The full rewrite is still there as its own command, for requirements past patching. It just is not the review.',
         ],
-        shot: { src: '/projects/redline/review-findings.png', cap: 'Categorized findings — accept the ones you agree with, leave the rest' },
+        shot: [
+          { src: '/projects/reqmaster/review-findings.png', cap: 'Review — each finding quotes the words it is about, and is accepted on its own' },
+          { src: '/projects/reqmaster/rewrite.png', cap: 'Rewrite — for a requirement past patching, the whole thing comes back as a draft, unpublished' },
+          { src: '/projects/reqmaster/published.png', cap: 'Publish — the new revision supersedes the one that was reviewed. Nothing is overwritten' },
+        ],
+      },
+      {
+        kicker: 'WHAT THE ANNOTATED SET SHOWED',
+        title: 'The model quoted lines that were not there',
+        paras: [
+          'Every requirement in the evaluation set carried a human judgement of what was wrong with it, topped up with synthetic ones for the faults that are rare but matter. It caught the failure that nearly killed the idea. Findings kept pointing at text that did not exist — the problem described well, the fix sensible, and the quoted line a paraphrase the model had written itself. A reviewer only has to be burned by that twice before they stop opening the panel.',
+          'So a finding has to quote the requirement word for word, and one whose quote is not in the text never reaches a human. Version 0 asked the model for character positions instead. It hands those over with total confidence and they are usually wrong. Copying a span of text is the one thing it is reliably good at — ask for what the model does well, and check it yourself.',
+          'The other decision the set settled was to stop asking one agent for everything. I split the review into six quality dimensions, and an orchestrator plans the pass and assigns an agent to each one.',
+        ],
       },
     ],
+    pull: '“A finding that cannot point at the line it is about is just an opinion.”',
   },
   {
     slug: 'logelite',
@@ -253,10 +254,11 @@ export const projects: Project[] = [
 export const hrHelpdesk: Pick<Project, 'slug' | 'title' | 'cvWhen' | 'chips' | 'cv' | 'github'> = {
   slug: 'hrdesk',
   title: 'HR Helpdesk',
-  cvWhen: 'FEB 2026',
+  cvWhen: 'FEB 2026 - March 2026',
   chips: ['Python', 'FastAPI', 'RAG', 'WeCom'],
   cv: [
-    'Shipped a policy/onboarding Q&A bot into company chat at a 100-person business, in production since March; built in an abstention path that hands 25% of queries to a named HR contact',
+    'Shipped a policy-grounded RAG backend for small-business employee handbooks and onboarding materials, **citing the source passages** for every answer',
+    'Implemented **evidence-gated refusal**, with 25% of production queries routed to a templated inquiry path',
   ],
 }
 

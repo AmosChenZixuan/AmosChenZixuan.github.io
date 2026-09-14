@@ -34,3 +34,7 @@ const one = (b: Bullet, lane: Lane | '') =>
 // chips ride the last project bullet, and that has to mean the last one on the page.
 export const bulletTexts = (bs: readonly Bullet[], lane: Lane | '' = '') =>
   bs.map(b => one(b, lane)).filter(Boolean)
+
+// `**…**` marks the phrase a bullet is scanned for. Only the résumé renders it bold; every other
+// surface reads the same string as prose and drops the markers through here.
+export const plain = (s: string) => s.replace(/\*\*/g, '')

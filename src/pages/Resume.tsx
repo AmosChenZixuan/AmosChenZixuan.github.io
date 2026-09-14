@@ -13,9 +13,14 @@ import './resume.css'
 // `in/handle` is the form a CV uses anyway. The label next to it already says which site.
 const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/^linkedin\.com\//, '').replace(/\/$/, '')
 
+// `**…**` → bold, so a six-second scan lands on the claim rather than on nothing. Split, not a
+// regex replace: odd segments are the marked ones, and building nodes keeps the text out of
+// `dangerouslySetInnerHTML`.
+const em = (s: string) => s.split('**').map((t, i) => (i % 2 ? <strong key={i}>{t}</strong> : t))
+
 // Picked by slug, not by array index: the CV lists personal work only, and `projects` is
 // ordered for the showroom, so an index here silently follows whatever it is reordered to.
-const cvProjects = [...['bibilab', 'awc'].map(s => projects.find(p => p.slug === s)!), hrHelpdesk]
+const cvProjects = [...['bibilab'].map(s => projects.find(p => p.slug === s)!), hrHelpdesk]
 
 // Space Mono draws a dash on the lowercase mid-line while its digits run the full cap height,
 // so between two all-caps dates the dash sits about 0.09em low. Nudging it needs it in an
@@ -52,7 +57,6 @@ export default function Resume() {
   const current = LANE_KEYS.find(k => k === params.get('lane')) ?? LANE_KEYS[0]
   const lane = profile.lanes[current]
   const role = lane?.role ?? profile.role
-  const summary = lane?.summary ?? profile.resumeSummary
   const skillGroups = (lane?.skills ?? Object.keys(profile.skills)).map(g => [g, profile.skills[g]] as const)
 
   // Chrome names a printed PDF after the document title, which is otherwise one static string
@@ -92,7 +96,6 @@ export default function Resume() {
                     name, which it is not. */}
                 <h1 className="name">{profile.name}<br /><span className="alias">“{profile.alias}”</span></h1>
                 <p className="role">{role}</p>
-                <p className="summary">{summary}</p>
               </div>
               <div className="r-contact">
                 <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
@@ -116,7 +119,7 @@ export default function Resume() {
               <main>
                 <section className="r-sec r-exp">
                   <h2><span className="tick">{'//'}</span> Experience</h2>
-                  {profile.work.map(w => {
+                  {profile.work.filter(w => w.onResume !== false).map(w => {
                     const [title, co] = w.title.split(' · ')
                     return (
                       <div className="job" key={w.title}>
@@ -129,7 +132,7 @@ export default function Resume() {
                         <div className="when"><span>{w.loc}</span>{GAP}<span>{dated(w.when)}</span></div>
                         <ul>
                           {bulletTexts(w.bullets, current).map(t => (
-                            <li key={t.slice(0, 24)}>{t}</li>
+                            <li key={t.slice(0, 24)}>{em(t)}</li>
                           ))}
                         </ul>
                       </div>
@@ -140,13 +143,7 @@ export default function Resume() {
                 {/* The section classes are print's running order — see the `order` rules in
                     resume.css. On screen they do nothing. */}
                 <section className="r-sec r-proj">
-                  {/* A plain anchor, not a router Link: `to` renders a relative href, and Chrome
-                      resolves that against whatever host the sheet was printed from — a PDF made
-                      on a local preview carries a localhost link forever. Costs a full page load
-                      on screen, which the nav already offers a cheaper route to. */}
-                  <h2><span className="tick">{'//'}</span> Selected Projects
-                    <a className="more" href={`${profile.siteUrl}/projects`}>{short(profile.siteUrl)}/projects</a>
-                  </h2>
+                  <h2><span className="tick">{'//'}</span> Selected Projects</h2>
                   {/* An entry each, not one list of sentences: a project a reader has to find
                       mid-line is a project they skip. */}
                   {cvProjects.map(p => (
@@ -167,7 +164,7 @@ export default function Resume() {
                         {bulletTexts(p.cv!, current).map((t, i, all) => {
                           return (
                             <li key={t.slice(0, 24)}>
-                              {t}.{i === all.length - 1 && <> <span className="stack">{p.chips.join(', ')}</span></>}
+                              {em(t)}.{i === all.length - 1 && <> <span className="stack">{p.chips.join(', ')}</span></>}
                             </li>
                           ) })}
                       </ul>
@@ -195,18 +192,6 @@ export default function Resume() {
                   </div>
                 </section>
 
-                <section className="r-sec r-skills">
-                  <h2><span className="tick">{'//'}</span> Skills</h2>
-                  {skillGroups.map(([group, items], gi) => (
-                    <div className="skill-group" key={group}>
-                      <div className="lbl">{group}</div>
-                      <div className="row">
-                        {items.map(s => <span key={s} className={gi === 0 ? 'chip chip--hi' : 'chip'}>{s}</span>)}
-                      </div>
-                    </div>
-                  ))}
-                </section>
-
                 <section className="r-sec edu">
                   <h2><span className="tick">{'//'}</span> Education</h2>
                   {profile.education.map(e => (
@@ -225,6 +210,18 @@ export default function Resume() {
                     </div>
                   ))}
                 </section>
+                <section className="r-sec r-skills">
+                  <h2><span className="tick">{'//'}</span> Skills</h2>
+                  {skillGroups.map(([group, items], gi) => (
+                    <div className="skill-group" key={group}>
+                      <div className="lbl">{group}</div>
+                      <div className="row">
+                        {items.map(s => <span key={s} className={gi === 0 ? 'chip chip--hi' : 'chip'}>{s}</span>)}
+                      </div>
+                    </div>
+                  ))}
+                </section>
+
 
               </aside>
             </div>
