@@ -116,7 +116,7 @@ export default function Resume() {
                 <div className="line"><span className="k">{k('LinkedIn')}</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
                 {/* The last employer on this sheet is in Sweden; without a city a US screener
                     files the whole CV as an overseas candidate. */}
-                <div className="line"><span className="k">{k('Location')}</span><span>{profile.location}</span></div>
+                <div className="line"><span className="k">{k('Location')}</span><span>{profile.location} · Relocatable</span></div>
               </div>
             </div>
 

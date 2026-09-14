@@ -11,7 +11,7 @@ export const profile = {
   role: 'AI Engineer — Generative AI & Agentic Systems',
   blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
   aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
-  location: 'Irvine, California',
+  location: 'Irvine, CA',
   timeZone: 'America/Los_Angeles',
   openTo: 'AI · Full-Stack · Forward-Deployed Engineer',
   // Placement (which corner, what rotation) is keyed by index in home.css — a seventh entry needs
