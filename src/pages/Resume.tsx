@@ -18,6 +18,13 @@ const short = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/
 // `dangerouslySetInnerHTML`.
 const em = (s: string) => s.split('**').map((t, i) => (i % 2 ? <strong key={i}>{t}</strong> : t))
 
+// Pads a label with real non-breaking spaces to a fixed width, so a PDF text extractor sees one
+// continuous painted line per contact row instead of a label and value as separate objects.
+// Non-breaking, not a plain space — HTML collapses a run of plain ones to one. 12 covers the
+// longest label, "Portfolio", plus the column's own gap.
+const K_WIDTH = 12
+const k = (label: string) => label + ' '.repeat(K_WIDTH - label.length)
+
 // Picked by slug, not by array index: the CV lists personal work only, and `projects` is
 // ordered for the showroom, so an index here silently follows whatever it is reordered to.
 const cvProjects = [...['bibilab'].map(s => projects.find(p => p.slug === s)!), hrHelpdesk]
@@ -98,18 +105,18 @@ export default function Resume() {
                 <p className="role">{role}</p>
               </div>
               <div className="r-contact">
-                <div className="line"><span className="k">Email</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
+                <div className="line"><span className="k">{k('Email')}</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div>
                 {/* `tel:` needs the number without its separators; the visible text keeps them. */}
-                <div className="line"><span className="k">Phone</span><a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`}>{profile.phone}</a></div>
+                <div className="line"><span className="k">{k('Phone')}</span><a href={`tel:${profile.phone.replace(/[^+\d]/g, '')}`}>{profile.phone}</a></div>
                 {/* Second, above the profile links: it is the one address that shows the work
                     rather than pointing at where the work is filed. `Portfolio`, not the domain's
                     own word — two rows reading `github` would take a beat to tell apart. */}
-                <div className="line"><span className="k">Portfolio</span><a href={profile.siteUrl} target="_blank" rel="noopener">{short(profile.siteUrl)}</a></div>
-                <div className="line"><span className="k">GitHub</span><a href={profile.github} target="_blank" rel="noopener">{short(profile.github)}</a></div>
-                <div className="line"><span className="k">LinkedIn</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
+                <div className="line"><span className="k">{k('Portfolio')}</span><a href={profile.siteUrl} target="_blank" rel="noopener">{short(profile.siteUrl)}</a></div>
+                <div className="line"><span className="k">{k('GitHub')}</span><a href={profile.github} target="_blank" rel="noopener">{short(profile.github)}</a></div>
+                <div className="line"><span className="k">{k('LinkedIn')}</span><a href={profile.linkedin} target="_blank" rel="noopener">{short(profile.linkedin)}</a></div>
                 {/* The last employer on this sheet is in Sweden; without a city a US screener
                     files the whole CV as an overseas candidate. */}
-                <div className="line"><span className="k">Location</span><span>{profile.location}</span></div>
+                <div className="line"><span className="k">{k('Location')}</span><span>{profile.location}</span></div>
               </div>
             </div>
 

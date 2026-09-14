@@ -43,7 +43,9 @@
 .r-contact .line { display: grid; grid-template-columns: 72px 1fr; gap: 8px; }
 /* Dim ink, not accent: a label must not outshout the address beside it, and yellow on this
    paper is unreadable regardless — see the note on `.tick` below. */
-.r-contact .k { color: var(--on-paper-dim); text-transform: uppercase; }
+/* nowrap: the container's `overflow-wrap: anywhere` (for long URLs on a phone) inherits here
+   too, which would otherwise wrap this label's padding onto a second line. */
+.r-contact .k { color: var(--on-paper-dim); text-transform: uppercase; white-space: nowrap; }
 .r-contact a { border-bottom: 1px solid var(--paper-edge); }
 /* A tab straddling the sheet's top-right border, half on the paper and half above it, the way
    one sticks out of a file. Rotated like the tape holding the portrait on `/about`.
