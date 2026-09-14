@@ -28,7 +28,7 @@ export type Project = {
   short?: string         // lockup name when the full title is too long for the card
   hero?: Shot            // story-page hero shot
   stats?: { num: string; cap: string }[]
-  sections: { kicker: string; title: string; paras: string[]; shot?: Shot }[]
+  sections: { kicker: string; title: string; paras: string[]; shot?: Shot | Shot[] }[]
   pull?: string
 }
 
@@ -39,17 +39,11 @@ export const projects: Project[] = [
     title: 'BibiLab',
     cat: '2026 · AI · Local-first · Python',
     card: 'A local, private NotebookLM for video — turn videos & playlists into a searchable, citation-backed AI notebook. No cloud.',
-    cvWhen: 'FEB 2026 — PRESENT',
+    cvWhen: 'March 2026 — PRESENT',
     cv: [
-      {
-        ai: 'Shipped a self-hosted RAG notebook over video: an agent plans its own retrieval as it answers, citing the source each claim came from, and generates study material from the same library',
-        swe: 'Built a self-hosted, model-agnostic Agentic-RAG system in FastAPI across 200+ hours of video, introduced query-adaptive retrieval depth in place of a fixed top-k, and traced every generated claim to a source timestamp',
-      },
-      {
-        ai: '',
-        swe: 'Dropped time-to-first-token from ~6s to sub-second by starting generation before retrieval rather than blocking on it',
-      },
-      'Regression-tested answer quality with a standalone eval package — a hand-curated 35-case set, scored per answer by an LLM judge and compared across runs',
+      'Built a **self-hosted, agentic RAG platform** that turns multilingual video sources into a searchable vector knowledge base, powering both grounded chat and automated artifact generation',
+      'Implemented SSE streaming for long-running agent workflows, exposing tool execution and intermediate results through a **live tool ledger**, and started generation ahead of retrieval to drop time-to-first-token to **sub-second**',
+      'Developed a standalone RAG evaluation framework with a **35-case curated golden set** and **LLM-as-a-judge** scoring, for reproducible benchmarking and regression testing',
     ],
     tagline: 'Turn a playlist into a private notebook, then ask questions across every transcript — answers cite their sources, and citations seek the video.',
     chips: ['Python', 'FastAPI', 'React', 'SQLite', 'ChromaDB', 'RAG'],
@@ -95,13 +89,6 @@ export const projects: Project[] = [
     title: 'Agentic Working Contract',
     cat: '2026 · AI Agents · Tooling',
     card: 'Personal skills collection for AI coding agents — /shipit, /razor, /grill-me and friends. Built for Claude Code, works cross-platform.',
-    cvWhen: 'MAR 2026 — PRESENT',
-    cv: [
-      {
-        ai: 'Packaged an issue-driven engineering workflow as agent skills that install into any coding agent: one tracked unit of work in, one review-ready PR out, review and merge left to a human',
-        swe: 'Replaced up-front planning docs with an issue-scoped agent workflow installable across three coding agents; gated every PR on a blackbox verifier instead of letting the agent review its own code',
-      },
-    ],
     tagline: 'Stop re-teaching your agent your standards every session — install the contract once, get the same discipline everywhere.',
     chips: ['Claude Code', 'Agent Skills', 'Markdown', 'OpenCode', 'Codex'],
     github: 'https://github.com/AmosChenZixuan/Agentic-working-contract',
@@ -130,67 +117,95 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'redline',
+    slug: 'reqmaster',
     idx: '03',
-    title: 'Redline',
-    cat: '2025 · Requirements · ADAS',
-    card: 'Agent-driven requirements quality portal — AI peer-review for ADAS functional requirements, with tracked revisions.',
-    tagline: 'AI peer-review for safety requirements: the routine read handled by an agent, the judgement calls left to a human, every revision tracked.',
-    chips: ['LLM Agents', 'Node', 'React', 'ISO 26262'],
-    language: 'TypeScript',
+    title: 'ReqMaster',
+    cat: '2025 · Requirements · Multi-agent',
+    card: 'AI peer-review for functional requirements.',
+    tagline: 'A model that rewrites your safety requirement is no help. One that points at the exact words and waits for you to agree is.',
+    chips: ['Python', 'FastAPI', 'LangGraph', 'React', 'Azure OpenAI', 'MCP', 'Server-Sent Events'],
+    language: 'Python + TypeScript',
     cardVariant: 'magenta',
     span: 's2',
-    hero: { src: '/projects/redline/flow.gif', cap: 'Load → review → apply → publish, end to end' },
+    hero: { src: '/projects/reqmaster/flow.gif', cap: 'Load → review → apply → publish, end to end' },
     sections: [
       {
         kicker: 'THE PROBLEM',
         title: 'Peer review that scales with headcount',
         paras: [
-          'Every ADAS functional requirement gets hand-checked by a peer: writing conventions, conflicts and duplicates against the requirement base, SMART quality, ambiguity. It’s slow, it’s inconsistent between reviewers, and the only way to do more of it is to hire more reviewers.',
-          'Redline replaces the routine part of that read with an agentic workflow — and keeps the human on the judgment calls.',
+          'Every functional requirement is hand-checked by another engineer: writing conventions, missing conditions, conflicts with requirements someone else wrote a year ago, and whether the thing can be objectively tested at all. It is slow, two reviewers rarely come back with the same list, and the only way to review more is to hire more people.',
+          'The target was to cut that review cycle in half. The obvious way to get there is to hand the requirement to a model and ask for a better one. And that is the first thing everyone builds.',
         ],
       },
       {
-        kicker: 'THE SHAPE',
-        title: 'The agent proposes, the human decides',
+        kicker: 'THE WRONG SHAPE',
+        title: 'A better requirement nobody can sign',
         paras: [
-          'The design question worth arguing about is where the human sits. An agent that rewrites requirements on its own is unusable in a regulated process; one that only leaves comments gets ignored. Redline sits in between — it returns categorized findings, the reviewer accepts the ones they agree with, and publishing mints a tracked revision instead of overwriting the source.',
-          'Everything else follows from that choice. Findings have to be specific enough to accept one at a time, and the audit trail has to stay intact for the cases where the agent is simply wrong.',
+          'It comes back cleaner. It is also unusable. The reviewer is holding two blocks of text with no idea what moved, or which of the edits they are agreeing to. Someone signs their name under this wording, and "the model wrote it and it reads better" is not an argument a safety process accepts. Give a model the whole requirement and it will quietly fix things nobody asked it to touch.',
+          'So the model stopped writing requirements and started writing findings — one problem at a time, each naming the exact words it is about. The engineer decides which ones are real, and the application makes the edit, not the model. The text under review is frozen the moment the review starts, and publishing supersedes it instead of overwriting it, so whatever gets signed can be traced back to what was read. The full rewrite is still there as its own command, for requirements past patching. It just is not the review.',
         ],
-        shot: { src: '/projects/redline/review-findings.png', cap: 'Categorized findings — accept the ones you agree with, leave the rest' },
+        shot: [
+          { src: '/projects/reqmaster/review-findings.png', cap: 'Review — each finding quotes the words it is about, and is accepted on its own' },
+          { src: '/projects/reqmaster/rewrite.png', cap: 'Rewrite — for a requirement past patching, the whole thing comes back as a draft, unpublished' },
+          { src: '/projects/reqmaster/published.png', cap: 'Publish — the new revision supersedes the one that was reviewed. Nothing is overwritten' },
+        ],
+      },
+      {
+        kicker: 'WHAT THE ANNOTATED SET SHOWED',
+        title: 'The model quoted lines that were not there',
+        paras: [
+          'Every requirement in the evaluation set carried a human judgement of what was wrong with it, topped up with synthetic ones for the faults that are rare but matter. It caught the failure that nearly killed the idea. Findings kept pointing at text that did not exist — the problem described well, the fix sensible, and the quoted line a paraphrase the model had written itself. A reviewer only has to be burned by that twice before they stop opening the panel.',
+          'So a finding has to quote the requirement word for word, and one whose quote is not in the text never reaches a human. Version 0 asked the model for character positions instead. It hands those over with total confidence and they are usually wrong. Copying a span of text is the one thing it is reliably good at — ask for what the model does well, and check it yourself.',
+          'The other decision the set settled was to stop asking one agent for everything. I split the review into six quality dimensions, and an orchestrator plans the pass and assigns an agent to each one.',
+        ],
       },
     ],
+    pull: '“A finding that cannot point at the line it is about is just an opinion.”',
   },
   {
-    slug: 'logsum',
+    slug: 'logelite',
     idx: '04',
-    title: 'LogSum',
+    title: 'LogElite',
     cat: '2024 · Log Analysis · Pipelines',
-    card: 'Turns a multi-gigabyte vehicle log into a one-page incident report. Deterministic core, bounded memory — the LLM is optional.',
-    tagline: 'A capture far too large for any context window, funnelled into an evidence pack small enough to reason about — then written up as an incident story an engineer can act on.',
-    chips: ['Python', 'DLT', 'FastAPI', 'LLM'],
+    card: 'Root cause analysis on failed vehicle test builds, from six hours to forty minutes. Compress the log with fixed rules, compare it against the builds that passed, and let the model explain what changed.',
+    tagline: 'Six hours to find out why a test build failed. The fix was not a bigger model. It was giving the model something it could actually read.',
+    chips: ['Python', 'FastAPI', 'LangChain', 'MongoDB', 'Azure OpenAI'],
     language: 'Python',
     cardVariant: 'cyan',
     span: 's2',
-    mark: '/projects/logsum/mark.svg',
+    mark: '/projects/logelite/mark.svg',
     sections: [
       {
-        kicker: 'THE PROBLEM',
-        title: 'Nobody reads a multi-gigabyte log',
+        kicker: 'THE WRONG PROBLEM',
+        title: 'I treated it like a search problem',
         paras: [
-          'When a test vehicle misbehaves, someone gets a capture measured in gigabytes and a question: what happened? No context window holds it, shipping raw logs to a cloud model is slow, expensive, and leaks things that shouldn’t leave the machine — and the capture is probably damaged anyway, because that’s what a yanked USB stick does.',
+          'A software build gives you one giant log file, around four million lines, and one question: what broke? Troubleshooting took an average engineer six hours, if lucky. Sometimes days.',
+          'My first read was wrong. I treated it like any other long document — too big to read, so search it or summarize it. Neither works here, because the answer is not on the surface.',
+          'Nothing in the log connects the steps of one action, so a single request arrives as scattered pieces that never mention each other. Timestamps come from different machines that do not agree, and they reset whenever part of the car restarts, so the order you read is not the order things happened. Severity labels are decided by whoever wrote each component, so an error in one place is routine noise and an info in another place is a component that stopped. And many failures are something that should have happened and did not. You cannot search for a line that is not there.',
         ],
       },
       {
-        kicker: 'THE SHAPE',
-        title: 'A deterministic funnel with an LLM on top',
+        kicker: 'THE OBVIOUS BUILD',
+        title: 'Map-reduce was the standard, but not the fix',
         paras: [
-          'The load-bearing decision is that the model does as little as possible. Every stage before it is deterministic and streams in bounded memory, reducing the capture to a small evidence pack; only the closing narrative is generated. That ordering is what makes the output reproducible, cheap, and safe to run on a machine the data cannot leave.',
-          'It also means the pipeline degrades rather than fails. With no model available the report still renders, minus the prose — a diagnostic tool that stops working when an API is down is not a diagnostic tool.',
+          'In 2023, everyone was building the same thing: cut the log into chunks, summarize each chunk, then summarize the summaries. I built that first, too.',
+          'It does not fit this problem. Four million lines is far past any context window available then, so most of the file is thrown away before the model ever sees it. And summarizing chunk by chunk costs real money on every run, in a pipeline that fails many times a day.',
+          'So the direction changed. Not to wait for a larger model, but to provide better input for it. The model was good at reasoning over a small piece of structured evidence, and bad at scanning four million lines to find that piece. So I moved the work to the front: deterministic steps that compress the log into structural units, each one small enough for the model to reason about properly. The model still writes the answer. It just stops doing the part it is bad at.',
+          'One side effect matters later. Deterministic steps are testable — same log in, same units out, every time. That let me build a regression set out of real past failures, with ground truth being the lines the engineer actually used to find the bug.',
+        ],
+      },
+      {
+        kicker: 'WHAT THE TESTS SHOWED',
+        title: 'A fault does not announce itself',
+        paras: [
+          'Version 0 shipped with compression and LLMs, but the regression set said it was not good enough. The units were smaller and cleaner, but the lines that mattered often were not in them.',
+          'So I went and observed how engineers actually debug this. I noticed that nobody reads the failing log top to bottom. They start by filtering and narrowing the scope, which is what we already offered. Then they open a build that passed, put it next to the failing one, and look for the difference. That was the part I had missed. A fault rarely looks wrong on its own. It looks wrong next to normal.',
+          'So the system got a baseline. Every build that passes on a branch adds to a picture of what that branch normally prints, and a failed build is compared against that picture. Three kinds of difference come out: what is new, what is missing, and what changed in volume. The missing one is why this works. No search will ever return a line that is not there. A comparison will.',
+          'The new version ended up reaching more engineers beyond my original team, then was adopted by a sister department. Six hours became forty minutes, as reported by actual users.',
         ],
       },
     ],
-    pull: '“Errors are the payload; verbose noise is not.”',
+    pull: '“The answer is not on the surface.”',
   },
   {
     slug: 'pyflexim',
@@ -239,14 +254,15 @@ export const projects: Project[] = [
 export const hrHelpdesk: Pick<Project, 'slug' | 'title' | 'cvWhen' | 'chips' | 'cv' | 'github'> = {
   slug: 'hrdesk',
   title: 'HR Helpdesk',
-  cvWhen: 'FEB 2026',
+  cvWhen: 'FEB 2026 - March 2026',
   chips: ['Python', 'FastAPI', 'RAG', 'WeCom'],
   cv: [
-    'Shipped a policy/onboarding Q&A bot into company chat at a 100-person business, in production since March; built in an abstention path that hands 25% of queries to a named HR contact',
+    'Shipped a policy-grounded RAG backend for small-business employee handbooks and onboarding materials, **citing the source passages** for every answer',
+    'Implemented **evidence-gated refusal**, with 25% of production queries routed to a templated inquiry path',
   ],
 }
 
 // The three the landing showroom puts up front, in order. /projects lists all five,
 // newest first — this is a curation, not the top of that list.
-export const featured = ['bibilab', 'awc', 'logsum']
+export const featured = ['bibilab', 'awc', 'logelite']
   .map(slug => projects.find(p => p.slug === slug)!)

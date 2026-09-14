@@ -11,8 +11,7 @@ export const profile = {
   role: 'AI Engineer — Generative AI & Agentic Systems',
   blurb: 'Driven by a relentless curiosity. I build LLM systems that do real work inside real products.',
   aboutLead: 'Software engineer & machine-learning engineer. PC gamer, anime enthusiast.',
-  resumeSummary: 'LLM systems taken from prototype to production — agents, retrieval, evaluation, and the full-stack work it takes to ship them.',
-  location: 'Irvine, California',
+  location: 'Irvine, CA',
   timeZone: 'America/Los_Angeles',
   openTo: 'AI · Full-Stack · Forward-Deployed Engineer',
   // Placement (which corner, what rotation) is keyed by index in home.css — a seventh entry needs
@@ -60,35 +59,26 @@ export const profile = {
     {
       when: 'AUG 2023 — DEC 2025',
       title: 'Software Developer (Global Graduate Programme) · Volvo Cars',
-      loc: 'Gothenburg, Sweden',
+      // Three postings under one employer, which is what the programme was. Gothenburg first
+      // because it was the base; the other two are why a US screener should not file this as
+      // overseas-only experience.
+      loc: 'Gothenburg, Sweden · Mahwah, NJ',
       bullets: [
-        {
-          ai: 'Cut root-cause analysis from ~6 hours to 40 minutes with an LLM workflow for vehicle test troubleshooting, adopted department-wide.',
-          swe: 'Cut root-cause analysis on integration builds from ~6 hours to 40 minutes with an LLM workflow triggered by the team’s existing CI, deployed department-wide.',
-        },
-        {
-          ai: 'Built an agentic LLM reviewer for ADAS requirement-document audits, evaluated against a human-annotated benchmark with synthetic augmentation, and delivered to the owning team.',
-          swe: 'Delivered an automated reviewer for the ADAS team’s requirement documents, 86% precision against 400+ human-annotated cases, each finding a verbatim span applied as a deterministic patch.',
-        },
-        {
-          ai: 'Shipped conversion features on customer-facing web apps for the US market, including location-matched dealer inventory; bounce rate down 12% across the releases.',
-          swe: 'Owned in-stock vehicle matching on Volvo’s US site, where an exact local match is rare, designing the relaxation policy that defines relevance; bounce down 12% across releases, in production since 2024.',
-        },
-        {
-          ai: 'Took an LLM voice-assistant from PoC to shipped product — owner’s-manual answers, points of interest, and 100+ in-vehicle voice commands — running the product side across the navigation, voice and test teams, and an external LLM vendor.',
-          swe: 'Led the two-month PoC that moved the car’s voice assistant from a fixed command set to open-domain question answering, across teams in Sweden and China, and an external vendor; the prototype shipped as a product.',
-        },
+        'Built a vehicle software build triage workflow that deterministically reduces a 4M-lines log into ~20 ranked evidence packs of **6k tokens each for LLM report generation**. Graded it against historical runs with diagnosed failures, achieving **90%+ recall** with 70% of runs containing the right evidence in the top five.',
+        'Cut time-to-root-cause on failed CI builds from **~6 hours to 40 minutes**, shipped on Azure and triggered by Jenkins, holding per-run **LLM cost under $2** and p95 latency under 6 minutes against a fixed TPM quota. In production **department-wide**.',
+        'Developed a multi-agent reviewer for functional requirements with a self-reflect loop that catches hallucinated citations, **increasing groundedness by 30%** and **precision by 20%**.',
+        'Engineered task-specific context routing, structured agent outputs, and targeted MCP retrieval to eliminate redundant LLM context, **reducing tokens per review by 60%**.',
+        'Shipped two conversion modules on Volvo’s US site, replacing a dead end in the shopping flow with a next step; **bounce down 12%** across the releases, in production since 2024.',
+        'Extended the team’s CI/CD pipeline with automated visual regression gates, reducing manual QA verification overhead and catching layout regressions across mobile and desktop viewports.',
       ],
     },
     {
       when: 'MAY 2022 — AUG 2022',
       title: 'Research Assistant · Carnegie Mellon CyLab',
       loc: 'Pittsburgh, PA',
+      onResume: false,
       bullets: [
-        {
-          ai: 'Deployed vulnerability-detection models on GCP with PyTorch, tuning hyper-parameters for a 19% relative F1 gain and debiasing against identifier names with variable obfuscation.',
-          swe: 'Wrote the config-driven pipeline behind a vulnerability-detection study, stripping identifier names and rebalancing a rare positive class for a four-backbone sweep.',
-        },
+        'Swept four vulnerability-detection backbones in PyTorch on GCP with hyperparameter tuning, identifiers obfuscation and label rebalancing; *Increased F1 score for 19%**.',
       ],
     },
     {
@@ -96,23 +86,14 @@ export const profile = {
       title: 'Software Engineer · Glinsun AI',
       loc: 'Wuhan, China',
       bullets: [
-        {
-          ai: 'Implemented fluid, smoke, air-inflation, and two-way coupling on a unified particle model in a real-time C++/CUDA engine; 60+ FPS at 50k+ particles.',
-          swe: 'Extended a C++/CUDA cloth engine with two-way coupled fluid, smoke and air inflation, and wrote its neighbor search as a single-pass uniform grid instead of an O(n²) all-pairs check, holding 60 FPS at 50k+ particles.',
-        },
-        {
-          ai: '',
-          swe: '',
-        },
-        {
-          ai: 'Developed a semi-supervised human-body-measurement system in PyTorch, with body-shape classification reaching 87% F1 on a 6,000-image dataset.',
-          swe: '',
-        },
+        'Extended a C++/CUDA simulation engine with a two-way coupled fluid and volume-cloth solver, achieving **60+ FPS** at real-time rendering on 50k+ particles.',
+        'Implemented parallel GPU **uniform-grid** neighbor search for fluid density calculations and volume-cloth self-collision passes, replacing all-pairs checks to reduce per-frame lookup latency by **~100ms**.',
+        'Developed a semi-supervised ResNet-based human-body-measurement system, enhancing the dataset with rendered synthetic data and web-crawled real-world images, achieving **87% F1** on its body-shape classification subtask.',
       ],
     },
     // `satisfies`, not `as`: an assertion runs no excess-property check, so a misspelt lane key
     // would pass it. This line is what makes the named lanes on `Bullet` enforceable.
-  ] satisfies readonly { when: string; title: string; loc: string; bullets: readonly Bullet[] }[],
+  ] satisfies readonly { when: string; title: string; loc: string; bullets: readonly Bullet[]; onResume?: boolean }[],
 
   // `yr` is the date and nothing else — print pulls it to the right edge where every other date
   // sits, so a grade riding along would land in the column a reader scans for "when".
@@ -136,8 +117,8 @@ export const profile = {
     'Cloud & Ops': ['Azure', 'AWS', 'Docker', 'Azure Container Apps', 'CI/CD', 'GitHub Actions', 'Jenkins', 'Ansible', 'Linux'],
   } as Record<string, readonly string[]>,
 
-  // A lane holds only what it changes. The AI sheet is the *absence* of an entry here — `role`,
-  // `resumeSummary` and the key order of `skills` above already are it.
+  // A lane holds only what it changes. The AI sheet is the *absence* of an entry here — `role`
+  // and the key order of `skills` above already are it.
   // Nothing factual may go in here: no bullet, date, school, contact or project. A lane stating
   // a fact would be a second copy of that fact, which is what this shape exists to prevent.
   // Do not close this object with `satisfies Record<Lane, …>` — the AI lane is deliberately the
@@ -145,10 +126,9 @@ export const profile = {
   lanes: {
     swe: {
       role: 'Software Engineer — LLM Systems',
-      summary: 'Took systems from design to production. Bridged teams in the US, Sweden and China.',
       // Existing group names, reordered — no skill string moves. Languages lead because a
       // generalist requisition states a language list as its bar, and the first row answers it.
       skills: ['Languages', 'AI & LLM', 'Backend & Web', 'Cloud & Ops'],
     },
-  } as Record<string, { role: string; summary: string; skills: readonly string[] }>,
+  } as Record<string, { role: string; skills: readonly string[] }>,
 } as const
