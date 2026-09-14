@@ -237,9 +237,11 @@
      baseline alignment drops the date 2px below where the sheet has always had it. */
   .r-proj .title { display: flex; align-items: flex-start; }
   .r-proj .title .range { float: none; }
-  /* `•` over the screen's `▪`: both extract as a line of their own, but the round bullet is in
-     every parser's list of markers to strip. */
-  .job li::before { content: "•"; }
+  /* text-indent, not absolute: an absolutely positioned marker paints as its own object to a PDF
+     text extractor, separate from its sentence. `•`, not the screen's `▪` — it's on every
+     parser's list of markers to strip. */
+  .job li { padding-left: 6px; text-indent: -6px; }
+  .job li::before { content: "• "; position: static; }
   .job { margin-bottom: 7px; }
   .job .title { font-size: 12.5px; line-height: 1.22; }
   .job .when { font-size: 10px; margin-top: 0; }
