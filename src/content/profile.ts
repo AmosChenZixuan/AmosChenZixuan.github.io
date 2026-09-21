@@ -125,7 +125,7 @@ export const profile = {
   // missing key, so the answer to a compiler complaint is `Partial`, never an `ai` entry.
   lanes: {
     swe: {
-      role: 'Software Engineer — LLM Systems',
+      role: 'Software Engineer — Applied AI',
       // Existing group names, reordered — no skill string moves. Languages lead because a
       // generalist requisition states a language list as its bar, and the first row answers it.
       skills: ['Languages', 'AI & LLM', 'Backend & Web', 'Cloud & Ops'],
