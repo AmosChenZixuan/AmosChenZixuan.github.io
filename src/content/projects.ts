@@ -42,7 +42,7 @@ export const projects: Project[] = [
     cvWhen: 'March 2026 — PRESENT',
     cv: [
       'Built a **self-hosted, agentic RAG platform** that turns multilingual video sources into a searchable vector knowledge base, powering both grounded chat and automated artifact generation',
-      'Implemented SSE streaming with a **live tool ledger** exposing tool execution and intermediate results; a small model streams a preamble while retrieval runs in parallel, dropping first-token to **sub-second**',
+      'Implemented SSE streaming with a **live tool ledger** exposing tool execution and intermediate results; a small model streams a preamble while retrieval runs in parallel, cutting perceived latency to **sub-second**',
       'Developed a standalone RAG evaluation framework with a **35-case curated golden set** and **LLM-as-a-judge** scoring, for reproducible benchmarking and regression testing',
     ],
     tagline: 'Turn a playlist into a private notebook, then ask questions across every transcript — answers cite their sources, and citations seek the video.',
