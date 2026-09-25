@@ -66,7 +66,7 @@ export const profile = {
       bullets: [
         'Built a vehicle software build triage workflow that deterministically reduces a 4M-lines log into ~20 ranked evidence packs of **6k tokens each for LLM report generation**. Graded it against historical runs with diagnosed failures, achieving **90%+ recall** with 70% of runs containing the right evidence in the top five.',
         'Cut time-to-root-cause on failed CI builds from **~6 hours to 40 minutes**, shipped on Azure and triggered by Jenkins, holding per-run **LLM cost under $2** and p95 latency under 6 minutes against a fixed TPM quota. In production **department-wide**.',
-        'Developed a multi-agent reviewer for functional requirements with a self-reflect loop that catches hallucinated citations, **increasing groundedness by 30%** and **precision by 20%**.',
+        'Developed a multi-agent reviewer for functional requirements with a self-reflect loop driven by deterministic citation verification, raising **recall by 30 points** and **precision by 20 points**.',
         'Engineered task-specific context routing, structured agent outputs, and targeted MCP retrieval to eliminate redundant LLM context, **reducing tokens per review by 60%**.',
         'Shipped two conversion modules on Volvo’s US site, replacing a dead end in the shopping flow with a next step; **bounce down 12%** across the releases, in production since 2024.',
         'Extended the team’s CI/CD pipeline with automated visual regression gates, reducing manual QA verification overhead and catching layout regressions across mobile and desktop viewports.',
